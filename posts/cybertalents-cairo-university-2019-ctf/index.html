@@ -1,0 +1,567 @@
+<!DOCTYPE html><html lang="en" mode="dark" ><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no"><meta name="theme" content="Chirpy v2.5.1"><meta name="generator" content="Jekyll v4.2.0" /><meta property="og:title" content="CyberTalents Cairo University CTF 2019" /><meta name="author" content="Abdelrahman Nasr" /><meta property="og:locale" content="en_US" /><meta name="description" content="A place where you can find Reversing Engineering CTF challenges writeups, Malware Analysis reports and some low-level geeky stuff" /><meta property="og:description" content="A place where you can find Reversing Engineering CTF challenges writeups, Malware Analysis reports and some low-level geeky stuff" /><link rel="canonical" href="https://t1m3m.github.io/posts/cybertalents-cairo-university-2019-ctf/" /><meta property="og:url" content="https://t1m3m.github.io/posts/cybertalents-cairo-university-2019-ctf/" /><meta property="og:site_name" content="T1m3-m4ch1n3" /><meta property="og:image" content="https://t1m3m.github.io/assets/img/posts/2020-11-30-cybertalents-cairo-university-2019-ctf/cover.jpg" /><meta property="og:type" content="article" /><meta property="article:published_time" content="2020-11-30T21:40:00+02:00" /><meta name="twitter:card" content="summary_large_image" /><meta property="twitter:image" content="https://t1m3m.github.io/assets/img/posts/2020-11-30-cybertalents-cairo-university-2019-ctf/cover.jpg" /><meta property="twitter:title" content="CyberTalents Cairo University CTF 2019" /><meta name="twitter:site" content="@T1m3M" /><meta name="twitter:creator" content="@Abdelrahman Nasr" /><meta name="google-site-verification" content="wjab7JjezNdGg3dhJv8-6KbCIlqjjYnFBlntUWCuq3g" /> <script type="application/ld+json"> {"description":"A place where you can find Reversing Engineering CTF challenges writeups, Malware Analysis reports and some low-level geeky stuff","headline":"CyberTalents Cairo University CTF 2019","dateModified":"2020-11-30T21:40:00+02:00","datePublished":"2020-11-30T21:40:00+02:00","@type":"BlogPosting","image":"https://t1m3m.github.io/assets/img/posts/2020-11-30-cybertalents-cairo-university-2019-ctf/cover.jpg","url":"https://t1m3m.github.io/posts/cybertalents-cairo-university-2019-ctf/","mainEntityOfPage":{"@type":"WebPage","@id":"https://t1m3m.github.io/posts/cybertalents-cairo-university-2019-ctf/"},"author":{"@type":"Person","name":"Abdelrahman Nasr"},"@context":"https://schema.org"}</script><title>CyberTalents Cairo University CTF 2019 | T1m3-m4ch1n3</title><link rel="shortcut icon" href="/assets/img/favicons/favicon.ico" type="image/x-icon"><link rel="icon" href="/assets/img/favicons/favicon.ico" type="image/x-icon"><link rel="apple-touch-icon" href="/assets/img/favicons/apple-icon.png"><link rel="apple-touch-icon" href="/assets/img/favicons/apple-icon-precomposed.png"><link rel="apple-touch-icon" sizes="57x57" href="/assets/img/favicons/apple-icon-57x57.png"><link rel="apple-touch-icon" sizes="60x60" href="/assets/img/favicons/apple-icon-60x60.png"><link rel="apple-touch-icon" sizes="72x72" href="/assets/img/favicons/apple-icon-72x72.png"><link rel="apple-touch-icon" sizes="76x76" href="/assets/img/favicons/apple-icon-76x76.png"><link rel="apple-touch-icon" sizes="114x114" href="/assets/img/favicons/apple-icon-114x114.png"><link rel="apple-touch-icon" sizes="120x120" href="/assets/img/favicons/apple-icon-120x120.png"><link rel="apple-touch-icon" sizes="144x144" href="/assets/img/favicons/apple-icon-144x144.png"><link rel="apple-touch-icon" sizes="152x152" href="/assets/img/favicons/apple-icon-152x152.png"><link rel="apple-touch-icon" sizes="180x180" href="/assets/img/favicons/apple-icon-180x180.png"><link rel="icon" type="image/png" sizes="192x192" href="/assets/img/favicons/android-icon-192x192.png"><link rel="icon" type="image/png" sizes="32x32" href="/assets/img/favicons/favicon-32x32.png"><link rel="icon" type="image/png" sizes="96x96" href="/assets/img/favicons/favicon-96x96.png"><link rel="icon" type="image/png" sizes="16x16" href="/assets/img/favicons/favicon-16x16.png"><link rel="manifest" href="/assets/img/favicons/manifest.json"><meta name='msapplication-config' content='/assets/img/favicons/browserconfig.xml'><meta name="msapplication-TileColor" content="#ffffff"><meta name="msapplication-TileImage" content="/assets/img/favicons/ms-icon-144x144.png"><meta name="theme-color" content="#ffffff"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin="anonymous"><link rel="dns-prefetch" href="https://fonts.gstatic.com"><link rel="preconnect" href="https://www.google-analytics.com" crossorigin="use-credentials"><link rel="dns-prefetch" href="https://www.google-analytics.com"><link rel="preconnect" href="https://www.googletagmanager.com" crossorigin="anonymous"><link rel="dns-prefetch" href="https://www.googletagmanager.com"><link rel="preconnect" href="cdn.jsdelivr.net"><link rel="dns-prefetch" href="cdn.jsdelivr.net"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.0.0/dist/css/bootstrap.min.css" integrity="sha256-LA89z+k9fjgMKQ/kq4OO2Mrf8VltYml/VES+Rg0fh20=" crossorigin="anonymous"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@5.11.2/css/all.min.css" integrity="sha256-+N4/V/SbAFiW1MPBCXnfnP9QSN3+Keu+NlB+0ev/YKQ=" crossorigin="anonymous"><link rel="preload" as="style" href="/assets/css/post.css"><link rel="stylesheet" href="/assets/css/post.css"><link rel="preload" as="style" href="/assets/css/lib/bootstrap-toc.min.css"><link rel="stylesheet" href="/assets/css/lib/bootstrap-toc.min.css" /> <script src="https://cdn.jsdelivr.net/npm/jquery@3/dist/jquery.min.js"></script> <script async src="https://cdn.jsdelivr.net/combine/npm/popper.js@1.15.0,npm/bootstrap@4/dist/js/bootstrap.min.js"></script> <script async src="/assets/js/post.min.js"></script> <script defer src="/app.js"></script><body data-spy="scroll" data-target="#toc"><div id="sidebar" class="d-flex flex-column"><div id="nav-wrapper"><div id="profile-wrapper" class="d-flex flex-column"><div id="avatar" class="d-flex justify-content-center"> <a href="/" alt="avatar"> <img src="/assets/img/sample/avatar.png" alt="avatar" onerror="this.style.display='none'"> </a></div><div class="profile-text mt-3"><div class="site-title"> <a href="/">T1m3-m4ch1n3</a></div><div class="site-subtitle font-italic"></div></div></div><ul class="nav flex-column"><li class="nav-item d-flex justify-content-center "> <a href="/" class="nav-link d-flex justify-content-center align-items-center w-100"> <i class="fa-fw fas fa-home ml-xl-3 mr-xl-3 unloaded"></i> <span>HOME</span> </a><li class="nav-item d-flex justify-content-center "> <a href="/tabs/categories/" class="nav-link d-flex justify-content-center align-items-center w-100"> <i class="fa-fw fas fa-stream ml-xl-3 mr-xl-3 unloaded"></i> <span>CATEGORIES</span> </a><li class="nav-item d-flex justify-content-center "> <a href="/tabs/tags/" class="nav-link d-flex justify-content-center align-items-center w-100"> <i class="fa-fw fas fa-tags ml-xl-3 mr-xl-3 unloaded"></i> <span>TAGS</span> </a><li class="nav-item d-flex justify-content-center "> <a href="/tabs/archives/" class="nav-link d-flex justify-content-center align-items-center w-100"> <i class="fa-fw fas fa-archive ml-xl-3 mr-xl-3 unloaded"></i> <span>ARCHIVES</span> </a><li class="nav-item d-flex justify-content-center "> <a href="/tabs/about/" class="nav-link d-flex justify-content-center align-items-center w-100"> <i class="fa-fw fas fa-info ml-xl-3 mr-xl-3 unloaded"></i> <span>ABOUT</span> </a></ul></div><div class="sidebar-bottom d-flex flex-wrap justify-content-around mt-4"> <a href="https://github.com/T1m3M" aria-label="github" target="_blank" rel="noopener"> <i class="fab fa-github-alt"></i> </a> <a href="https://twitter.com/T1m3M" aria-label="twitter" target="_blank" rel="noopener"> <i class="fab fa-twitter"></i> </a> <a href=" javascript:location.href = 'mailto:' + ['1.h4ck.t1m3','gmail.com'].join('@')" aria-label="email" > <i class="fas fa-envelope"></i> </a> <a href="https://linkedin.com/in/abdelrahman-nasr99/" aria-label="linkedin" target="_blank" rel="noopener"> <i class="fab fa-linkedin"></i> </a></div></div><div id="topbar-wrapper" class="row justify-content-center topbar-down"><div id="topbar" class="col-11 d-flex h-100 align-items-center justify-content-between"> <span id="breadcrumb"> <span> <a href="/"> Posts </a> </span> <span>CyberTalents Cairo University CTF 2019</span> </span> <i id="sidebar-trigger" class="fas fa-bars fa-fw"></i><div id="topbar-title"> Post</div><i id="search-trigger" class="fas fa-search fa-fw"></i> <span id="search-wrapper" class="align-items-center"> <i class="fas fa-search fa-fw"></i> <input class="form-control" id="search-input" type="search" aria-label="search" placeholder="Search..."> <i class="fa fa-times-circle fa-fw" id="search-cleaner"></i> </span> <span id="search-cancel" >Cancel</span></div></div><div id="main-wrapper"><div id="main"><div class="row"><div id="post-wrapper" class="col-12 col-lg-11 col-xl-8"><div class="post pl-1 pr-1 pl-sm-2 pr-sm-2 pl-md-4 pr-md-4"><h1 data-toc-skip>CyberTalents Cairo University CTF 2019</h1><div class="post-meta text-muted d-flex flex-column"><div> Posted <span class="timeago " data-toggle="tooltip" data-placement="bottom" title="Mon, Nov 30, 2020, 9:40 PM +0200" > Nov 30, 2020 <i class="unloaded">2020-11-30T21:40:00+02:00</i> </span> by <span class="author"> Abdelrahman Nasr </span></div><div> Updated <span class="timeago lastmod" data-toggle="tooltip" data-placement="bottom" title="Mon, Dec 28, 2020, 12:47 AM +0200" > Dec 28, 2020 <i class="unloaded">2020-12-28T00:47:29+02:00</i> </span></div></div><div class="post-content"> <img src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7 " data-src="/assets/img/posts/2020-11-30-cybertalents-cairo-university-2019-ctf/cover.jpg" class="post-preview-img"><p>It was the first year for CyberTalents’s Cybersecurity CTF Competition at Cairo University and was also my first time to participate in a real-life CTF!</p><p><strong>NOTE:</strong> the descriptions of the challenges aren’t accurate because they’re not available after the competition has ended.</p><h2 id="challenges">Challenges</h2><div class="table-wrapper"><table><thead><tr><th>Title<th style="text-align: center">Category<th style="text-align: right">Score<tbody><tr><td><a href="#repeat">repeat</a><td style="text-align: center">Forensics<td style="text-align: right">100<tr><td><a href="#ezez-keygen-2">ezez keygen 2</a><td style="text-align: center">Malware reverse engineering<td style="text-align: right">100<tr><td><a href="#holmes-traces">Holmes Traces</a><td style="text-align: center">Forensics<td style="text-align: right">100</table></div><hr /><h2 id="repeat">repeat</h2><h4 id="forensics-100-points">Forensics (100 points)</h4><h3 id="description">Description</h3><p>In this challenge we’re given a repeat.zip file</p><h3 id="solution">solution</h3><p>i checked the file by <strong>file</strong> command to see if zip is the true extension of it:</p><div class="language-console highlighter-rouge"><div class="highlight"><code><table class="rouge-table"><tbody><tr><td class="rouge-gutter gl"><pre class="lineno">1
+2
+</pre><td class="rouge-code"><pre><span class="gp">$</span><span class="w"> </span>file repeat.zip
+<span class="go">repeat.zip: Zip archive data, at least v2.0 to extract
+</span></pre></table></code></div></div><p>well, it seems that .zip is the true extension! let’s unzip it!!</p><div class="language-console highlighter-rouge"><div class="highlight"><code><table class="rouge-table"><tbody><tr><td class="rouge-gutter gl"><pre class="lineno">1
+</pre><td class="rouge-code"><pre><span class="gp">$</span><span class="w"> </span>unzip repeat.zip
+</pre></table></code></div></div><p>now we have a file called <strong>flag</strong> and by checking it using <strong>file</strong> command again:</p><div class="language-console highlighter-rouge"><div class="highlight"><code><table class="rouge-table"><tbody><tr><td class="rouge-gutter gl"><pre class="lineno">1
+2
+</pre><td class="rouge-code"><pre><span class="gp">$</span><span class="w"> </span>file flag
+<span class="go">flag: Zip archive data, at least v2.0 to extract
+</span></pre></table></code></div></div><p>we see that it’s a zip file too! now we should rename it to <strong>flag.zip</strong>:</p><div class="language-console highlighter-rouge"><div class="highlight"><code><table class="rouge-table"><tbody><tr><td class="rouge-gutter gl"><pre class="lineno">1
+</pre><td class="rouge-code"><pre><span class="gp">$</span><span class="w"> </span><span class="nb">mv </span>flag flag.zip
+</pre></table></code></div></div><p>and then unzip it:</p><div class="language-console highlighter-rouge"><div class="highlight"><code><table class="rouge-table"><tbody><tr><td class="rouge-gutter gl"><pre class="lineno">1
+</pre><td class="rouge-code"><pre><span class="gp">$</span><span class="w"> </span>unzip flag.zip
+</pre></table></code></div></div><p>i got a file called <strong>flag</strong> again! .. after repeating the process of renaming and unzipping the fiile again i got the same result, <em>so it sounds like this file is archived multiple times, right?</em></p><p>and since we repeat the renaming and the unzipping process we can write a bash script to do this task for us by a for loop:</p><div class="language-console highlighter-rouge"><div class="highlight"><code><table class="rouge-table"><tbody><tr><td class="rouge-gutter gl"><pre class="lineno">1
+</pre><td class="rouge-code"><pre><span class="gp">$</span><span class="w"> </span><span class="k">for </span>i <span class="k">in</span> <span class="o">{</span>0..100<span class="o">}</span><span class="p">;</span> <span class="k">do </span><span class="nb">mv </span>flag flag.zip <span class="o">&amp;&amp;</span> unzip flag.zip<span class="p">;</span> <span class="k">done</span>
+</pre></table></code></div></div><p>after the script finished, now we can see a <strong>flag.txt</strong> which contains the flag <br /> <code class="language-plaintext highlighter-rouge">flag{Scrip7ing_is_s0_4w3som3}</code></p><hr /><h2 id="ezez-keygen-2">ezez keygen 2</h2><h4 id="malware-reverse-engineering-100-points">Malware reverse engineering (100 points)</h4><h3 id="description-1">Description</h3><p>ezez_keygen2 is an executable file and the task is to <strong>crack it</strong></p><h3 id="solution-1">solution</h3><p><strong>Solved after the competition</strong></p><p>First, i used <strong>gdb</strong> to see the structure of the program:</p><div class="language-console highlighter-rouge"><div class="highlight"><code><table class="rouge-table"><tbody><tr><td class="rouge-gutter gl"><pre class="lineno">1
+2
+3
+</pre><td class="rouge-code"><pre><span class="gp">$</span><span class="w"> </span>gdb ezez_keygen2
+<span class="go">(gdb) set disassembly-flavor intel
+(gdb) disas main
+</span></pre></table></code></div></div><p>and the output was:</p><div class="language-java highlighter-rouge"><div class="highlight"><code><table class="rouge-table"><tbody><tr><td class="rouge-gutter gl"><pre class="lineno">1
+2
+3
+4
+5
+6
+7
+8
+9
+10
+11
+12
+13
+14
+15
+16
+17
+18
+19
+20
+21
+22
+23
+24
+25
+26
+27
+28
+29
+30
+31
+32
+33
+34
+35
+36
+37
+38
+39
+40
+41
+42
+43
+44
+45
+46
+47
+48
+49
+50
+</pre><td class="rouge-code"><pre>   <span class="mh">0x0000000000400abb</span> <span class="o">&lt;+</span><span class="mi">0</span><span class="o">&gt;:</span>	<span class="n">push</span>   <span class="n">rbp</span>
+   <span class="mh">0x0000000000400abc</span> <span class="o">&lt;+</span><span class="mi">1</span><span class="o">&gt;:</span>	<span class="n">mov</span>    <span class="n">rbp</span><span class="o">,</span><span class="n">rsp</span>
+   <span class="mh">0x0000000000400abf</span> <span class="o">&lt;+</span><span class="mi">4</span><span class="o">&gt;:</span>	<span class="n">sub</span>    <span class="n">rsp</span><span class="o">,</span><span class="mh">0x20</span>
+   <span class="mh">0x0000000000400ac3</span> <span class="o">&lt;+</span><span class="mi">8</span><span class="o">&gt;:</span>	<span class="n">mov</span>    <span class="no">DWORD</span> <span class="no">PTR</span> <span class="o">[</span><span class="n">rbp</span><span class="o">-</span><span class="mh">0x14</span><span class="o">],</span><span class="n">edi</span>
+   <span class="mh">0x0000000000400ac6</span> <span class="o">&lt;+</span><span class="mi">11</span><span class="o">&gt;:</span>	<span class="n">mov</span>    <span class="no">QWORD</span> <span class="no">PTR</span> <span class="o">[</span><span class="n">rbp</span><span class="o">-</span><span class="mh">0x20</span><span class="o">],</span><span class="n">rsi</span>
+   <span class="mh">0x0000000000400aca</span> <span class="o">&lt;+</span><span class="mi">15</span><span class="o">&gt;:</span>	<span class="n">cmp</span>    <span class="no">DWORD</span> <span class="no">PTR</span> <span class="o">[</span><span class="n">rbp</span><span class="o">-</span><span class="mh">0x14</span><span class="o">],</span><span class="mh">0x2</span>
+   <span class="mh">0x0000000000400ace</span> <span class="o">&lt;+</span><span class="mi">19</span><span class="o">&gt;:</span>	<span class="n">jg</span>     <span class="mh">0x400ae4</span> <span class="o">&lt;</span><span class="n">main</span><span class="o">+</span><span class="mi">41</span><span class="o">&gt;</span>
+   <span class="mh">0x0000000000400ad0</span> <span class="o">&lt;+</span><span class="mi">21</span><span class="o">&gt;:</span>	<span class="n">mov</span>    <span class="n">edi</span><span class="o">,</span><span class="mh">0x400c20</span>
+   <span class="mh">0x0000000000400ad5</span> <span class="o">&lt;+</span><span class="mi">26</span><span class="o">&gt;:</span>	<span class="n">call</span>   <span class="mh">0x4005e0</span> <span class="o">&lt;</span><span class="n">puts</span><span class="nd">@plt</span><span class="o">&gt;</span>
+   <span class="mh">0x0000000000400ada</span> <span class="o">&lt;+</span><span class="mi">31</span><span class="o">&gt;:</span>	<span class="n">mov</span>    <span class="n">eax</span><span class="o">,</span><span class="mh">0xffffffff</span>
+   <span class="mh">0x0000000000400adf</span> <span class="o">&lt;+</span><span class="mi">36</span><span class="o">&gt;:</span>	<span class="n">jmp</span>    <span class="mh">0x400b70</span> <span class="o">&lt;</span><span class="n">main</span><span class="o">+</span><span class="mi">181</span><span class="o">&gt;</span>
+   <span class="mh">0x0000000000400ae4</span> <span class="o">&lt;+</span><span class="mi">41</span><span class="o">&gt;:</span>	<span class="n">mov</span>    <span class="n">rax</span><span class="o">,</span><span class="no">QWORD</span> <span class="no">PTR</span> <span class="o">[</span><span class="n">rbp</span><span class="o">-</span><span class="mh">0x20</span><span class="o">]</span>
+   <span class="mh">0x0000000000400ae8</span> <span class="o">&lt;+</span><span class="mi">45</span><span class="o">&gt;:</span>	<span class="n">add</span>    <span class="n">rax</span><span class="o">,</span><span class="mh">0x8</span>
+   <span class="mh">0x0000000000400aec</span> <span class="o">&lt;+</span><span class="mi">49</span><span class="o">&gt;:</span>	<span class="n">mov</span>    <span class="n">rax</span><span class="o">,</span><span class="no">QWORD</span> <span class="no">PTR</span> <span class="o">[</span><span class="n">rax</span><span class="o">]</span>
+   <span class="mh">0x0000000000400aef</span> <span class="o">&lt;+</span><span class="mi">52</span><span class="o">&gt;:</span>	<span class="n">mov</span>    <span class="n">rdi</span><span class="o">,</span><span class="n">rax</span>
+   <span class="mh">0x0000000000400af2</span> <span class="o">&lt;+</span><span class="mi">55</span><span class="o">&gt;:</span>	<span class="n">call</span>   <span class="mh">0x400670</span> <span class="o">&lt;</span><span class="n">strdup</span><span class="nd">@plt</span><span class="o">&gt;</span>
+   <span class="mh">0x0000000000400af7</span> <span class="o">&lt;+</span><span class="mi">60</span><span class="o">&gt;:</span>	<span class="n">mov</span>    <span class="no">QWORD</span> <span class="no">PTR</span> <span class="o">[</span><span class="n">rbp</span><span class="o">-</span><span class="mh">0x10</span><span class="o">],</span><span class="n">rax</span>
+   <span class="mh">0x0000000000400afb</span> <span class="o">&lt;+</span><span class="mi">64</span><span class="o">&gt;:</span>	<span class="n">mov</span>    <span class="n">rax</span><span class="o">,</span><span class="no">QWORD</span> <span class="no">PTR</span> <span class="o">[</span><span class="n">rbp</span><span class="o">-</span><span class="mh">0x20</span><span class="o">]</span>
+   <span class="mh">0x0000000000400aff</span> <span class="o">&lt;+</span><span class="mi">68</span><span class="o">&gt;:</span>	<span class="n">add</span>    <span class="n">rax</span><span class="o">,</span><span class="mh">0x10</span>
+   <span class="mh">0x0000000000400b03</span> <span class="o">&lt;+</span><span class="mi">72</span><span class="o">&gt;:</span>	<span class="n">mov</span>    <span class="n">rax</span><span class="o">,</span><span class="no">QWORD</span> <span class="no">PTR</span> <span class="o">[</span><span class="n">rax</span><span class="o">]</span>
+   <span class="mh">0x0000000000400b06</span> <span class="o">&lt;+</span><span class="mi">75</span><span class="o">&gt;:</span>	<span class="n">mov</span>    <span class="n">rdi</span><span class="o">,</span><span class="n">rax</span>
+   <span class="mh">0x0000000000400b09</span> <span class="o">&lt;+</span><span class="mi">78</span><span class="o">&gt;:</span>	<span class="n">call</span>   <span class="mh">0x400670</span> <span class="o">&lt;</span><span class="n">strdup</span><span class="nd">@plt</span><span class="o">&gt;</span>
+   <span class="mh">0x0000000000400b0e</span> <span class="o">&lt;+</span><span class="mi">83</span><span class="o">&gt;:</span>	<span class="n">mov</span>    <span class="no">QWORD</span> <span class="no">PTR</span> <span class="o">[</span><span class="n">rbp</span><span class="o">-</span><span class="mh">0x8</span><span class="o">],</span><span class="n">rax</span>
+   <span class="mh">0x0000000000400b12</span> <span class="o">&lt;+</span><span class="mi">87</span><span class="o">&gt;:</span>	<span class="n">mov</span>    <span class="n">rdx</span><span class="o">,</span><span class="no">QWORD</span> <span class="no">PTR</span> <span class="o">[</span><span class="n">rbp</span><span class="o">-</span><span class="mh">0x8</span><span class="o">]</span>
+   <span class="mh">0x0000000000400b16</span> <span class="o">&lt;+</span><span class="mi">91</span><span class="o">&gt;:</span>	<span class="n">mov</span>    <span class="n">rax</span><span class="o">,</span><span class="no">QWORD</span> <span class="no">PTR</span> <span class="o">[</span><span class="n">rbp</span><span class="o">-</span><span class="mh">0x10</span><span class="o">]</span>
+   <span class="mh">0x0000000000400b1a</span> <span class="o">&lt;+</span><span class="mi">95</span><span class="o">&gt;:</span>	<span class="n">mov</span>    <span class="n">rsi</span><span class="o">,</span><span class="n">rdx</span>
+   <span class="mh">0x0000000000400b1d</span> <span class="o">&lt;+</span><span class="mi">98</span><span class="o">&gt;:</span>	<span class="n">mov</span>    <span class="n">rdi</span><span class="o">,</span><span class="n">rax</span>
+   <span class="mh">0x0000000000400b20</span> <span class="o">&lt;+</span><span class="mi">101</span><span class="o">&gt;:</span>	<span class="n">call</span>   <span class="mh">0x400a32</span> <span class="o">&lt;</span><span class="n">check</span><span class="o">&gt;</span>
+   <span class="mh">0x0000000000400b25</span> <span class="o">&lt;+</span><span class="mi">106</span><span class="o">&gt;:</span>	<span class="n">cmp</span>    <span class="n">eax</span><span class="o">,</span><span class="mh">0x1</span>
+   <span class="mh">0x0000000000400b28</span> <span class="o">&lt;+</span><span class="mi">109</span><span class="o">&gt;:</span>	<span class="n">jne</span>    <span class="mh">0x400b5c</span> <span class="o">&lt;</span><span class="n">main</span><span class="o">+</span><span class="mi">161</span><span class="o">&gt;</span>
+   <span class="mh">0x0000000000400b2a</span> <span class="o">&lt;+</span><span class="mi">111</span><span class="o">&gt;:</span>	<span class="n">mov</span>    <span class="n">rax</span><span class="o">,</span><span class="no">QWORD</span> <span class="no">PTR</span> <span class="o">[</span><span class="n">rbp</span><span class="o">-</span><span class="mh">0x10</span><span class="o">]</span>
+   <span class="mh">0x0000000000400b2e</span> <span class="o">&lt;+</span><span class="mi">115</span><span class="o">&gt;:</span>	<span class="n">mov</span>    <span class="n">esi</span><span class="o">,</span><span class="mh">0x400c46</span>
+   <span class="mh">0x0000000000400b33</span> <span class="o">&lt;+</span><span class="mi">120</span><span class="o">&gt;:</span>	<span class="n">mov</span>    <span class="n">rdi</span><span class="o">,</span><span class="n">rax</span>
+   <span class="mh">0x0000000000400b36</span> <span class="o">&lt;+</span><span class="mi">123</span><span class="o">&gt;:</span>	<span class="n">call</span>   <span class="mh">0x400640</span> <span class="o">&lt;</span><span class="n">strcmp</span><span class="nd">@plt</span><span class="o">&gt;</span>
+   <span class="mh">0x0000000000400b3b</span> <span class="o">&lt;+</span><span class="mi">128</span><span class="o">&gt;:</span>	<span class="n">test</span>   <span class="n">eax</span><span class="o">,</span><span class="n">eax</span>
+   <span class="mh">0x0000000000400b3d</span> <span class="o">&lt;+</span><span class="mi">130</span><span class="o">&gt;:</span>	<span class="n">jne</span>    <span class="mh">0x400b5c</span> <span class="o">&lt;</span><span class="n">main</span><span class="o">+</span><span class="mi">161</span><span class="o">&gt;</span>
+   <span class="mh">0x0000000000400b3f</span> <span class="o">&lt;+</span><span class="mi">132</span><span class="o">&gt;:</span>	<span class="n">mov</span>    <span class="n">rax</span><span class="o">,</span><span class="no">QWORD</span> <span class="no">PTR</span> <span class="o">[</span><span class="n">rbp</span><span class="o">-</span><span class="mh">0x8</span><span class="o">]</span>
+   <span class="mh">0x0000000000400b43</span> <span class="o">&lt;+</span><span class="mi">136</span><span class="o">&gt;:</span>	<span class="n">mov</span>    <span class="n">rsi</span><span class="o">,</span><span class="n">rax</span>
+   <span class="mh">0x0000000000400b46</span> <span class="o">&lt;+</span><span class="mi">139</span><span class="o">&gt;:</span>	<span class="n">mov</span>    <span class="n">edi</span><span class="o">,</span><span class="mh">0x400c55</span>
+   <span class="mh">0x0000000000400b4b</span> <span class="o">&lt;+</span><span class="mi">144</span><span class="o">&gt;:</span>	<span class="n">mov</span>    <span class="n">eax</span><span class="o">,</span><span class="mh">0x0</span>
+   <span class="mh">0x0000000000400b50</span> <span class="o">&lt;+</span><span class="mi">149</span><span class="o">&gt;:</span>	<span class="n">call</span>   <span class="mh">0x400620</span> <span class="o">&lt;</span><span class="n">printf</span><span class="nd">@plt</span><span class="o">&gt;</span>
+   <span class="mh">0x0000000000400b55</span> <span class="o">&lt;+</span><span class="mi">154</span><span class="o">&gt;:</span>	<span class="n">mov</span>    <span class="n">eax</span><span class="o">,</span><span class="mh">0x0</span>
+   <span class="mh">0x0000000000400b5a</span> <span class="o">&lt;+</span><span class="mi">159</span><span class="o">&gt;:</span>	<span class="n">jmp</span>    <span class="mh">0x400b70</span> <span class="o">&lt;</span><span class="n">main</span><span class="o">+</span><span class="mi">181</span><span class="o">&gt;</span>
+   <span class="mh">0x0000000000400b5c</span> <span class="o">&lt;+</span><span class="mi">161</span><span class="o">&gt;:</span>	<span class="n">mov</span>    <span class="n">edi</span><span class="o">,</span><span class="mh">0x400c68</span>
+   <span class="mh">0x0000000000400b61</span> <span class="o">&lt;+</span><span class="mi">166</span><span class="o">&gt;:</span>	<span class="n">call</span>   <span class="mh">0x4005e0</span> <span class="o">&lt;</span><span class="n">puts</span><span class="nd">@plt</span><span class="o">&gt;</span>
+   <span class="mh">0x0000000000400b66</span> <span class="o">&lt;+</span><span class="mi">171</span><span class="o">&gt;:</span>	<span class="n">mov</span>    <span class="n">edi</span><span class="o">,</span><span class="mh">0xffffffff</span>
+   <span class="mh">0x0000000000400b6b</span> <span class="o">&lt;+</span><span class="mi">176</span><span class="o">&gt;:</span>	<span class="n">call</span>   <span class="mh">0x400660</span> <span class="o">&lt;</span><span class="n">exit</span><span class="nd">@plt</span><span class="o">&gt;</span>
+   <span class="mh">0x0000000000400b70</span> <span class="o">&lt;+</span><span class="mi">181</span><span class="o">&gt;:</span>	<span class="n">leave</span>  
+   <span class="mh">0x0000000000400b71</span> <span class="o">&lt;+</span><span class="mi">182</span><span class="o">&gt;:</span>	<span class="n">ret</span>    
+
+</pre></table></code></div></div><p>well, at address 0x0000000000400b20 there is a function called <strong>check</strong> and that sounds interesting! and by disassembling it:</p><div class="language-java highlighter-rouge"><div class="highlight"><code><table class="rouge-table"><tbody><tr><td class="rouge-gutter gl"><pre class="lineno">1
+2
+3
+4
+5
+6
+7
+8
+9
+10
+11
+12
+13
+14
+15
+16
+17
+18
+19
+20
+21
+22
+23
+24
+25
+26
+27
+28
+29
+30
+31
+32
+33
+34
+35
+36
+37
+38
+39
+40
+41
+42
+</pre><td class="rouge-code"><pre><span class="o">(</span><span class="n">gdb</span><span class="o">)</span> <span class="n">disas</span> <span class="n">check</span>
+
+   <span class="mh">0x0000000000400a32</span> <span class="o">&lt;+</span><span class="mi">0</span><span class="o">&gt;:</span>	<span class="n">push</span>   <span class="n">rbp</span>
+   <span class="mh">0x0000000000400a33</span> <span class="o">&lt;+</span><span class="mi">1</span><span class="o">&gt;:</span>	<span class="n">mov</span>    <span class="n">rbp</span><span class="o">,</span><span class="n">rsp</span>
+   <span class="mh">0x0000000000400a36</span> <span class="o">&lt;+</span><span class="mi">4</span><span class="o">&gt;:</span>	<span class="n">sub</span>    <span class="n">rsp</span><span class="o">,</span><span class="mh">0x20</span>
+   <span class="mh">0x0000000000400a3a</span> <span class="o">&lt;+</span><span class="mi">8</span><span class="o">&gt;:</span>	<span class="n">mov</span>    <span class="no">QWORD</span> <span class="no">PTR</span> <span class="o">[</span><span class="n">rbp</span><span class="o">-</span><span class="mh">0x18</span><span class="o">],</span><span class="n">rdi</span>
+   <span class="mh">0x0000000000400a3e</span> <span class="o">&lt;+</span><span class="mi">12</span><span class="o">&gt;:</span>	<span class="n">mov</span>    <span class="no">QWORD</span> <span class="no">PTR</span> <span class="o">[</span><span class="n">rbp</span><span class="o">-</span><span class="mh">0x20</span><span class="o">],</span><span class="n">rsi</span>
+   <span class="mh">0x0000000000400a42</span> <span class="o">&lt;+</span><span class="mi">16</span><span class="o">&gt;:</span>	<span class="n">mov</span>    <span class="n">rax</span><span class="o">,</span><span class="no">QWORD</span> <span class="no">PTR</span> <span class="o">[</span><span class="n">rbp</span><span class="o">-</span><span class="mh">0x18</span><span class="o">]</span>
+   <span class="mh">0x0000000000400a46</span> <span class="o">&lt;+</span><span class="mi">20</span><span class="o">&gt;:</span>	<span class="n">mov</span>    <span class="n">rdi</span><span class="o">,</span><span class="n">rax</span>
+   <span class="mh">0x0000000000400a49</span> <span class="o">&lt;+</span><span class="mi">23</span><span class="o">&gt;:</span>	<span class="n">call</span>   <span class="mh">0x4005f0</span> <span class="o">&lt;</span><span class="n">strlen</span><span class="nd">@plt</span><span class="o">&gt;</span>
+   <span class="mh">0x0000000000400a4e</span> <span class="o">&lt;+</span><span class="mi">28</span><span class="o">&gt;:</span>	<span class="n">mov</span>    <span class="no">QWORD</span> <span class="no">PTR</span> <span class="o">[</span><span class="n">rbp</span><span class="o">-</span><span class="mh">0x10</span><span class="o">],</span><span class="n">rax</span>
+   <span class="mh">0x0000000000400a52</span> <span class="o">&lt;+</span><span class="mi">32</span><span class="o">&gt;:</span>	<span class="n">mov</span>    <span class="n">rax</span><span class="o">,</span><span class="no">QWORD</span> <span class="no">PTR</span> <span class="o">[</span><span class="n">rbp</span><span class="o">-</span><span class="mh">0x20</span><span class="o">]</span>
+   <span class="mh">0x0000000000400a56</span> <span class="o">&lt;+</span><span class="mi">36</span><span class="o">&gt;:</span>	<span class="n">mov</span>    <span class="n">rdi</span><span class="o">,</span><span class="n">rax</span>
+   <span class="mh">0x0000000000400a59</span> <span class="o">&lt;+</span><span class="mi">39</span><span class="o">&gt;:</span>	<span class="n">call</span>   <span class="mh">0x4005f0</span> <span class="o">&lt;</span><span class="n">strlen</span><span class="nd">@plt</span><span class="o">&gt;</span>
+   <span class="mh">0x0000000000400a5e</span> <span class="o">&lt;+</span><span class="mi">44</span><span class="o">&gt;:</span>	<span class="n">mov</span>    <span class="no">QWORD</span> <span class="no">PTR</span> <span class="o">[</span><span class="n">rbp</span><span class="o">-</span><span class="mh">0x8</span><span class="o">],</span><span class="n">rax</span>
+   <span class="mh">0x0000000000400a62</span> <span class="o">&lt;+</span><span class="mi">48</span><span class="o">&gt;:</span>	<span class="n">cmp</span>    <span class="no">QWORD</span> <span class="no">PTR</span> <span class="o">[</span><span class="n">rbp</span><span class="o">-</span><span class="mh">0x10</span><span class="o">],</span><span class="mh">0x1e</span>
+   <span class="mh">0x0000000000400a67</span> <span class="o">&lt;+</span><span class="mi">53</span><span class="o">&gt;:</span>	<span class="n">ja</span>     <span class="mh">0x400a70</span> <span class="o">&lt;</span><span class="n">check</span><span class="o">+</span><span class="mi">62</span><span class="o">&gt;</span>
+   <span class="mh">0x0000000000400a69</span> <span class="o">&lt;+</span><span class="mi">55</span><span class="o">&gt;:</span>	<span class="n">cmp</span>    <span class="no">QWORD</span> <span class="no">PTR</span> <span class="o">[</span><span class="n">rbp</span><span class="o">-</span><span class="mh">0x8</span><span class="o">],</span><span class="mh">0x3c</span>
+   <span class="mh">0x0000000000400a6e</span> <span class="o">&lt;+</span><span class="mi">60</span><span class="o">&gt;:</span>	<span class="n">jbe</span>    <span class="mh">0x400a77</span> <span class="o">&lt;</span><span class="n">check</span><span class="o">+</span><span class="mi">69</span><span class="o">&gt;</span>
+   <span class="mh">0x0000000000400a70</span> <span class="o">&lt;+</span><span class="mi">62</span><span class="o">&gt;:</span>	<span class="n">mov</span>    <span class="n">eax</span><span class="o">,</span><span class="mh">0xffffffff</span>
+   <span class="mh">0x0000000000400a75</span> <span class="o">&lt;+</span><span class="mi">67</span><span class="o">&gt;:</span>	<span class="n">jmp</span>    <span class="mh">0x400ab9</span> <span class="o">&lt;</span><span class="n">check</span><span class="o">+</span><span class="mi">135</span><span class="o">&gt;</span>
+   <span class="mh">0x0000000000400a77</span> <span class="o">&lt;+</span><span class="mi">69</span><span class="o">&gt;:</span>	<span class="n">mov</span>    <span class="n">rax</span><span class="o">,</span><span class="no">QWORD</span> <span class="no">PTR</span> <span class="o">[</span><span class="n">rbp</span><span class="o">-</span><span class="mh">0x8</span><span class="o">]</span>
+   <span class="mh">0x0000000000400a7b</span> <span class="o">&lt;+</span><span class="mi">73</span><span class="o">&gt;:</span>	<span class="n">shr</span>    <span class="n">rax</span><span class="o">,</span><span class="mi">1</span>
+   <span class="mh">0x0000000000400a7e</span> <span class="o">&lt;+</span><span class="mi">76</span><span class="o">&gt;:</span>	<span class="n">cmp</span>    <span class="n">rax</span><span class="o">,</span><span class="no">QWORD</span> <span class="no">PTR</span> <span class="o">[</span><span class="n">rbp</span><span class="o">-</span><span class="mh">0x10</span><span class="o">]</span>
+   <span class="mh">0x0000000000400a82</span> <span class="o">&lt;+</span><span class="mi">80</span><span class="o">&gt;:</span>	<span class="n">je</span>     <span class="mh">0x400a8b</span> <span class="o">&lt;</span><span class="n">check</span><span class="o">+</span><span class="mi">89</span><span class="o">&gt;</span>
+   <span class="mh">0x0000000000400a84</span> <span class="o">&lt;+</span><span class="mi">82</span><span class="o">&gt;:</span>	<span class="n">mov</span>    <span class="n">eax</span><span class="o">,</span><span class="mh">0xffffffff</span>
+   <span class="mh">0x0000000000400a89</span> <span class="o">&lt;+</span><span class="mi">87</span><span class="o">&gt;:</span>	<span class="n">jmp</span>    <span class="mh">0x400ab9</span> <span class="o">&lt;</span><span class="n">check</span><span class="o">+</span><span class="mi">135</span><span class="o">&gt;</span>
+   <span class="mh">0x0000000000400a8b</span> <span class="o">&lt;+</span><span class="mi">89</span><span class="o">&gt;:</span>	<span class="n">mov</span>    <span class="n">rax</span><span class="o">,</span><span class="no">QWORD</span> <span class="no">PTR</span> <span class="o">[</span><span class="n">rbp</span><span class="o">-</span><span class="mh">0x20</span><span class="o">]</span>
+   <span class="mh">0x0000000000400a8f</span> <span class="o">&lt;+</span><span class="mi">93</span><span class="o">&gt;:</span>	<span class="n">mov</span>    <span class="n">rdi</span><span class="o">,</span><span class="n">rax</span>
+   <span class="mh">0x0000000000400a92</span> <span class="o">&lt;+</span><span class="mi">96</span><span class="o">&gt;:</span>	<span class="n">call</span>   <span class="mh">0x4008a5</span> <span class="o">&lt;</span><span class="n">getuser</span><span class="o">&gt;</span>
+   <span class="mh">0x0000000000400a97</span> <span class="o">&lt;+</span><span class="mi">101</span><span class="o">&gt;:</span>	<span class="n">mov</span>    <span class="n">rdx</span><span class="o">,</span><span class="n">rax</span>
+   <span class="mh">0x0000000000400a9a</span> <span class="o">&lt;+</span><span class="mi">104</span><span class="o">&gt;:</span>	<span class="n">mov</span>    <span class="n">rax</span><span class="o">,</span><span class="no">QWORD</span> <span class="no">PTR</span> <span class="o">[</span><span class="n">rbp</span><span class="o">-</span><span class="mh">0x18</span><span class="o">]</span>
+   <span class="mh">0x0000000000400a9e</span> <span class="o">&lt;+</span><span class="mi">108</span><span class="o">&gt;:</span>	<span class="n">mov</span>    <span class="n">rsi</span><span class="o">,</span><span class="n">rax</span>
+   <span class="mh">0x0000000000400aa1</span> <span class="o">&lt;+</span><span class="mi">111</span><span class="o">&gt;:</span>	<span class="n">mov</span>    <span class="n">rdi</span><span class="o">,</span><span class="n">rdx</span>
+   <span class="mh">0x0000000000400aa4</span> <span class="o">&lt;+</span><span class="mi">114</span><span class="o">&gt;:</span>	<span class="n">call</span>   <span class="mh">0x400640</span> <span class="o">&lt;</span><span class="n">strcmp</span><span class="nd">@plt</span><span class="o">&gt;</span>
+   <span class="mh">0x0000000000400aa9</span> <span class="o">&lt;+</span><span class="mi">119</span><span class="o">&gt;:</span>	<span class="n">test</span>   <span class="n">eax</span><span class="o">,</span><span class="n">eax</span>
+   <span class="mh">0x0000000000400aab</span> <span class="o">&lt;+</span><span class="mi">121</span><span class="o">&gt;:</span>	<span class="n">je</span>     <span class="mh">0x400ab4</span> <span class="o">&lt;</span><span class="n">check</span><span class="o">+</span><span class="mi">130</span><span class="o">&gt;</span>
+   <span class="mh">0x0000000000400aad</span> <span class="o">&lt;+</span><span class="mi">123</span><span class="o">&gt;:</span>	<span class="n">mov</span>    <span class="n">eax</span><span class="o">,</span><span class="mh">0xffffffff</span>
+   <span class="mh">0x0000000000400ab2</span> <span class="o">&lt;+</span><span class="mi">128</span><span class="o">&gt;:</span>	<span class="n">jmp</span>    <span class="mh">0x400ab9</span> <span class="o">&lt;</span><span class="n">check</span><span class="o">+</span><span class="mi">135</span><span class="o">&gt;</span>
+   <span class="mh">0x0000000000400ab4</span> <span class="o">&lt;+</span><span class="mi">130</span><span class="o">&gt;:</span>	<span class="n">mov</span>    <span class="n">eax</span><span class="o">,</span><span class="mh">0x1</span>
+   <span class="mh">0x0000000000400ab9</span> <span class="o">&lt;+</span><span class="mi">135</span><span class="o">&gt;:</span>	<span class="n">leave</span>  
+   <span class="mh">0x0000000000400aba</span> <span class="o">&lt;+</span><span class="mi">136</span><span class="o">&gt;:</span>	<span class="n">ret</span>    
+</pre></table></code></div></div><p>it seems that this function do multiple tests to check for username and password and if everything is okay it follows to the address 0x0000000000400a92 to call <strong>getuser</strong> function</p><p>and again after we disassemble getuser function we will see <strong>getBin</strong> and <strong>getIndex</strong> functions are being called.</p><p>So the general look at this code is that the check function makes a general checks for inputs and getuser function checks if the password is correct for the current user with some mathematics by getBin and getIndex functions.</p><p>I moved then to <a href="https://ghidra-sre.org/">Ghidra</a> to decompile those functions for better and detalied understanding.</p><p>i decompiled the main and i got this:</p><div class="language-c highlighter-rouge"><div class="highlight"><code><table class="rouge-table"><tbody><tr><td class="rouge-gutter gl"><pre class="lineno">1
+2
+3
+4
+5
+6
+7
+8
+9
+10
+11
+12
+13
+14
+15
+16
+17
+18
+19
+20
+21
+22
+23
+</pre><td class="rouge-code"><pre><span class="n">undefined8</span> <span class="nf">main</span><span class="p">(</span><span class="kt">int</span> <span class="n">param_1</span><span class="p">,</span><span class="kt">long</span> <span class="n">param_2</span><span class="p">)</span>
+
+<span class="p">{</span>
+  <span class="kt">int</span> <span class="n">iVar1</span><span class="p">;</span>
+  <span class="kt">char</span> <span class="o">*</span><span class="n">__s1</span><span class="p">;</span>
+  <span class="kt">char</span> <span class="o">*</span><span class="n">pcVar2</span><span class="p">;</span>
+
+  <span class="k">if</span> <span class="p">(</span><span class="n">param_1</span> <span class="o">&lt;</span> <span class="mi">3</span><span class="p">)</span> <span class="p">{</span>
+    <span class="n">puts</span><span class="p">(</span><span class="s">"usage: ./ezez_keygen2 username serial"</span><span class="p">);</span>
+    <span class="k">return</span> <span class="mh">0xffffffff</span><span class="p">;</span>
+  <span class="p">}</span>
+  <span class="n">__s1</span> <span class="o">=</span> <span class="n">strdup</span><span class="p">(</span><span class="o">*</span><span class="p">(</span><span class="kt">char</span> <span class="o">**</span><span class="p">)(</span><span class="n">param_2</span> <span class="o">+</span> <span class="mi">8</span><span class="p">));</span>
+  <span class="n">pcVar2</span> <span class="o">=</span> <span class="n">strdup</span><span class="p">(</span><span class="o">*</span><span class="p">(</span><span class="kt">char</span> <span class="o">**</span><span class="p">)(</span><span class="n">param_2</span> <span class="o">+</span> <span class="mh">0x10</span><span class="p">));</span>
+  <span class="n">iVar1</span> <span class="o">=</span> <span class="n">check</span><span class="p">(</span><span class="n">__s1</span><span class="p">,</span><span class="n">pcVar2</span><span class="p">,</span><span class="n">pcVar2</span><span class="p">);</span>
+
+  <span class="k">if</span> <span class="p">((</span><span class="n">iVar1</span> <span class="o">==</span> <span class="mi">1</span><span class="p">)</span> <span class="o">&amp;&amp;</span> <span class="p">(</span><span class="n">iVar1</span> <span class="o">=</span> <span class="n">strcmp</span><span class="p">(</span><span class="n">__s1</span><span class="p">,</span><span class="s">"4dminUser31337"</span><span class="p">),</span> <span class="n">iVar1</span> <span class="o">==</span> <span class="mi">0</span><span class="p">))</span> <span class="p">{</span>
+    <span class="n">printf</span><span class="p">(</span><span class="s">"flag is: flag{ %s }</span><span class="se">\n</span><span class="s">"</span><span class="p">,</span><span class="n">pcVar2</span><span class="p">);</span>
+    <span class="k">return</span> <span class="mi">0</span><span class="p">;</span>
+  <span class="p">}</span>
+
+  <span class="n">puts</span><span class="p">(</span><span class="s">"unrecognized user"</span><span class="p">);</span>
+  <span class="n">exit</span><span class="p">(</span><span class="o">-</span><span class="mi">1</span><span class="p">);</span>
+<span class="p">}</span>
+</pre></table></code></div></div><p>So to get the flag the check(username, password) must be true and the username must be “<strong>4dminUser31337</strong>”. <em>well, we got the username .. now let’s go get the password!</em></p><p>I decompiled check function to see what’s happening there:</p><div class="language-c highlighter-rouge"><div class="highlight"><code><table class="rouge-table"><tbody><tr><td class="rouge-gutter gl"><pre class="lineno">1
+2
+3
+4
+5
+6
+7
+8
+9
+10
+11
+12
+13
+14
+15
+16
+17
+18
+19
+20
+21
+22
+23
+24
+25
+26
+27
+28
+29
+30
+31
+32
+33
+34
+</pre><td class="rouge-code"><pre><span class="n">undefined8</span> <span class="nf">check</span><span class="p">(</span><span class="kt">char</span> <span class="o">*</span><span class="n">param_1</span><span class="p">,</span><span class="kt">char</span> <span class="o">*</span><span class="n">param_2</span><span class="p">)</span>
+
+<span class="p">{</span>
+  <span class="kt">int</span> <span class="n">iVar1</span><span class="p">;</span>
+  <span class="kt">size_t</span> <span class="n">sVar2</span><span class="p">;</span>
+  <span class="kt">size_t</span> <span class="n">sVar3</span><span class="p">;</span>
+  <span class="n">undefined8</span> <span class="n">uVar4</span><span class="p">;</span>
+  <span class="kt">char</span> <span class="o">*</span><span class="n">__s1</span><span class="p">;</span>
+
+  <span class="n">sVar2</span> <span class="o">=</span> <span class="n">strlen</span><span class="p">(</span><span class="n">param_1</span><span class="p">);</span>
+  <span class="n">sVar3</span> <span class="o">=</span> <span class="n">strlen</span><span class="p">(</span><span class="n">param_2</span><span class="p">);</span>
+
+  <span class="k">if</span> <span class="p">((</span><span class="n">sVar2</span> <span class="o">&lt;</span> <span class="mh">0x1f</span><span class="p">)</span> <span class="o">&amp;&amp;</span> <span class="p">(</span><span class="n">sVar3</span> <span class="o">&lt;</span> <span class="mh">0x3d</span><span class="p">))</span> <span class="p">{</span>
+
+    <span class="k">if</span> <span class="p">(</span><span class="n">sVar3</span> <span class="o">&gt;&gt;</span> <span class="mi">1</span> <span class="o">==</span> <span class="n">sVar2</span><span class="p">)</span> <span class="p">{</span>
+      <span class="n">__s1</span> <span class="o">=</span> <span class="p">(</span><span class="kt">char</span> <span class="o">*</span><span class="p">)</span><span class="n">getuser</span><span class="p">(</span><span class="n">param_2</span><span class="p">);</span>
+      <span class="n">iVar1</span> <span class="o">=</span> <span class="n">strcmp</span><span class="p">(</span><span class="n">__s1</span><span class="p">,</span><span class="n">param_1</span><span class="p">);</span>
+
+      <span class="k">if</span> <span class="p">(</span><span class="n">iVar1</span> <span class="o">==</span> <span class="mi">0</span><span class="p">)</span> <span class="p">{</span>
+        <span class="n">uVar4</span> <span class="o">=</span> <span class="mi">1</span><span class="p">;</span>
+      <span class="p">}</span>
+      <span class="k">else</span> <span class="p">{</span>
+        <span class="n">uVar4</span> <span class="o">=</span> <span class="mh">0xffffffff</span><span class="p">;</span>
+      <span class="p">}</span>
+    <span class="p">}</span>
+    <span class="k">else</span> <span class="p">{</span>
+      <span class="n">uVar4</span> <span class="o">=</span> <span class="mh">0xffffffff</span><span class="p">;</span>
+    <span class="p">}</span>
+  <span class="p">}</span>
+  <span class="k">else</span> <span class="p">{</span>
+    <span class="n">uVar4</span> <span class="o">=</span> <span class="mh">0xffffffff</span><span class="p">;</span>
+  <span class="p">}</span>
+  <span class="k">return</span> <span class="n">uVar4</span><span class="p">;</span>
+<span class="p">}</span>
+</pre></table></code></div></div><p>Now we know that:</p><ul><li>username must be &lt; 30 characters<li>password must be &lt; 60 characters<li>the password length should be twice the username length<li>the password is passed to getuser function and it returns a string<li>the string returned by getuser function should be identical to the username we entered</ul><p>So the getuser function generates a string based on the password, i then studied how it’s doing that and i came up with this python code which is equivalent of getuser function:</p><div class="language-python highlighter-rouge"><div class="highlight"><code><table class="rouge-table"><tbody><tr><td class="rouge-gutter gl"><pre class="lineno">1
+2
+3
+4
+5
+6
+7
+8
+9
+10
+11
+12
+13
+14
+15
+16
+17
+18
+19
+20
+21
+22
+23
+24
+25
+26
+27
+28
+29
+30
+31
+32
+33
+34
+35
+36
+37
+38
+39
+40
+41
+42
+43
+44
+45
+46
+47
+48
+49
+50
+51
+52
+53
+54
+55
+56
+57
+58
+</pre><td class="rouge-code"><pre><span class="n">LTable</span> <span class="o">=</span> <span class="s">"AFECWQPXIGJTUBN%"</span>
+<span class="n">HTable</span> <span class="o">=</span> <span class="s">"cpqowuejfnvhzbx$"</span>
+
+<span class="c1"># enter the password to be encrypted
+</span><span class="n">password</span> <span class="o">=</span> <span class="s">''</span>
+<span class="n">password</span> <span class="o">=</span> <span class="nb">input</span><span class="p">(</span><span class="s">"Password = "</span><span class="p">)</span>
+
+<span class="n">p</span> <span class="o">=</span> <span class="s">''</span>
+<span class="n">counter</span> <span class="o">=</span> <span class="mi">0</span>
+
+<span class="c1"># loop for password length
+</span><span class="k">while</span><span class="p">(</span><span class="bp">True</span><span class="p">):</span>
+
+    <span class="n">pass_len</span> <span class="o">=</span> <span class="nb">len</span><span class="p">(</span><span class="n">password</span><span class="p">)</span>
+    <span class="k">if</span><span class="p">(</span><span class="n">pass_len</span> <span class="o">&lt;=</span> <span class="n">counter</span><span class="p">):</span>
+        <span class="k">break</span>
+
+    <span class="c1"># find the index of the password even-indexed letter in LTable
+</span>    <span class="n">even_index</span> <span class="o">=</span> <span class="n">LTable</span><span class="p">.</span><span class="n">find</span><span class="p">(</span><span class="n">password</span><span class="p">[</span><span class="n">counter</span><span class="p">])</span>
+
+    <span class="c1"># find the index of the password odd-indexed letter in HTable
+</span>    <span class="n">odd_index</span>  <span class="o">=</span> <span class="n">HTable</span><span class="p">.</span><span class="n">find</span><span class="p">(</span><span class="n">password</span><span class="p">[</span><span class="n">counter</span> <span class="o">+</span> <span class="mi">1</span><span class="p">])</span>
+
+    <span class="c1"># convert the index value to binary
+</span>    <span class="n">s</span> <span class="o">=</span> <span class="nb">format</span><span class="p">(</span><span class="n">even_index</span><span class="p">,</span> <span class="s">'04b'</span><span class="p">)</span>
+    <span class="n">t</span> <span class="o">=</span> <span class="nb">format</span><span class="p">(</span><span class="n">odd_index</span><span class="p">,</span> <span class="s">'04b'</span><span class="p">)</span>
+
+    <span class="c1"># concatenate even-indexed value in binary with odd-indexed value in binary to get 1 byte
+</span>    <span class="c1"># (e.g. [s = 0110, t = 0001] =&gt; p = 00101001)
+</span>    <span class="k">for</span> <span class="n">x</span> <span class="ow">in</span> <span class="nb">range</span> <span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">4</span><span class="p">):</span>
+        <span class="n">p</span> <span class="o">+=</span> <span class="n">s</span><span class="p">[</span><span class="n">x</span><span class="p">]</span>
+        <span class="n">p</span> <span class="o">+=</span> <span class="n">t</span><span class="p">[</span><span class="n">x</span><span class="p">]</span>
+
+    <span class="c1"># seperate each byte with a space
+</span>    <span class="n">p</span> <span class="o">+=</span> <span class="s">' '</span>
+
+    <span class="c1"># reset
+</span>    <span class="n">s</span> <span class="o">=</span> <span class="s">''</span>
+    <span class="n">t</span> <span class="o">=</span> <span class="s">''</span>
+
+    <span class="n">counter</span> <span class="o">+=</span> <span class="mi">2</span>
+
+<span class="n">list_bin</span> <span class="o">=</span> <span class="n">p</span><span class="p">.</span><span class="n">split</span><span class="p">(</span><span class="s">' '</span><span class="p">)</span>
+<span class="n">list_bin</span><span class="p">.</span><span class="n">pop</span><span class="p">()</span>
+
+<span class="n">h</span> <span class="o">=</span> <span class="s">""</span>
+
+<span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="n">list_bin</span><span class="p">:</span>
+    <span class="c1"># convert each byte to hex
+</span>    <span class="n">h</span> <span class="o">=</span> <span class="nb">hex</span><span class="p">(</span><span class="nb">int</span><span class="p">(</span><span class="n">i</span><span class="p">,</span> <span class="mi">2</span><span class="p">))[</span><span class="mi">2</span><span class="p">:]</span>
+
+    <span class="c1"># convert each byte in hex to decimal
+</span>    <span class="n">h2i</span> <span class="o">=</span> <span class="nb">int</span><span class="p">(</span><span class="n">h</span><span class="p">,</span> <span class="mi">16</span><span class="p">)</span>
+
+    <span class="c1"># get the ascii character
+</span>    <span class="k">print</span><span class="p">(</span><span class="nb">chr</span><span class="p">(</span><span class="n">h2i</span><span class="p">),</span> <span class="n">end</span> <span class="o">=</span> <span class="s">''</span><span class="p">)</span>
+
+<span class="k">print</span><span class="p">(</span><span class="s">''</span><span class="p">)</span>
+</pre></table></code></div></div><p><strong>NOTE:</strong> <em>the even-indexed characters in the input string must be in LTable and the odd-indexed characters must be in HTable</em></p><p>Shortly, it iterates for each charachter in the password string and searches for it in LTable <em>if the character index is even</em> and searches for it in HTable <em>if the character index is odd</em> and then converts each value to binary (4-bits) and combine them into 1-byte (8-bits) and then gets the ascii value of this byte.</p><p>As explained this will result in a string with a half-length of password and this string must be the same as the username which we got before “<strong>4dminUser31337</strong>”.</p><p>Now given “<strong>4dminUser31337</strong>” we need to reverse this encryption process to get the password!</p><p>i wrote a python code again to do this task for us which is the reverse process of the previous code:</p><div class="language-python highlighter-rouge"><div class="highlight"><code><table class="rouge-table"><tbody><tr><td class="rouge-gutter gl"><pre class="lineno">1
+2
+3
+4
+5
+6
+7
+8
+9
+10
+11
+12
+13
+14
+15
+16
+17
+18
+19
+20
+21
+22
+23
+24
+25
+26
+27
+28
+29
+30
+31
+32
+33
+34
+35
+36
+37
+38
+</pre><td class="rouge-code"><pre><span class="c1"># given information
+</span><span class="n">LTable</span> <span class="o">=</span> <span class="s">"AFECWQPXIGJTUBN%"</span>
+<span class="n">HTable</span> <span class="o">=</span> <span class="s">"cpqowuejfnvhzbx$"</span>
+
+<span class="c1"># the username we need to decrypt
+</span><span class="n">user</span> <span class="o">=</span> <span class="s">"4dminUser31337"</span>
+
+<span class="c1"># username in binary
+</span><span class="n">s</span> <span class="o">=</span> <span class="s">"00"</span> <span class="o">+</span> <span class="nb">bin</span><span class="p">(</span><span class="nb">int</span><span class="p">.</span><span class="n">from_bytes</span><span class="p">(</span><span class="n">user</span><span class="p">.</span><span class="n">encode</span><span class="p">(),</span> <span class="s">'big'</span><span class="p">))[</span><span class="mi">2</span><span class="p">:]</span>
+
+<span class="n">p</span> <span class="o">=</span> <span class="s">""</span>
+<span class="n">q</span> <span class="o">=</span> <span class="s">""</span>
+<span class="n">flag</span> <span class="o">=</span> <span class="s">""</span>
+
+<span class="c1"># loop for each byte in s
+</span><span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="nb">len</span><span class="p">(</span><span class="n">s</span><span class="p">)</span> <span class="o">//</span> <span class="mi">8</span><span class="p">):</span>
+    <span class="c1"># each byte in s
+</span>    <span class="n">piece</span> <span class="o">=</span> <span class="n">s</span><span class="p">[</span><span class="mi">8</span> <span class="o">*</span> <span class="n">i</span><span class="p">:</span><span class="mi">8</span> <span class="o">*</span> <span class="p">(</span><span class="n">i</span><span class="o">+</span><span class="mi">1</span><span class="p">)]</span>
+
+    <span class="c1"># seperate the byte so even-indexed bits stored in p and odd-indexed bits stored in q
+</span>    <span class="k">for</span> <span class="n">j</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">8</span><span class="p">):</span>
+        <span class="k">if</span><span class="p">(</span><span class="n">j</span><span class="o">%</span><span class="mi">2</span> <span class="o">==</span> <span class="mi">0</span><span class="p">):</span>
+            <span class="n">p</span> <span class="o">+=</span> <span class="n">piece</span><span class="p">[</span><span class="n">j</span><span class="p">]</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="n">q</span> <span class="o">+=</span> <span class="n">piece</span><span class="p">[</span><span class="n">j</span><span class="p">]</span>
+
+    <span class="c1"># convert p and q to decimal
+</span>    <span class="n">LTable_index</span> <span class="o">=</span> <span class="nb">int</span><span class="p">(</span><span class="n">p</span><span class="p">,</span> <span class="mi">2</span><span class="p">)</span>
+    <span class="n">HTable_index</span> <span class="o">=</span> <span class="nb">int</span><span class="p">(</span><span class="n">q</span><span class="p">,</span> <span class="mi">2</span><span class="p">)</span>
+
+    <span class="c1"># get the p-th letter in LTable and the q-th letter in HTable
+</span>    <span class="n">flag</span> <span class="o">+=</span> <span class="n">LTable</span><span class="p">[</span><span class="n">LTable_index</span><span class="p">]</span> <span class="o">+</span> <span class="n">HTable</span><span class="p">[</span><span class="n">HTable_index</span><span class="p">]</span>
+
+    <span class="c1"># reset
+</span>    <span class="n">p</span> <span class="o">=</span> <span class="s">""</span>
+    <span class="n">q</span> <span class="o">=</span> <span class="s">""</span>
+
+<span class="k">print</span><span class="p">(</span><span class="n">flag</span><span class="p">)</span>
+</pre></table></code></div></div><p>This will print out <strong>WeWvPhPnXvA$QbWhQzQuWuQuQuQj</strong> and by running the program:</p><div class="language-plaintext highlighter-rouge"><div class="highlight"><code><table class="rouge-table"><tbody><tr><td class="rouge-gutter gl"><pre class="lineno">1
+2
+</pre><td class="rouge-code"><pre>$ ./ezez_keygen2 4dminUser31337 WeWvPhPnXvA$QbWhQzQuWuQuQuQj
+unrecognized user
+</pre></table></code></div></div><p>It doesn’t work, why?!! Because <strong>$</strong> character in bash is reserved and what comes after it is a variable name to solve this problem we can use <strong>\</strong> to escape this character</p><p>and by running the program again:</p><div class="language-plaintext highlighter-rouge"><div class="highlight"><code><table class="rouge-table"><tbody><tr><td class="rouge-gutter gl"><pre class="lineno">1
+2
+</pre><td class="rouge-code"><pre>$ ./ezez_keygen2 4dminUser31337 WeWvPhPnXvA\$QbWhQzQuWuQuQuQj
+flag is: flag{WeWvPhPnXvA$QbWhQzQuWuQuQuQj}
+</pre></table></code></div></div><p>that’s it!! we got the flag! <br /> <code class="language-plaintext highlighter-rouge">flag{WeWvPhPnXvA$QbWhQzQuWuQuQuQj}</code></p><hr /><h2 id="holmes-traces">Holmes Traces</h2><h4 id="forensics-100-points-1">Forensics (100 points)</h4><h3 id="description-2">Description</h3><p>Given holmes.pcap file .. get the flag</p><h3 id="solution-2">solution</h3><p><strong>Solved after the competition</strong></p><p>Using wireshark and after studying the capture i made an assumption about what’s going on ..</p><p>there’s a file <strong>safe.tar.gz.gpg</strong> has been sent so now we need to collect the packets and see what will happen next: we choose a packet of the many packets of this file over FTP-DATA protocol then <code class="language-plaintext highlighter-rouge">right-click &gt; Follow &gt; TCP Stream</code></p><p>there’s a window popup contains the stream of the file and we will choose <code class="language-plaintext highlighter-rouge">show data and save as: Raw</code> then <code class="language-plaintext highlighter-rouge">Save as &gt; safe.tar.gz.gpg</code></p><p>Now we got the file notice that gpg file needs a password to be decrypted so our next step will be getting that password!</p><p>There are interesting base64 texts while we are scrolling in the pcap file .. and they all are sent over the protocol HTTP and the source is: <code class="language-plaintext highlighter-rouge">192.168.56.1</code> and the destination is: <code class="language-plaintext highlighter-rouge">192.168.56.101</code> so our filter is:</p><div class="language-c highlighter-rouge"><div class="highlight"><code><table class="rouge-table"><tbody><tr><td class="rouge-gutter gl"><pre class="lineno">1
+</pre><td class="rouge-code"><pre><span class="n">http</span> <span class="o">&amp;&amp;</span> <span class="n">ip</span><span class="p">.</span><span class="n">src</span> <span class="o">==</span> <span class="mi">192</span><span class="p">.</span><span class="mi">168</span><span class="p">.</span><span class="mi">56</span><span class="p">.</span><span class="mi">1</span> <span class="o">&amp;&amp;</span> <span class="n">ip</span><span class="p">.</span><span class="n">dst</span> <span class="o">==</span> <span class="mi">192</span><span class="p">.</span><span class="mi">168</span><span class="p">.</span><span class="mi">56</span><span class="p">.</span><span class="mi">101</span>
+</pre></table></code></div></div><p>and by decoding each base64 password:</p><div class="language-plaintext highlighter-rouge"><div class="highlight"><code><table class="rouge-table"><tbody><tr><td class="rouge-gutter gl"><pre class="lineno">1
+2
+3
+4
+5
+6
+7
+8
+9
+10
+11
+12
+13
+14
+15
+16
+</pre><td class="rouge-code"><pre>QWxtb3N0VGhlcmVKdXN0cGFzcw==	-&gt;	AlmostThereJustpass
+cVNGVXFaV3pNWG5CckJTY3E=	-&gt;	qSFUqZWzMXnBrBScq
+MjAwQ29kZW1lYW5zPw==		-&gt;	200Codemeans?
+QXV0b3NweVdhdHNvbg==		-&gt;	AutospyWatson
+QXV0b3NweUhvbG1lcw==		-&gt;	AutospyHolmes
+QyJdXyt1ajxfLmZLUWs9U1k=	-&gt;	C"]_+uj&lt;_.fKQk=SY
+aFNZdldEc0NrVWVySFlOdXE=	-&gt;	hSYvWDsCkUerHYNuq
+SEZzTU13Q1BZTkhSU3BEcGo=	-&gt;	HFsMMwCPYNHRSpDpj
+NWJIV3B6MmFmN3RUUHpWNVI=	-&gt;	5bHWpz2af7tTPzV5R
+SG9sbWVzJldhdHNvblBhc3M=	-&gt;	Holmes&amp;WatsonPass
+Q2Fpcm9TZWN1cml0eUNhbXA=	-&gt;	CairoSecurityCamp
+U2hlcmxva0hvbG1lczI=		-&gt;	SherlokHolmes2
+UGFzczJyZFNvbHZlMjI=		-&gt;	Pass2rdSolve22
+Qy8tdHQ6KytIa2tCVWhkZyQ=	-&gt;	C/-tt:++HkkBUhdg$
+Yzs3WnFqTkBSbi1bZiRZJA==	-&gt;	c;7ZqjN@Rn-[f$Y$
+JiFzbndCQEdtWVR+a1Y5XTYl	-&gt;	&amp;!snwB@GmYT~kV9]6%
+</pre></table></code></div></div><p>And by applying each password to decrypt the gpg file using this command:</p><div class="language-console highlighter-rouge"><div class="highlight"><code><table class="rouge-table"><tbody><tr><td class="rouge-gutter gl"><pre class="lineno">1
+</pre><td class="rouge-code"><pre><span class="gp">$</span><span class="w"> </span>gpg <span class="nt">-d</span> <span class="nt">--batch</span> <span class="nt">--passphrase</span><span class="o">=</span><span class="s2">"THE PASSWORD GOES HERE"</span> safe.tar.gz.gpg
+</pre></table></code></div></div><p>we will see that 5bHWpz2af7tTPzV5R is the real password! there’s ascii data floating around so now we need to improve our command:</p><div class="language-console highlighter-rouge"><div class="highlight"><code><table class="rouge-table"><tbody><tr><td class="rouge-gutter gl"><pre class="lineno">1
+</pre><td class="rouge-code"><pre><span class="gp">$</span><span class="w"> </span>gpg <span class="nt">-d</span> <span class="nt">--batch</span> <span class="nt">--passphrase</span><span class="o">=</span><span class="s2">"5bHWpz2af7tTPzV5R"</span> safe.tar.gz.gpg <span class="o">&gt;</span> safe.tar.gz
+</pre></table></code></div></div><p>Now we need to decrypt the resulting file safe.tar.gz:</p><div class="language-console highlighter-rouge"><div class="highlight"><code><table class="rouge-table"><tbody><tr><td class="rouge-gutter gl"><pre class="lineno">1
+2
+3
+</pre><td class="rouge-code"><pre><span class="gp">$</span><span class="w"> </span><span class="nb">gunzip </span>safe.tar.gz
+<span class="gp">$</span><span class="w"> </span><span class="nb">tar</span> <span class="nt">-xvf</span> safe.tar
+<span class="go">Steg.png
+</span></pre></table></code></div></div><p><img src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7 " data-src="/assets/img/posts/2020-11-30-cybertalents-cairo-university-2019-ctf/Steg.png" alt="Steg.png" /></p><p>Well, now we have a photo named Steg.png so we will conclude that the flag is hidden inside using a <strong>Steg</strong>anography method .. i tried many tools but <a href="https://github.com/DimitarPetrov/stegify">stegify</a> did the job <em>make sure to install golang before</em></p><p>Finally:</p><div class="language-console highlighter-rouge"><div class="highlight"><code><table class="rouge-table"><tbody><tr><td class="rouge-gutter gl"><pre class="lineno">1
+</pre><td class="rouge-code"><pre><span class="gp">$</span><span class="w"> </span>stegify decode <span class="nt">--carrier</span> Steg.png <span class="nt">--result</span> flag
+</pre></table></code></div></div><p>The result is a JPEG photo when we open it we find this text <strong>“N3twRk_Tr@c_hV_m@ny_Det@ls”</strong> <img src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7 " data-src="/assets/img/posts/2020-11-30-cybertalents-cairo-university-2019-ctf/flag.png" alt="flag" /> <br /> <code class="language-plaintext highlighter-rouge">flag{N3twRk_Tr@c_hV_m@ny_Det@ls}</code></p></div><div class="post-tail-wrapper text-muted"><div class="post-meta mb-3"> <i class="far fa-folder-open fa-fw mr-1"></i> <a href='/categories/ctf/'>CTF</a>, <a href='/categories/writeups/'>Writeups</a></div><div class="post-tags"> <i class="fa fa-tags fa-fw mr-1"></i> <a href="/tags/ctf/" class="post-tag no-text-decoration" >ctf</a> <a href="/tags/writeups/" class="post-tag no-text-decoration" >writeups</a> <a href="/tags/reverse-engineering/" class="post-tag no-text-decoration" >reverse-engineering</a> <a href="/tags/forensics/" class="post-tag no-text-decoration" >forensics</a></div><div class="post-tail-bottom d-flex justify-content-between align-items-center mt-3 pt-5 pb-2"><div class="license-wrapper"> This post is licensed under <a href="https://creativecommons.org/licenses/by/4.0/">CC BY 4.0</a> by the author.</div><div class="share-wrapper"> <span class="share-label text-muted mr-1">Share</span> <span class="share-icons"> <a href="https://twitter.com/intent/tweet?text=CyberTalents Cairo University CTF 2019 - T1m3-m4ch1n3&url=https://T1m3M.github.io/posts/cybertalents-cairo-university-2019-ctf/" data-toggle="tooltip" data-placement="top" title="Twitter" target="_blank" rel="noopener" aria-label="Twitter"> <i class="fa-fw fab fa-twitter"></i> </a> <a href="https://www.facebook.com/sharer/sharer.php?title=CyberTalents Cairo University CTF 2019 - T1m3-m4ch1n3&u=https://T1m3M.github.io/posts/cybertalents-cairo-university-2019-ctf/" data-toggle="tooltip" data-placement="top" title="Facebook" target="_blank" rel="noopener" aria-label="Facebook"> <i class="fa-fw fab fa-facebook-square"></i> </a> <a href="https://telegram.me/share?text=CyberTalents Cairo University CTF 2019 - T1m3-m4ch1n3&url=https://T1m3M.github.io/posts/cybertalents-cairo-university-2019-ctf/" data-toggle="tooltip" data-placement="top" title="Telegram" target="_blank" rel="noopener" aria-label="Telegram"> <i class="fa-fw fab fa-telegram"></i> </a> <a href="https://www.linkedin.com/sharing/share-offsite/?url=https://T1m3M.github.io/posts/cybertalents-cairo-university-2019-ctf/" data-toggle="tooltip" data-placement="top" title="Linkedin" target="_blank" rel="noopener" aria-label="Linkedin"> <i class="fa-fw fab fa-linkedin"></i> </a> <i class="fa-fw fas fa-link small" onclick="copyLink()" data-toggle="tooltip" data-placement="top" title="Copy link"></i> </span></div></div></div></div></div><div id="panel-wrapper" class="col-xl-3 pl-2 text-muted topbar-down"><div class="access"><div id="access-lastmod" class="post"> <span>Recent Update</span><ul class="post-content pl-0 pb-1 ml-1 mt-2"><li><a href="/posts/MIPS-cheatsheet/">MIPS cheatsheet</a><li><a href="/posts/RE/">What is Reverse Engineering? | ما هى الهندسة العكسية؟</a><li><a href="/posts/cybertalents-cairo-university-2019-ctf/">CyberTalents Cairo University CTF 2019</a><li><a href="/posts/auctf-2020/">AUCTF 2020</a><li><a href="/posts/angstrom-ctf-2020/">Angstrom CTF 2020</a></ul></div><div id="access-tags"> <span>Trending Tags</span><div class="d-flex flex-wrap mt-3 mb-1 mr-3"> <a class="post-tag" href="/tags/reverse-engineering/">reverse engineering</a> <a class="post-tag" href="/tags/ctf/">ctf</a> <a class="post-tag" href="/tags/writeups/">writeups</a> <a class="post-tag" href="/tags/assembly/">assembly</a> <a class="post-tag" href="/tags/binary-exploitation/">binary exploitation</a> <a class="post-tag" href="/tags/cheatsheet/">cheatsheet</a> <a class="post-tag" href="/tags/crypto/">crypto</a> <a class="post-tag" href="/tags/forensics/">forensics</a> <a class="post-tag" href="/tags/low-level/">low level</a> <a class="post-tag" href="/tags/malware-analysis/">malware analysis</a></div></div></div><div id="toc-wrapper" class="pl-0 pr-4 mb-5"> <span class="pl-3 pt-2 mb-2">Contents</span><nav id="toc" data-toggle="toc"></nav></div></div></div><div class="row"><div class="col-12 col-lg-11 col-xl-8"><div id="post-extend-wrapper" class="pl-1 pr-1 pl-sm-2 pr-sm-2 pl-md-4 pr-md-4"><div id="related-posts" class="mt-5 mb-2 mb-sm-4"><h3 class="pt-2 mt-1 mb-4 ml-1" data-toc-skip>Further Reading</h3><div class="card-deck mb-4"><div class="card"> <a href="/posts/angstrom-ctf-2020/"><div class="card-body"> <span class="timeago small" > Dec 1, 2020 <i class="unloaded">2020-12-01T03:20:00+02:00</i> </span><h3 class="pt-0 mt-1 mb-3" data-toc-skip>Angstrom CTF 2020</h3><div class="text-muted small"><p> {% assign img_root = “/assets/img/posts/2020-12-01-angstrom-ctf-2020” %} ångstromCTF 2020 was really a great competition and we as P1rates team enjoyed it and learned a lot, Here’s my writeup abou...</p></div></div></a></div><div class="card"> <a href="/posts/auctf-2020/"><div class="card-body"> <span class="timeago small" > Dec 18, 2020 <i class="unloaded">2020-12-18T22:38:00+02:00</i> </span><h3 class="pt-0 mt-1 mb-3" data-toc-skip>AUCTF 2020</h3><div class="text-muted small"><p> {% assign img_root = “/assets/img/posts/2020-12-18-auctf-2020” %} AUCTF 2020 has ended, and me and my team P1rates really enjoyed it as it was full of good problems, here’s my writeup about some o...</p></div></div></a></div><div class="card"> <a href="/posts/RE/"><div class="card-body"> <span class="timeago small" > Jan 3 <i class="unloaded">2021-01-03T10:38:00+02:00</i> </span><h3 class="pt-0 mt-1 mb-3" data-toc-skip>What is Reverse Engineering? | ما هى الهندسة العكسية؟</h3><div class="text-muted small"><p> ملحوظة: المقال باللغتين العربية والإنجليزية لمساعدة أكبر قدر ممكن من الناس ونشر العلم 💜 NOTE: This article is in both Arabic and English to help as many people as possible and spread the knowled...</p></div></div></a></div></div></div><div class="post-navigation d-flex justify-content-between"> <span class="btn btn-outline-primary disabled"><p>-</p></span> <a href="/posts/angstrom-ctf-2020/" class="btn btn-outline-primary"><p>Angstrom CTF 2020</p></a></div></div></div></div><script type="text/javascript" src="https://cdn.jsdelivr.net/npm/lozad/dist/lozad.min.js"></script> <script type="text/javascript"> const imgs = document.querySelectorAll('#post-wrapper img'); const observer = lozad(imgs); observer.observe(); </script><footer class="d-flex w-100 justify-content-center"><div class="d-flex justify-content-between align-items-center"><div class="footer-left"><p class="mb-0"> © 2021 <a href="https://twitter.com/T1m3M">Abdelrahman Nasr</a>. <span data-toggle="tooltip" data-placement="top" title="Except where otherwise noted, the blog posts on this site are licensed under the Creative Commons Attribution 4.0 International (CC BY 4.0) License by the author.">Some rights reserved.</span></p></div><div class="footer-right"><p class="mb-0"> Powered by <a href="https://jekyllrb.com" target="_blank" rel="noopener">Jekyll</a> with <a href="https://github.com/cotes2020/jekyll-theme-chirpy/" target="_blank" rel="noopener">Chirpy</a> theme.</p></div></div></footer></div><div id="search-result-wrapper" class="d-flex justify-content-center unloaded"><div class="col-12 col-xl-11 post-content"><div id="search-hints"><h4 class="text-muted mb-4">Trending Tags</h4><a class="post-tag" href="/tags/reverse-engineering/">reverse engineering</a> <a class="post-tag" href="/tags/ctf/">ctf</a> <a class="post-tag" href="/tags/writeups/">writeups</a> <a class="post-tag" href="/tags/assembly/">assembly</a> <a class="post-tag" href="/tags/binary-exploitation/">binary exploitation</a> <a class="post-tag" href="/tags/cheatsheet/">cheatsheet</a> <a class="post-tag" href="/tags/crypto/">crypto</a> <a class="post-tag" href="/tags/forensics/">forensics</a> <a class="post-tag" href="/tags/low-level/">low level</a> <a class="post-tag" href="/tags/malware-analysis/">malware analysis</a></div><div id="search-results" class="d-flex flex-wrap justify-content-center text-muted mt-3"></div></div></div></div><div id="mask"></div><a id="back-to-top" href="#" aria-label="back-to-top" class="btn btn-lg btn-box-shadow" role="button"> <i class="fas fa-angle-up"></i> </a> <script src="https://cdn.jsdelivr.net/npm/simple-jekyll-search@1.7.3/dest/simple-jekyll-search.min.js"></script> <script> SimpleJekyllSearch({ searchInput: document.getElementById('search-input'), resultsContainer: document.getElementById('search-results'), json: '/assets/js/data/search.json', searchResultTemplate: '<div class="pl-1 pr-1 pl-sm-2 pr-sm-2 pl-lg-4 pr-lg-4 pl-xl-0 pr-xl-0"> <a href="https://T1m3M.github.io{url}">{title}</a><div class="post-meta d-flex flex-column flex-sm-row text-muted mt-1 mb-1"><div class="mr-sm-4"><i class="far fa-folder fa-fw"></i>{categories}</div><div><i class="fa fa-tag fa-fw"></i>{tags}</div></div><p>{snippet}</p></div>', noResultsText: '<p class="mt-5">Oops! No result founds.</p>' }); </script> <script async src="https://www.googletagmanager.com/gtag/js?id=G-1WZELSLYX1"></script> <script> window.dataLayer = window.dataLayer || []; function gtag(){dataLayer.push(arguments);} gtag('js', new Date()); gtag('config', 'G-1WZELSLYX1'); </script>

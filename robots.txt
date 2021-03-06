@@ -1,0 +1,6 @@
+User-agent: *
+
+Disallow: /norobots/
+Disallow: /assets/
+
+Sitemap: https://T1m3M.github.io/sitemap.xml

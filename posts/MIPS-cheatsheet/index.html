@@ -1,0 +1,235 @@
+<!DOCTYPE html><html lang="en" mode="dark" ><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no"><meta name="theme" content="Chirpy v2.5.1"><meta name="generator" content="Jekyll v4.2.0" /><meta property="og:title" content="MIPS cheatsheet" /><meta name="author" content="Abdelrahman Nasr" /><meta property="og:locale" content="en_US" /><meta name="description" content="A place where you can find Reversing Engineering CTF challenges writeups, Malware Analysis reports and some low-level geeky stuff" /><meta property="og:description" content="A place where you can find Reversing Engineering CTF challenges writeups, Malware Analysis reports and some low-level geeky stuff" /><link rel="canonical" href="https://t1m3m.github.io/posts/MIPS-cheatsheet/" /><meta property="og:url" content="https://t1m3m.github.io/posts/MIPS-cheatsheet/" /><meta property="og:site_name" content="T1m3-m4ch1n3" /><meta property="og:image" content="https://t1m3m.github.io/assets/img/posts/2021-03-06-MIPS-cheatsheet/cover.jpg" /><meta property="og:type" content="article" /><meta property="article:published_time" content="2021-03-06T12:10:00+02:00" /><meta name="twitter:card" content="summary_large_image" /><meta property="twitter:image" content="https://t1m3m.github.io/assets/img/posts/2021-03-06-MIPS-cheatsheet/cover.jpg" /><meta property="twitter:title" content="MIPS cheatsheet" /><meta name="twitter:site" content="@T1m3M" /><meta name="twitter:creator" content="@Abdelrahman Nasr" /><meta name="google-site-verification" content="wjab7JjezNdGg3dhJv8-6KbCIlqjjYnFBlntUWCuq3g" /> <script type="application/ld+json"> {"description":"A place where you can find Reversing Engineering CTF challenges writeups, Malware Analysis reports and some low-level geeky stuff","headline":"MIPS cheatsheet","dateModified":"2021-03-06T12:10:00+02:00","datePublished":"2021-03-06T12:10:00+02:00","@type":"BlogPosting","image":"https://t1m3m.github.io/assets/img/posts/2021-03-06-MIPS-cheatsheet/cover.jpg","url":"https://t1m3m.github.io/posts/MIPS-cheatsheet/","mainEntityOfPage":{"@type":"WebPage","@id":"https://t1m3m.github.io/posts/MIPS-cheatsheet/"},"author":{"@type":"Person","name":"Abdelrahman Nasr"},"@context":"https://schema.org"}</script><title>MIPS cheatsheet | T1m3-m4ch1n3</title><link rel="shortcut icon" href="/assets/img/favicons/favicon.ico" type="image/x-icon"><link rel="icon" href="/assets/img/favicons/favicon.ico" type="image/x-icon"><link rel="apple-touch-icon" href="/assets/img/favicons/apple-icon.png"><link rel="apple-touch-icon" href="/assets/img/favicons/apple-icon-precomposed.png"><link rel="apple-touch-icon" sizes="57x57" href="/assets/img/favicons/apple-icon-57x57.png"><link rel="apple-touch-icon" sizes="60x60" href="/assets/img/favicons/apple-icon-60x60.png"><link rel="apple-touch-icon" sizes="72x72" href="/assets/img/favicons/apple-icon-72x72.png"><link rel="apple-touch-icon" sizes="76x76" href="/assets/img/favicons/apple-icon-76x76.png"><link rel="apple-touch-icon" sizes="114x114" href="/assets/img/favicons/apple-icon-114x114.png"><link rel="apple-touch-icon" sizes="120x120" href="/assets/img/favicons/apple-icon-120x120.png"><link rel="apple-touch-icon" sizes="144x144" href="/assets/img/favicons/apple-icon-144x144.png"><link rel="apple-touch-icon" sizes="152x152" href="/assets/img/favicons/apple-icon-152x152.png"><link rel="apple-touch-icon" sizes="180x180" href="/assets/img/favicons/apple-icon-180x180.png"><link rel="icon" type="image/png" sizes="192x192" href="/assets/img/favicons/android-icon-192x192.png"><link rel="icon" type="image/png" sizes="32x32" href="/assets/img/favicons/favicon-32x32.png"><link rel="icon" type="image/png" sizes="96x96" href="/assets/img/favicons/favicon-96x96.png"><link rel="icon" type="image/png" sizes="16x16" href="/assets/img/favicons/favicon-16x16.png"><link rel="manifest" href="/assets/img/favicons/manifest.json"><meta name='msapplication-config' content='/assets/img/favicons/browserconfig.xml'><meta name="msapplication-TileColor" content="#ffffff"><meta name="msapplication-TileImage" content="/assets/img/favicons/ms-icon-144x144.png"><meta name="theme-color" content="#ffffff"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin="anonymous"><link rel="dns-prefetch" href="https://fonts.gstatic.com"><link rel="preconnect" href="https://www.google-analytics.com" crossorigin="use-credentials"><link rel="dns-prefetch" href="https://www.google-analytics.com"><link rel="preconnect" href="https://www.googletagmanager.com" crossorigin="anonymous"><link rel="dns-prefetch" href="https://www.googletagmanager.com"><link rel="preconnect" href="cdn.jsdelivr.net"><link rel="dns-prefetch" href="cdn.jsdelivr.net"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.0.0/dist/css/bootstrap.min.css" integrity="sha256-LA89z+k9fjgMKQ/kq4OO2Mrf8VltYml/VES+Rg0fh20=" crossorigin="anonymous"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@5.11.2/css/all.min.css" integrity="sha256-+N4/V/SbAFiW1MPBCXnfnP9QSN3+Keu+NlB+0ev/YKQ=" crossorigin="anonymous"><link rel="preload" as="style" href="/assets/css/post.css"><link rel="stylesheet" href="/assets/css/post.css"><link rel="preload" as="style" href="/assets/css/lib/bootstrap-toc.min.css"><link rel="stylesheet" href="/assets/css/lib/bootstrap-toc.min.css" /> <script src="https://cdn.jsdelivr.net/npm/jquery@3/dist/jquery.min.js"></script> <script async src="https://cdn.jsdelivr.net/combine/npm/popper.js@1.15.0,npm/bootstrap@4/dist/js/bootstrap.min.js"></script> <script async src="/assets/js/post.min.js"></script> <script defer src="/app.js"></script><body data-spy="scroll" data-target="#toc"><div id="sidebar" class="d-flex flex-column"><div id="nav-wrapper"><div id="profile-wrapper" class="d-flex flex-column"><div id="avatar" class="d-flex justify-content-center"> <a href="/" alt="avatar"> <img src="/assets/img/sample/avatar.png" alt="avatar" onerror="this.style.display='none'"> </a></div><div class="profile-text mt-3"><div class="site-title"> <a href="/">T1m3-m4ch1n3</a></div><div class="site-subtitle font-italic"></div></div></div><ul class="nav flex-column"><li class="nav-item d-flex justify-content-center "> <a href="/" class="nav-link d-flex justify-content-center align-items-center w-100"> <i class="fa-fw fas fa-home ml-xl-3 mr-xl-3 unloaded"></i> <span>HOME</span> </a><li class="nav-item d-flex justify-content-center "> <a href="/tabs/categories/" class="nav-link d-flex justify-content-center align-items-center w-100"> <i class="fa-fw fas fa-stream ml-xl-3 mr-xl-3 unloaded"></i> <span>CATEGORIES</span> </a><li class="nav-item d-flex justify-content-center "> <a href="/tabs/tags/" class="nav-link d-flex justify-content-center align-items-center w-100"> <i class="fa-fw fas fa-tags ml-xl-3 mr-xl-3 unloaded"></i> <span>TAGS</span> </a><li class="nav-item d-flex justify-content-center "> <a href="/tabs/archives/" class="nav-link d-flex justify-content-center align-items-center w-100"> <i class="fa-fw fas fa-archive ml-xl-3 mr-xl-3 unloaded"></i> <span>ARCHIVES</span> </a><li class="nav-item d-flex justify-content-center "> <a href="/tabs/about/" class="nav-link d-flex justify-content-center align-items-center w-100"> <i class="fa-fw fas fa-info ml-xl-3 mr-xl-3 unloaded"></i> <span>ABOUT</span> </a></ul></div><div class="sidebar-bottom d-flex flex-wrap justify-content-around mt-4"> <a href="https://github.com/T1m3M" aria-label="github" target="_blank" rel="noopener"> <i class="fab fa-github-alt"></i> </a> <a href="https://twitter.com/T1m3M" aria-label="twitter" target="_blank" rel="noopener"> <i class="fab fa-twitter"></i> </a> <a href=" javascript:location.href = 'mailto:' + ['1.h4ck.t1m3','gmail.com'].join('@')" aria-label="email" > <i class="fas fa-envelope"></i> </a> <a href="https://linkedin.com/in/abdelrahman-nasr99/" aria-label="linkedin" target="_blank" rel="noopener"> <i class="fab fa-linkedin"></i> </a></div></div><div id="topbar-wrapper" class="row justify-content-center topbar-down"><div id="topbar" class="col-11 d-flex h-100 align-items-center justify-content-between"> <span id="breadcrumb"> <span> <a href="/"> Posts </a> </span> <span>MIPS cheatsheet</span> </span> <i id="sidebar-trigger" class="fas fa-bars fa-fw"></i><div id="topbar-title"> Post</div><i id="search-trigger" class="fas fa-search fa-fw"></i> <span id="search-wrapper" class="align-items-center"> <i class="fas fa-search fa-fw"></i> <input class="form-control" id="search-input" type="search" aria-label="search" placeholder="Search..."> <i class="fa fa-times-circle fa-fw" id="search-cleaner"></i> </span> <span id="search-cancel" >Cancel</span></div></div><div id="main-wrapper"><div id="main"><div class="row"><div id="post-wrapper" class="col-12 col-lg-11 col-xl-8"><div class="post pl-1 pr-1 pl-sm-2 pr-sm-2 pl-md-4 pr-md-4"><h1 data-toc-skip>MIPS cheatsheet</h1><div class="post-meta text-muted d-flex flex-column"><div> Posted <span class="timeago " data-toggle="tooltip" data-placement="bottom" title="Sat, Mar 6, 2021, 12:10 PM +0200" > Mar 6 <i class="unloaded">2021-03-06T12:10:00+02:00</i> </span> by <span class="author"> Abdelrahman Nasr </span></div><div> Updated <span class="timeago lastmod" data-toggle="tooltip" data-placement="bottom" title="Sat, Mar 6, 2021, 12:52 PM +0200" > Mar 6 <i class="unloaded">2021-03-06T12:52:48+02:00</i> </span></div></div><div class="post-content"> <img src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7 " data-src="/assets/img/posts/2021-03-06-MIPS-cheatsheet/cover.jpg" class="post-preview-img"><p>This is a cheatsheet for MIPS 32-bit, It worth mentioning that MIPS is a RISC (Reduced Instruction Set Computer) architecture with 32 general-purpose registers and 3 instruction formats which you will see in more detail.</p><p>MIPS architecture uses 32-bit memory addresses and 32-bit data words (4 bytes), note that the endianness of MIPS can be little or big-endian but we will talk about little-endian here regarding the data represented in memory.</p><p>Talking about memory! It’s important to know that the addresses of data read or written from/into memory should be word aligned (divisible by 4), now we have a good grasp of MIPS.</p><p>Before we dive in. It worth mentioning that most of the examples in this post is from <a href="https://www.amazon.com/Digital-Design-Computer-Architecture-Harris-ebook/dp/B00HEHG7W2">Digital Design and Computer Architecture 2nd edition by David Harris and Sarah Harris</a> which I highly recommend for those interested in computer architecture.</p><hr /><h2 id="registers">Registers</h2><div class="table-wrapper"><table><thead><tr><th>Name<th>Number<th>Use<tbody><tr><td>$0<td>0<td>constant 0<tr><td>$at<td>1<td>assembler temporary<tr><td>$v0–$v1<td>2–3<td>function return value<tr><td>$a0–$a3<td>4–7<td>function arguments<tr><td>$t0–$t7<td>8–15<td>temporary variables<tr><td>$s0–$s7<td>16–23<td>saved variables<tr><td>$t8–$t9<td>24–25<td>temporary variables<tr><td>$k0–$k1<td>26–27<td>operating system (OS) temporaries<tr><td>$gp<td>28<td>global pointer<tr><td>$sp<td>29<td>stack pointer<tr><td>$fp<td>30<td>frame pointer<tr><td>$ra<td>31<td>function return address</table></div><hr /><h2 id="instruction-formats">Instruction formats</h2><p>There are 3 types/formats for registers in MIPS:</p><ul><li>R-Type<li>I-Type<li>J-Type</ul><h3 id="r-type">R-Type</h3><div style="color: #fff; font-weight: bold; text-align: center;"><div class="table-wrapper"><table><tr><td style="background: #3498db;">op<td style="background: #c0392b;">rs<td style="background: #e67e22;">rt<td style="background: #9b59b6;">rd<td style="background: #34495e;">shamt<td style="background: #3498db;">funct<tr style="background: none; border: none;"><td>6 bits<td>5 bits<td>5 bits<td>5 bits<td>5 bits<td>6 bits</table></div></div><ul><li>op: opcode/operation (equals 0 in R-type)<li>rs: source register<li>rt: second source register (since t comes after s in alphabetical order)<li>rd: destination source<li>shamt: shift amount (for shift instructions)<li>funct: function (holds the actual functionality of the instruction for R-Type)</ul><p>Examples:</p><div style="color: #fff; text-align: center; font-size: 1.5rem;"> <span style="color: #3498db;">add</span> <span style="color: #9b59b6;">$s0</span>, <span style="color: #c0392b;">$s1</span>, <span style="color: #e67e22;">$s2</span></div><div style="color: #fff; font-weight: bold; text-align: center; margin-top: 20px;"><div class="table-wrapper"><table><tr><td>re-arrange<td style="background: #3498db;">000000<td style="background: #c0392b;">$s1<td style="background: #e67e22;">$s2<td style="background: #9b59b6;">$s0<td style="background: #34495e;">00000<td style="background: #3498db;">add<tr><td>decimal<td style="background: #3498db;">000000<td style="background: #c0392b;">17<td style="background: #e67e22;">18<td style="background: #9b59b6;">16<td style="background: #34495e;">00000<td style="background: #3498db;">32<tr><td>binary<td style="background: #3498db;">000000<td style="background: #c0392b;">10001<td style="background: #e67e22;">10010<td style="background: #9b59b6;">10000<td style="background: #34495e;">00000<td style="background: #3498db;">100000<tr style="background: none; border: none;"><td>size<td>6 bits<td>5 bits<td>5 bits<td>5 bits<td>5 bits<td>6 bits<tr><td colspan="7">0x02328020</table></div></div><div style="color: #fff; text-align: center; font-size: 1.5rem;"> <span style="color: #3498db;">sll</span> <span style="color: #9b59b6;">$s0</span>, <span style="color: #e67e22;">$s2</span>, <span style="color: #34495e;">2</span></div><div style="color: #fff; font-weight: bold; text-align: center; margin-top: 20px;"><div class="table-wrapper"><table><tr><td style="background: #3498db;">000000<td style="background: #c0392b;">00000<td style="background: #e67e22;">18<td style="background: #9b59b6;">16<td style="background: #34495e;">2<td style="background: #3498db;">000000<tr style="background: none; border: none;"><td>6 bits<td>5 bits<td>5 bits<td>5 bits<td>5 bits<td>6 bits</table></div></div><p>Notes:</p><ul><li>add instruction’s function value (32) and (0) for sll is from the MIPS manual in which all instruction have a unique code<li>the registers values are substituted from the <a href="#registers">registers table</a> above</ul><p>we can say that the instruction machine code is 0x02328020 in hex and this is how it’s stored in the executable file or in memory when loaded by the operating system for execution!</p><h3 id="i-type">I-Type</h3><div style="color: #fff; font-weight: bold; text-align: center;"><div class="table-wrapper"><table><tr><td style="background: #3498db;">op<td style="background: #c0392b;">rs<td style="background: #e67e22;">rt<td style="background: #27ae60;">immediate<tr style="background: none; border: none;"><td>6 bits<td>5 bits<td>5 bits<td>16 bits</table></div></div><p>Examples:</p><div style="color: #fff; text-align: center; font-size: 1.5rem;"> <span style="color: #3498db;">addi</span> <span style="color: #e67e22;">$s0</span>, <span style="color: #c0392b;">$s1</span>, <span style="color: #27ae60;">5</span></div><div style="color: #fff; font-weight: bold; text-align: center; margin-top: 20px;"><div class="table-wrapper"><table><tr><td style="background: #3498db;">8<td style="background: #c0392b;">17<td style="background: #e67e22;">16<td style="background: #27ae60;">5<tr style="background: none; border: none;"><td>6 bits<td>5 bits<td>5 bits<td>16 bits<tr><td colspan="4">0x22300005</table></div></div><div style="color: #fff; text-align: center; font-size: 1.5rem;"> <span style="color: #3498db;">sw</span> <span style="color: #e67e22;">$s1</span>, <span style="color: #27ae60;">4</span>(<span style="color: #c0392b;">$t1</span>)</div><div style="color: #fff; font-weight: bold; text-align: center; margin-top: 20px;"><div class="table-wrapper"><table><tr><td style="background: #3498db;">43<td style="background: #c0392b;">9<td style="background: #e67e22;">17<td style="background: #27ae60;">4<tr style="background: none; border: none;"><td>6 bits<td>5 bits<td>5 bits<td>16 bits<tr><td colspan="4">0xAD310004</table></div></div><h3 id="j-type">J-Type</h3><p>a special type for J (Jump) and JAL (Jump and link) instructions.</p><p><code class="language-plaintext highlighter-rouge">NOTE: (Jump Register) JR instruction is an R-Type instruction with only rs operand assigned</code></p><div style="color: #fff; font-weight: bold; text-align: center;"><div class="table-wrapper"><table><tr><td style="background: #3498db;">op<td style="background: #f1c40f;">address<tr style="background: none; border: none;"><td>6 bits<td>26 bits</table></div></div><p>Example:</p><div style="color: #fff; text-align: center; font-size: 1.5rem;"> <span style="color: #3498db;">jal</span> <span style="color: #f1c40f;">loop</span></div><div style="color: #fff; font-weight: bold; text-align: center; margin-top: 20px;"><div class="table-wrapper"><table><tr><td style="background: #3498db;">3<td style="background: #f1c40f;">0x100028<tr style="background: none; border: none;"><td>6 bits<td>26 bits<tr><td colspan="2">0x0C100028</table></div></div><p>Note that the label address is represented in pseudo-direct addressing to make it possible to write a 32-bit address in only 26-bits which will be discussed right now!</p><hr /><h2 id="addressing-modes">Addressing modes</h2><p>There are 5 different ways the CPU can access the memory in MIPS</p><h3 id="register-only">Register-only</h3><p>registers for all source and destination operands (R-Type uses it)</p><h3 id="immediate-addressing">Immediate addressing</h3><p>16-bit immediate with registers as operands (i.e. addi and lui)</p><h3 id="base-addressing">Base-addressing</h3><p>memory access instructions (i.e. lw and sw)</p><p>address of memory = base + sign-extended 16-bit offset of immediate</p><p>Example: lw $s0, 8($s1) <code class="language-plaintext highlighter-rouge">address = $s1 (base-pointer) + 8</code></p><h3 id="pc-relative">PC-relative</h3><p>conditional branch instructions (i.e. beq, bne, …) use it to compute the new value of the PC <em>(Program Counter)</em></p><p><code class="language-plaintext highlighter-rouge">Branch Target Address (BTA) = (PC + 4) + sign-extended offset of immediate</code></p><p>so if the offset is negative the label is above the current instruction.</p><p>Example:</p><div class="language-plaintext highlighter-rouge"><div class="highlight"><code><table class="rouge-table"><tbody><tr><td class="rouge-gutter gl"><pre class="lineno">1
+2
+3
+4
+5
+6
+</pre><td class="rouge-code"><pre>0xA4 beq $t0, $0, else
+0xA8 addi $v0, $0, 1
+0xAC addi $sp, $sp, 8
+0xBO jr $ra
+0xB4 else: addi $a0, $a0, −1
+0xB8 jal factorial
+</pre></table></code></div></div><p>assuming PC=0xA4 the BTA will be: <code class="language-plaintext highlighter-rouge">(0xA4 + 4) + 3 instructions</code> which means the target address is 3 instructions after 0xA8 instruction (if it’s a -5 then it would be 5 instructions <em>before</em> 0xA4)</p><h3 id="pseudo-direct">Pseudo-direct</h3><p>here the address is specified in the instruction which is used in J and JAL instructions (J-Type instructions) recall the example in <a href="#j-type">J-Type</a> the address had only 26-bits to be stored while in a program it should be 32-bit address for PC!</p><p>That’s the algorithm to calculate a 26-bit address from 32-bit address:</p><p>1- get the address of the label instruction <em>Jump Target Address (JTA)</em></p><p>2- Discard the 2 least significant bits JTA<sub>1:0</sub> <strong>Because the instructions are word-aligned 4 (0100)<sub>2</sub>, 8 (1000)<sub>2</sub>, 12 (1100)<sub>2</sub> so the 2 LSB are always zeros!)</strong></p><p>3- Discard the 4 most significant bits JTA<sub>31:28</sub> <strong>Because they can be obtained from the PC address so if your program is not long it won’t be far from current instruction which also puts some constraints on the range)</strong></p><p>Example:</p><div class="language-plaintext highlighter-rouge"><div class="highlight"><code><table class="rouge-table"><tbody><tr><td class="rouge-gutter gl"><pre class="lineno">1
+2
+3
+</pre><td class="rouge-code"><pre>0x0040005C jal sum
+...
+0x004000A0 sum: add $v0, $a0, $a1
+</pre></table></code></div></div><p>The JTA for JAL instruction here is 0x004000A0 and here’s the conversion of it to 26-bit address by applying the above algorithm:</p><div style="color: #fff; font-weight: bold; text-align: center; margin-top: 20px;"><div class="table-wrapper"><table><tr><td style="background: #a55eea;">0<td style="background: #8854d0;">0<td style="background: #a55eea;">4<td style="background: #8854d0;">0<td style="background: #a55eea;">0<td style="background: #8854d0;">0<td style="background: #a55eea;">A<td style="background: #8854d0;">0<tr><td style="background: #a55eea; text-decoration: line-through;">00 00<td style="background: #8854d0;">00 00<td style="background: #a55eea;">01 00<td style="background: #8854d0;">00 00<td style="background: #a55eea;">00 00<td style="background: #8854d0;">00 00<td style="background: #a55eea;">10 10<td style="background: #8854d0;">00<span style="text-decoration: line-through;">00</span><tr><td colspan="8">0x0100028</table></div></div><p>Note that the address is combined into hex from right to left. <code class="language-plaintext highlighter-rouge">You can think of the reverse process of adding 00 to the most right and adding the 4 most significant bits from the PC which are zero to get the original address 0x004000A0 back!</code></p><hr /><h2 id="variables-and-arrays">Variables and Arrays</h2><h3 id="variables">Variables</h3><p>To store a variable you can store it “immediately” (I-Type) to a registers if it’s 16 bits or less</p><div class="language-plaintext highlighter-rouge"><div class="highlight"><code><table class="rouge-table"><tbody><tr><td class="rouge-gutter gl"><pre class="lineno">1
+</pre><td class="rouge-code"><pre>addi $s0, $0, $0xF00D # $s0 = 0xF00D
+</pre></table></code></div></div><p>or if it’s 32 bits:</p><div class="language-plaintext highlighter-rouge"><div class="highlight"><code><table class="rouge-table"><tbody><tr><td class="rouge-gutter gl"><pre class="lineno">1
+2
+</pre><td class="rouge-code"><pre>lui $s0, 0x1337 # $s0 = 0x13370000
+ori $s0, $s0, 0xF00D # $s0 |= 0xF00D = 0x1337F00D
+</pre></table></code></div></div><p>or you can store it in memory in the data section and load it into a register:</p><div class="language-plaintext highlighter-rouge"><div class="highlight"><code><table class="rouge-table"><tbody><tr><td class="rouge-gutter gl"><pre class="lineno">1
+2
+3
+4
+5
+6
+7
+8
+9
+</pre><td class="rouge-code"><pre>.data
+  num: .word 0x1337F00D
+
+.text
+.globl main
+
+main:
+  la $t0, num # $t0 = &amp;num
+  lw $s0, ($t0) # $s0 = num = 0x1337F00D
+</pre></table></code></div></div><p>note that .word in the data section is the size of the variable (word = 4 bytes = 32 bits) and can be:</p><ul><li>.space (empty)<li>.byte (8 bits)<li>.word (4 bytes)<li>.asciiz (null terminated string)<li>.ascii (string without null terminator)<li>.align (aligns the next data on a 2<sup>n</sup> byte boundary)</ul><h3 id="arrays">Arrays</h3><p>The array is stored in memory in the data section:</p><div class="language-plaintext highlighter-rouge"><div class="highlight"><code><table class="rouge-table"><tbody><tr><td class="rouge-gutter gl"><pre class="lineno">1
+2
+3
+4
+5
+6
+7
+8
+9
+10
+11
+12
+13
+14
+15
+</pre><td class="rouge-code"><pre>.data
+  arr: .word 1, 2, 3
+
+.text
+.globl main
+
+main:
+  la $s0, arr 	 # $s0 = base address of arr
+  lw $t0, 0($s0) # $t0 = arr[0] = 1
+  lw $t1, 4($s0) # $t0 = arr[1] = 2
+  lw $t2, 8($s0) # $t0 = arr[2] = 3
+
+exit:
+  li $v0, 10
+  syscall
+</pre></table></code></div></div><p>note that the string is nothing but an array of characters in memory!</p><hr /><h2 id="multiplication-and-division">Multiplication and division</h2><p>Since multiplication of two 32-bit registers can result in a 64-bit value, and the division of two numbers results in a quotient and a remainder there are 2 special purpose registers for mult and div instructions:</p><div class="language-plaintext highlighter-rouge"><div class="highlight"><code><table class="rouge-table"><tbody><tr><td class="rouge-gutter gl"><pre class="lineno">1
+2
+</pre><td class="rouge-code"><pre>mult $s0, $s1 # result = hi:lo
+div  $s0, $s1 # hi = quotient, lo = remainder
+</pre></table></code></div></div><hr /><h2 id="if--else-conditions">If / else conditions</h2><p>The main observation here is <code class="language-plaintext highlighter-rouge">the low level condition is the inverse of the high level condition</code></p><p>High-level code:</p><div class="language-plaintext highlighter-rouge"><div class="highlight"><code><table class="rouge-table"><tbody><tr><td class="rouge-gutter gl"><pre class="lineno">1
+2
+3
+4
+</pre><td class="rouge-code"><pre>if (x == y):
+  x = y &lt;&lt; 2
+else:
+  x = y
+</pre></table></code></div></div><p>Low-level code</p><div class="language-plaintext highlighter-rouge"><div class="highlight"><code><table class="rouge-table"><tbody><tr><td class="rouge-gutter gl"><pre class="lineno">1
+2
+3
+4
+5
+6
+7
+8
+9
+10
+11
+12
+</pre><td class="rouge-code"><pre>..
+  addi $s0, $0, 0     #x = 0
+  addi $s1, $0, 1     #y = 1
+  bne  $s0, $s1, else #if (x != y) go to else
+  sll  $s0, $s1, 2    #x = (x &lt;&lt; 2)
+  j    done
+
+else:
+  add $s0, $s0, $s1   #x = y
+
+done:
+..
+</pre></table></code></div></div><p>Note that this code contains a conditional jump <code class="language-plaintext highlighter-rouge">bne</code> for comparison and an unconditional jump <code class="language-plaintext highlighter-rouge">j</code> to prevent from executing the else statement since assembly goes naturally from top to bottom!</p><hr /><h2 id="loops">Loops</h2><p>In programming loops consists of 4 main pieces:</p><ul><li>Initialization<li>Condition<li>Code that gets repeated<li>Counter update</ul><p>and so do assembly!</p><p>High-level code:</p><div class="language-plaintext highlighter-rouge"><div class="highlight"><code><table class="rouge-table"><tbody><tr><td class="rouge-gutter gl"><pre class="lineno">1
+2
+3
+4
+5
+6
+7
+</pre><td class="rouge-code"><pre>int pow = 1;         // (initialization)
+int x = 0;
+
+while (pow != 128) { // (condition)
+  pow = pow * 2;     // (code that gets repeated)
+  x = x + 1;         // (counter update)
+}
+</pre></table></code></div></div><p>Low-level code</p><div class="language-plaintext highlighter-rouge"><div class="highlight"><code><table class="rouge-table"><tbody><tr><td class="rouge-gutter gl"><pre class="lineno">1
+2
+3
+4
+5
+6
+7
+8
+9
+10
+11
+12
+13
+</pre><td class="rouge-code"><pre>..
+  addi $s0, $0, 1    # pow = 1 (initialization)
+  addi $s1, $0, 0    # x = 0
+  addi $t0, $0, 128  # t0 = 128 for comparison
+
+while:
+  beq $s0, $t0, done # if pow == 128, exit while loop (condition)
+  sll $s0, $s0, 1    # pow = pow * 2 (code that gets repeated)
+  addi $s1, $s1, 1   # x = x + 1 (counter update)
+  j while
+
+done:
+..
+</pre></table></code></div></div><hr /><h2 id="functions">Functions</h2><p>There’s no call/ret instructions in MIPS assembly like in Intel x86, but fortunately we have got labels! with this and Jump and Link <code class="language-plaintext highlighter-rouge">JAL</code> and Jump Register <code class="language-plaintext highlighter-rouge">JR</code> we can do magic!</p><h3 id="function-call">Function call</h3><p>Jump and Link <code class="language-plaintext highlighter-rouge">JAL</code> copies the next instruction address (PC+4) to the <code class="language-plaintext highlighter-rouge">$ra</code> register and jumps to the address of the label, when returning the Jump Register <code class="language-plaintext highlighter-rouge">JR $ra</code> copies the value of $ra back to the PC so the program continues execution from where it was left.</p><p>This is an implementation for a basic function that adds two numbers and returns the result:</p><p>High-level code:</p><div class="language-plaintext highlighter-rouge"><div class="highlight"><code><table class="rouge-table"><tbody><tr><td class="rouge-gutter gl"><pre class="lineno">1
+2
+3
+4
+5
+6
+7
+</pre><td class="rouge-code"><pre>int add_func(x, y) {
+  return x + y;
+}
+
+int main() {
+  a = add_func(2, 4);
+}
+</pre></table></code></div></div><p>Low-level code:</p><div class="language-plaintext highlighter-rouge"><div class="highlight"><code><table class="rouge-table"><tbody><tr><td class="rouge-gutter gl"><pre class="lineno">1
+2
+3
+4
+5
+6
+7
+8
+9
+10
+11
+</pre><td class="rouge-code"><pre>.text
+.globl main
+add_func:
+  add $v0, $a0, $a1
+  jr $ra            # return (PC = $ra)
+
+main:
+  addi $a0, $0, 2
+  addi $a1, $0, 4
+  jal add_func      # call function ($ra = PC + 4, PC --&gt; add_func)
+  add $s0, $0, $v0
+</pre></table></code></div></div><p>Notes:</p><ul><li>saved registers ($s0-$s7) shouldn’t change after call<li>temporary registers ($0-$t9) can be changed inside the function<li>arguments should be passed in ($a0-$a3) registers<li>return values should be saved in ($v0-$v1) registers</ul><h3 id="stack-frames">Stack frames</h3><p>each function should have its stack frame for purposes like saving the saved registers ($s0-$s7) at first and retrieving the values back at the end, and to control the stack we have 2 registers for this task:</p><ul><li><code class="language-plaintext highlighter-rouge">$fp</code>: base of the stack<li><code class="language-plaintext highlighter-rouge">$sp</code>: top of the stack</ul><p>Note that <code class="language-plaintext highlighter-rouge">$fp</code> &gt; <code class="language-plaintext highlighter-rouge">$sp</code> since <strong><code class="language-plaintext highlighter-rouge">the stack grows towards lower memory addresses</code></strong></p><p>Example of allocating and de-allocating stack frame of a function:</p><div class="language-plaintext highlighter-rouge"><div class="highlight"><code><table class="rouge-table"><tbody><tr><td class="rouge-gutter gl"><pre class="lineno">1
+2
+3
+4
+5
+6
+7
+8
+9
+</pre><td class="rouge-code"><pre> addi $sp, $sp, -12 # allocation
+ sw   $s0, 8($sp) # saves $s0
+ sw   $t0, 4($sp) # saves $t0
+ sw   $t1, 0($sp) # saves $t1
+ ..
+ lw   $t1, 0($sp) # restores $t1
+ lw   $t0, 4($sp) # restores $t0
+ lw   $s0, 8($sp) # restores $s0
+ addi $sp, $sp, 12 # de-allocation
+</pre></table></code></div></div><hr /><h2 id="system-calls">System calls</h2><p>To perform tasks like taking user input, printing on screen or exiting the program we use system calls as show in the table:</p><div class="table-wrapper"><table><thead><tr><th style="text-align: left">Service<th style="text-align: left">System call code<th style="text-align: left">Arguments<th style="text-align: left">Result<tbody><tr><td style="text-align: left">print_int<td style="text-align: left">1<td style="text-align: left">$a0 = integer<td style="text-align: left"> <tr><td style="text-align: left">print_float<td style="text-align: left">2<td style="text-align: left">$f12 = float<td style="text-align: left"> <tr><td style="text-align: left">print_double<td style="text-align: left">3<td style="text-align: left">$f12 = double<td style="text-align: left"> <tr><td style="text-align: left">print_string<td style="text-align: left">4<td style="text-align: left">$a0 = string<td style="text-align: left"> <tr><td style="text-align: left">read_int<td style="text-align: left">5<td style="text-align: left"> <td style="text-align: left">integer(in $v0)<tr><td style="text-align: left">read_float<td style="text-align: left">6<td style="text-align: left"> <td style="text-align: left">float(in $f0)<tr><td style="text-align: left">read_double<td style="text-align: left">7<td style="text-align: left"> <td style="text-align: left">double(in $f0)<tr><td style="text-align: left">read_string<td style="text-align: left">8<td style="text-align: left">$a0=buffer, $a1=length<td style="text-align: left"> <tr><td style="text-align: left">sbrk<td style="text-align: left">9<td style="text-align: left">$a0=amount<td style="text-align: left"> <tr><td style="text-align: left">exit<td style="text-align: left">10<td style="text-align: left"> <td style="text-align: left"> </table></div><p>the system call code gets loaded in $v0 followed by a <code class="language-plaintext highlighter-rouge">syscall</code> instruction to execute it.</p><p>Example of exit system call to exit a program:</p><div class="language-plaintext highlighter-rouge"><div class="highlight"><code><table class="rouge-table"><tbody><tr><td class="rouge-gutter gl"><pre class="lineno">1
+2
+</pre><td class="rouge-code"><pre>li $v0, 10
+syscall
+</pre></table></code></div></div><p>Another example of printing “foo” word on screen:</p><div class="language-plaintext highlighter-rouge"><div class="highlight"><code><table class="rouge-table"><tbody><tr><td class="rouge-gutter gl"><pre class="lineno">1
+2
+3
+4
+5
+6
+7
+8
+9
+10
+11
+12
+13
+14
+</pre><td class="rouge-code"><pre>.data
+	foo: .asciiz "foo"
+
+.text
+.globl main
+
+main:
+	la   $a0, foo
+	li   $v0, 4
+	syscall
+
+exit:
+	li $v0, 10
+	syscall
+</pre></table></code></div></div><blockquote><p>output: foo</p></blockquote></div><div class="post-tail-wrapper text-muted"><div class="post-meta mb-3"> <i class="far fa-folder-open fa-fw mr-1"></i> <a href='/categories/intro/'>Intro</a>, <a href='/categories/assembly/'>Assembly</a></div><div class="post-tags"> <i class="fa fa-tags fa-fw mr-1"></i> <a href="/tags/assembly/" class="post-tag no-text-decoration" >assembly</a> <a href="/tags/cheatsheet/" class="post-tag no-text-decoration" >cheatsheet</a> <a href="/tags/mips/" class="post-tag no-text-decoration" >mips</a> <a href="/tags/risc/" class="post-tag no-text-decoration" >risc</a> <a href="/tags/low-level/" class="post-tag no-text-decoration" >low-level</a></div><div class="post-tail-bottom d-flex justify-content-between align-items-center mt-3 pt-5 pb-2"><div class="license-wrapper"> This post is licensed under <a href="https://creativecommons.org/licenses/by/4.0/">CC BY 4.0</a> by the author.</div><div class="share-wrapper"> <span class="share-label text-muted mr-1">Share</span> <span class="share-icons"> <a href="https://twitter.com/intent/tweet?text=MIPS cheatsheet - T1m3-m4ch1n3&url=https://T1m3M.github.io/posts/MIPS-cheatsheet/" data-toggle="tooltip" data-placement="top" title="Twitter" target="_blank" rel="noopener" aria-label="Twitter"> <i class="fa-fw fab fa-twitter"></i> </a> <a href="https://www.facebook.com/sharer/sharer.php?title=MIPS cheatsheet - T1m3-m4ch1n3&u=https://T1m3M.github.io/posts/MIPS-cheatsheet/" data-toggle="tooltip" data-placement="top" title="Facebook" target="_blank" rel="noopener" aria-label="Facebook"> <i class="fa-fw fab fa-facebook-square"></i> </a> <a href="https://telegram.me/share?text=MIPS cheatsheet - T1m3-m4ch1n3&url=https://T1m3M.github.io/posts/MIPS-cheatsheet/" data-toggle="tooltip" data-placement="top" title="Telegram" target="_blank" rel="noopener" aria-label="Telegram"> <i class="fa-fw fab fa-telegram"></i> </a> <a href="https://www.linkedin.com/sharing/share-offsite/?url=https://T1m3M.github.io/posts/MIPS-cheatsheet/" data-toggle="tooltip" data-placement="top" title="Linkedin" target="_blank" rel="noopener" aria-label="Linkedin"> <i class="fa-fw fab fa-linkedin"></i> </a> <i class="fa-fw fas fa-link small" onclick="copyLink()" data-toggle="tooltip" data-placement="top" title="Copy link"></i> </span></div></div></div></div></div><div id="panel-wrapper" class="col-xl-3 pl-2 text-muted topbar-down"><div class="access"><div id="access-lastmod" class="post"> <span>Recent Update</span><ul class="post-content pl-0 pb-1 ml-1 mt-2"><li><a href="/posts/MIPS-cheatsheet/">MIPS cheatsheet</a><li><a href="/posts/RE/">What is Reverse Engineering? | ما هى الهندسة العكسية؟</a><li><a href="/posts/cybertalents-cairo-university-2019-ctf/">CyberTalents Cairo University CTF 2019</a><li><a href="/posts/auctf-2020/">AUCTF 2020</a><li><a href="/posts/angstrom-ctf-2020/">Angstrom CTF 2020</a></ul></div><div id="access-tags"> <span>Trending Tags</span><div class="d-flex flex-wrap mt-3 mb-1 mr-3"> <a class="post-tag" href="/tags/reverse-engineering/">reverse engineering</a> <a class="post-tag" href="/tags/ctf/">ctf</a> <a class="post-tag" href="/tags/writeups/">writeups</a> <a class="post-tag" href="/tags/assembly/">assembly</a> <a class="post-tag" href="/tags/binary-exploitation/">binary exploitation</a> <a class="post-tag" href="/tags/cheatsheet/">cheatsheet</a> <a class="post-tag" href="/tags/crypto/">crypto</a> <a class="post-tag" href="/tags/forensics/">forensics</a> <a class="post-tag" href="/tags/low-level/">low level</a> <a class="post-tag" href="/tags/malware-analysis/">malware analysis</a></div></div></div><div id="toc-wrapper" class="pl-0 pr-4 mb-5"> <span class="pl-3 pt-2 mb-2">Contents</span><nav id="toc" data-toggle="toc"></nav></div></div></div><div class="row"><div class="col-12 col-lg-11 col-xl-8"><div id="post-extend-wrapper" class="pl-1 pr-1 pl-sm-2 pr-sm-2 pl-md-4 pr-md-4"><div id="related-posts" class="mt-5 mb-2 mb-sm-4"><h3 class="pt-2 mt-1 mb-4 ml-1" data-toc-skip>Further Reading</h3><div class="card-deck mb-4"><div class="card"> <a href="/posts/RE/"><div class="card-body"> <span class="timeago small" > Jan 3 <i class="unloaded">2021-01-03T10:38:00+02:00</i> </span><h3 class="pt-0 mt-1 mb-3" data-toc-skip>What is Reverse Engineering? | ما هى الهندسة العكسية؟</h3><div class="text-muted small"><p> ملحوظة: المقال باللغتين العربية والإنجليزية لمساعدة أكبر قدر ممكن من الناس ونشر العلم 💜 NOTE: This article is in both Arabic and English to help as many people as possible and spread the knowled...</p></div></div></a></div><div class="card"> <a href="/posts/PEscope-tool/"><div class="card-body"> <span class="timeago small" > Jan 22 <i class="unloaded">2021-01-22T14:54:00+02:00</i> </span><h3 class="pt-0 mt-1 mb-3" data-toc-skip>PEscope Tool</h3><div class="text-muted small"><p> This is an official walkthrough with PEscope tool made by me to make basic static analysis more easier, in one place instead of grabbing it to many tools, and surely with cool colors! The tool is ...</p></div></div></a></div><div class="card"> <a href="/posts/auctf-2020/"><div class="card-body"> <span class="timeago small" > Dec 18, 2020 <i class="unloaded">2020-12-18T22:38:00+02:00</i> </span><h3 class="pt-0 mt-1 mb-3" data-toc-skip>AUCTF 2020</h3><div class="text-muted small"><p> AUCTF 2020 has ended, and me and my team P1rates really enjoyed it as it was full of good problems, here’s my writeup about some of the problems that i solved. Challenges Title ...</p></div></div></a></div></div></div><div class="post-navigation d-flex justify-content-between"> <a href="/posts/PEscope-tool/" class="btn btn-outline-primary"><p>PEscope Tool</p></a> <span class="btn btn-outline-primary disabled"><p>-</p></span></div></div></div></div><script type="text/javascript" src="https://cdn.jsdelivr.net/npm/lozad/dist/lozad.min.js"></script> <script type="text/javascript"> const imgs = document.querySelectorAll('#post-wrapper img'); const observer = lozad(imgs); observer.observe(); </script><footer class="d-flex w-100 justify-content-center"><div class="d-flex justify-content-between align-items-center"><div class="footer-left"><p class="mb-0"> © 2021 <a href="https://twitter.com/T1m3M">Abdelrahman Nasr</a>. <span data-toggle="tooltip" data-placement="top" title="Except where otherwise noted, the blog posts on this site are licensed under the Creative Commons Attribution 4.0 International (CC BY 4.0) License by the author.">Some rights reserved.</span></p></div><div class="footer-right"><p class="mb-0"> Powered by <a href="https://jekyllrb.com" target="_blank" rel="noopener">Jekyll</a> with <a href="https://github.com/cotes2020/jekyll-theme-chirpy/" target="_blank" rel="noopener">Chirpy</a> theme.</p></div></div></footer></div><div id="search-result-wrapper" class="d-flex justify-content-center unloaded"><div class="col-12 col-xl-11 post-content"><div id="search-hints"><h4 class="text-muted mb-4">Trending Tags</h4><a class="post-tag" href="/tags/reverse-engineering/">reverse engineering</a> <a class="post-tag" href="/tags/ctf/">ctf</a> <a class="post-tag" href="/tags/writeups/">writeups</a> <a class="post-tag" href="/tags/assembly/">assembly</a> <a class="post-tag" href="/tags/binary-exploitation/">binary exploitation</a> <a class="post-tag" href="/tags/cheatsheet/">cheatsheet</a> <a class="post-tag" href="/tags/crypto/">crypto</a> <a class="post-tag" href="/tags/forensics/">forensics</a> <a class="post-tag" href="/tags/low-level/">low level</a> <a class="post-tag" href="/tags/malware-analysis/">malware analysis</a></div><div id="search-results" class="d-flex flex-wrap justify-content-center text-muted mt-3"></div></div></div></div><div id="mask"></div><a id="back-to-top" href="#" aria-label="back-to-top" class="btn btn-lg btn-box-shadow" role="button"> <i class="fas fa-angle-up"></i> </a> <script src="https://cdn.jsdelivr.net/npm/simple-jekyll-search@1.7.3/dest/simple-jekyll-search.min.js"></script> <script> SimpleJekyllSearch({ searchInput: document.getElementById('search-input'), resultsContainer: document.getElementById('search-results'), json: '/assets/js/data/search.json', searchResultTemplate: '<div class="pl-1 pr-1 pl-sm-2 pr-sm-2 pl-lg-4 pr-lg-4 pl-xl-0 pr-xl-0"> <a href="https://T1m3M.github.io{url}">{title}</a><div class="post-meta d-flex flex-column flex-sm-row text-muted mt-1 mb-1"><div class="mr-sm-4"><i class="far fa-folder fa-fw"></i>{categories}</div><div><i class="fa fa-tag fa-fw"></i>{tags}</div></div><p>{snippet}</p></div>', noResultsText: '<p class="mt-5">Oops! No result founds.</p>' }); </script> <script async src="https://www.googletagmanager.com/gtag/js?id=G-1WZELSLYX1"></script> <script> window.dataLayer = window.dataLayer || []; function gtag(){dataLayer.push(arguments);} gtag('js', new Date()); gtag('config', 'G-1WZELSLYX1'); </script>
