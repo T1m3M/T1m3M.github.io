@@ -1,13 +1,13 @@
 ---
 title: CyberTalents Scholarship - Reverse Engineering CTF
-date: 2021-07-18 08:00:00 +0200
+date: 2021-07-19 22:22:00 +0200
 categories: [CTF, Writeups]
 tags: ctf writeups reverse reverse-engineering assembly idapro python crypto unpacking obfuscation
 image: /assets/img/posts/2021-07-18-cybertalents-scholarship-re-ctf/cover.png
 ---
 {% assign img_root = "/assets/img/posts/2021-07-18-cybertalents-scholarship-re-ctf" %}
 
-This was my first CTF to get the <span style="color:#cc0;">**1<sup>st</sup> place**</span> ever and my first <span style="color: #f33;">**first-blood**</span> for the hard challenge!! The CTF was after finishing the first course in the Cybertalents scholarship sponsored by Trend Micro which was about Reverse Engineering, I really enjoyed the course and I learned a lot from the instructor [joezid](https://joezid.github.io/){:target="_blank"} throughout the 6 sessions from very basic topics like the malware analysis lab setup till advanced topics like unpacking!
+This was my first CTF to get the <span style="color:#feca57;">**1<sup>st</sup> place**</span> ever and my first <span style="color:#ff6b6b;">**first-blood**</span> for the hard challenge!! The CTF was after finishing the first course in the Cybertalents scholarship sponsored by Trend Micro which was about Reverse Engineering, I really enjoyed the course and I learned a lot from the instructor [joezid](https://joezid.github.io/){:target="_blank"} throughout the 6 sessions from very basic topics like the malware analysis lab setup till advanced topics like unpacking!
 
 <img src="{{img_root}}/scoreboard.png" alt="scoreboard">
 
@@ -235,7 +235,7 @@ Then digging deeper to the call instruction I faced the encryption function:
 
 The value `0x9E3779B9` usually is the delta for the TEA cipher but the sum increment falls between 2 increments here so it's the updated version [XTEA](https://en.wikipedia.org/wiki/XTEA){target="_blank"}
 
-I had the encrypted values (from the MOVes instructions above) and the key and the algorithm and the constant number `32` which is the number of rounds, the decryption script is the next step but before that I rearranged the key to be of 4 blocks each of size 4 bytes in little-endian (that's how XTEA works)
+I had the encrypted values (from the MOVes instructions above) and the key and the algorithm and the constant number `32` which is the number of rounds, the decryption C++ script is the next step but before that I rearranged the key to be of 4 blocks each of size 4 bytes in little-endian (that's how XTEA works)
 
 ```c++
 #include <iostream>
@@ -272,7 +272,7 @@ int main(){
 
     for (int i=0; i < 4; i++)
         printf("%x %x\n", ciphertext[i][0], ciphertext[i][1]);
-
+https://t1m3m.github.io/posts/PEscope-tool/
 
     return 0;
 }
@@ -293,3 +293,141 @@ Flag: `flag{th4ts_h0w_y0u_surv1v3_}`
 <hr>
 
 ## PE M0nSt3r
+
+<img src="{{img_root}}/info/pe_monster.png" alt="PE M0nSt3r">
+
+Firstly, I ran initial analysis on the binary using my tool [PEscope](https://t1m3m.github.io/posts/PEscope-tool/){:target="_blank"} to get some ***basic static analysis*** information:
+
+<img src="{{img_root}}/challenges/pe_monster/1.png" alt="PEscope 1">
+<img src="{{img_root}}/challenges/pe_monster/2.png" alt="PEscope 2">
+
+I found some interesting APIs such as: `CreateProcessW`, `VirtualAlloc`, `VirtualAllocEx`, `VirtualProtect` from KERNEL32.dll and `NtResumeThread`, `NtUnmapViewOfSection`, `NtWriteVirtualMemory` from ntdll.dll. It seems like the binary is doing process hollowing!
+
+I knew It's time for a ***basic dynamic analysis*** so running the binary gave me this output:
+
+<img src="{{img_root}}/challenges/pe_monster/3.png" alt="basic dynamic analysis">
+
+Remember that number `5344` because we will use it soon, on process hacker tool I saw the sub process created while waiting for input:
+
+<img src="{{img_root}}/challenges/pe_monster/4.png" alt="process hacker">
+
+I looked at IDApro for an ***advanced static analysis*** and there were only an obfuscated function wmain that's doing the unpacking logic so I jumped directly to x64dbg for ***advanced dynamic analysis*** to extract that packed file
+
+In x64dbg after opening the binary first thing I set breakpoints at those interesting APIs I was more interested in `VirtualAlloc` and `NtResumeThread` because the first allocates a region in memory and returns the address to that region, and the latter moves the thread from suspended mode to running mode and this thread is basically the unpacked binary so I can dump its memory to a file!
+
+This when it hit `VirtualAlloc`:
+
+<img src="{{img_root}}/challenges/pe_monster/5.png" alt="x64dbg VirtualAlloc hit">
+
+Then by `step into` > `step til return` I got the return value in **RAX** register:
+
+<img src="{{img_root}}/challenges/pe_monster/6.png" alt="x64dbg VirtualAlloc return">
+
+Now I got the allocated memory region that will be hollowed, resuming execution until I hit `NtResumeThread` gave me the nice unpacked binary:
+
+<img src="{{img_root}}/challenges/pe_monster/7.png" alt="x64dbg unpacked dump">
+
+Now to dump this memory to a file: `right-click` on dump below > `Follow in Memory Map` > `right-click` in the selected memory > `Dump Memory to File`
+
+By saving this I got the raw unpacked file but there is a problem when running the binary it terminates immediately so maybe this is a problem that need to be fixed, something which is pretty common when dumping a binary from memory! So I checked it with PE-bear:
+
+<img src="{{img_root}}/challenges/pe_monster/8.png" alt="PE-bear">
+
+I noticed the `Entry Point` is zero which is unrealistic, but do you remember the number above? `5344`? I told you to remember it! Okay, no problem! converting that to hex `0x14e0` and changing the `Entry Point` to it and saving the changes should solve the issue!
+
+Now the binary is up and running, The next step is to reverse it! I looked at the `main` function graph view to get a bird eye view of what's going on and I found the same obfuscation of the `wmain` in the previous packed file but more simple as it has few blocks below:
+
+<img src="{{img_root}}/challenges/pe_monster/9.png" alt="IDApro overview">
+
+<img src="{{img_root}}/memes/madness.gif" alt="This is madness!">
+
+After the CTF I knew this obfuscation is called "OLLVM" and has a deobfuscator called [MODeflattener](https://github.com/mrT4ntr4/MODeflattener){:target="_blank"}, but I didn't know that so I worked with what I had!
+
+I noticed the obfuscation pattern, the small blocks above with this storm-like shape acts as decision makers and there is a decision variable that has an arbitrary value that's calculated in the end of each below blocks and some of the small blocks are just moving the value to that decision variable nothing else, so to defeat that I needed to:
+- notice the important blocks below depending on length of instruction and operations
+- set breakpoints at the start of that block and debugging to understand the logic
+
+<img src="{{img_root}}/challenges/pe_monster/10.png" alt="IDApro breakpoints">
+
+The small blocks included here do an increment so I set a breakpoint to know which iteration I am in, but I found this pseudocode snippet is interesting:
+
+<img src="{{img_root}}/challenges/pe_monster/11.png" alt="IDApro snippet pseudocode">
+
+The code basically:
+- Stores the input bytes as little-endian (the below snipped which is executed first)
+- Repeats that 8 times each with 4 bytes storing so the flag length should be 32 characters
+- Encrypting the input with a hard coded key
+- Comparing the result with previously encrypted hard coded values
+
+So the steps to the solution are:
+- Get the key
+- Get the encrypted values
+- Decryption (if possible)
+
+I got the key first by stepping over `lea rdx, hardcoded` instruction and following the address at `rdx` register in memory:
+
+<img src="{{img_root}}/challenges/pe_monster/12.png" alt="Key in memory">
+
+Then the encrypted values by hitting the breakpoint at the comparing block and stepping over few instructions until hitting the `cmp` instruction:
+
+<img src="{{img_root}}/challenges/pe_monster/13.png" alt="Key in memory">
+
+And by following `var_70` in the memory dump I got the encrypted values:
+
+<img src="{{img_root}}/challenges/pe_monster/14.png" alt="encrypted values in memory">
+
+What's left now is to know the encryption algorithm and this pseudocode of the encryption function made it easier:
+
+<img src="{{img_root}}/challenges/pe_monster/15.png" alt="Encryption algorithm">
+
+This looks like the algorithm in the previous challenge but notice the sum decrement is at first which makes it the original [TEA cipher](https://en.wikipedia.org/wiki/Tiny_Encryption_Algorithm){:target="_blank"}
+
+But one problem remains the delta is decremented here not incremented! I considered it to be equal to: `delta += -0x61C88647` and after searching it turns out it can be the original delta `0x9E3779B9` because `0x9E3779B9 - 0x100000000 = -0x61C88647` and therefore the sum can be the original value `0xC6EF3720`
+
+I arranged the endianness for the key and the encrypted values then I wrote a C++ script for TEA decryption:
+```c++
+#include <iostream>
+
+using namespace std;
+
+int main() {
+
+    uint32_t ciphertext[4][2] = {
+      {0x21C2FB7C, 0xC553E97B},
+      {0x9E893411, 0xFF5A7E60},
+      {0xB12CA755, 0xA5D55898},
+      {0x8A08537A, 0x663511D1}
+    };
+
+    uint32_t key[4] = {0x34561234, 0x111F3423, 0x34D57910, 0x00989034};
+
+    for (int j = 0; j < 4; j++) {
+
+        unsigned int i;
+        uint32_t v0 = ciphertext[j][0], v1 = ciphertext[j][1], delta = 0x9E3779B9, sum = 0xC6EF3720;
+        uint32_t k0 = key[0], k1 = key[1], k2 = key[2], k3 = key[3];
+
+        for (i = 0; i < 32; i++) {
+            v1 -= ((v0 << 4) + k2) ^ (v0 + sum) ^ ((v0 >> 5) + k3);
+            v0 -= ((v1 << 4) + k0) ^ (v1 + sum) ^ ((v1 >> 5) + k1);
+            sum -= delta;
+        }
+
+        ciphertext[j][0] = v0; ciphertext[j][1] = v1;
+    }
+
+    for (int i = 0; i < 4; i++)
+        printf("%x %x\n", ciphertext[i][0], ciphertext[i][1]);
+
+
+    return 0;
+}
+```
+
+I ran the script and decrypted the hex values using icyberchef using `from hex` recipe and I got the flag!
+
+Flag: `flag{W3Lc0m3_t0_r3v3rs3_L4nd-_-}`
+
+Now it's time for a cuppa TEA
+
+<img src="{{img_root}}/memes/TEA.gif" alt="TEA!">
