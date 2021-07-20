@@ -233,7 +233,7 @@ Following this address showed me interesting 16 bytes:
 Then digging deeper to the call instruction I faced the encryption function:
 <img src="{{img_root}}/challenges/kill_joy/4.png" alt="encryption function">
 
-The value `0x9E3779B9` usually is the delta for the TEA cipher but the sum increment falls between 2 increments here so it's the updated version [XTEA](https://en.wikipedia.org/wiki/XTEA){target="_blank"}
+The value `0x9E3779B9` usually is the delta for the TEA cipher but the sum increment falls between 2 increments here so it's the updated version [XTEA](https://en.wikipedia.org/wiki/XTEA){:target="_blank"}
 
 I had the encrypted values (from the MOVes instructions above) and the key and the algorithm and the constant number `32` which is the number of rounds, the decryption C++ script is the next step but before that I rearranged the key to be of 4 blocks each of size 4 bytes in little-endian (that's how XTEA works)
 
