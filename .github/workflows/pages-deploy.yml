@@ -61,11 +61,7 @@ jobs:
 
       - name: Test Site
         run: |
-          if [[ -n $SPEC_TEST ]]; then
-            bash tools/test.sh -d "$SPEC_TEST"
-          else
-            bash tools/test.sh
-          fi
+          bundle exec htmlproofer ./_site --checks Links --checks Images --checks Scripts
           
       - name: Deploy
         run: |
