@@ -28,7 +28,7 @@ jobs:
           ruby-version: 2.6.x
 
       - name: Bundle Caching
-        uses: actions/cache@v2
+        uses: actions/cache@v4
         with:
           path: ${{ env.GEMS_PATH }}
           key: ${{ runner.os }}-gems-${{ hashFiles('**/Gemfile') }}
