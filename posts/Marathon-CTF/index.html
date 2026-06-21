@@ -1,0 +1,609 @@
+<!DOCTYPE html><html lang="en" mode="dark" ><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no"><meta name="theme" content="Chirpy v2.5.1"><meta name="generator" content="Jekyll v4.4.1" /><meta property="og:title" content="Marathon CTF" /><meta name="author" content="Abdelrahman Nasr" /><meta property="og:locale" content="en_US" /><meta name="description" content="A place where you can find Reversing Engineering CTF challenges writeups, Malware Analysis reports and some low-level geeky stuff" /><meta property="og:description" content="A place where you can find Reversing Engineering CTF challenges writeups, Malware Analysis reports and some low-level geeky stuff" /><link rel="canonical" href="https://t1m3m.github.io/posts/Marathon-CTF/" /><meta property="og:url" content="https://t1m3m.github.io/posts/Marathon-CTF/" /><meta property="og:site_name" content="T1m3-m4ch1n3" /><meta property="og:image" content="https://t1m3m.github.io/assets/img/posts/2021-04-02-Marathon-CTF/cover.jpg" /><meta property="og:type" content="article" /><meta property="article:published_time" content="2021-04-02T10:30:00+02:00" /><meta name="twitter:card" content="summary_large_image" /><meta property="twitter:image" content="https://t1m3m.github.io/assets/img/posts/2021-04-02-Marathon-CTF/cover.jpg" /><meta property="twitter:title" content="Marathon CTF" /><meta name="twitter:site" content="@T1m3M" /><meta name="twitter:creator" content="@Abdelrahman Nasr" /><meta name="google-site-verification" content="wjab7JjezNdGg3dhJv8-6KbCIlqjjYnFBlntUWCuq3g" /> <script type="application/ld+json"> {"@type":"BlogPosting","description":"A place where you can find Reversing Engineering CTF challenges writeups, Malware Analysis reports and some low-level geeky stuff","dateModified":"2021-04-02T10:30:00+02:00","headline":"Marathon CTF","datePublished":"2021-04-02T10:30:00+02:00","url":"https://t1m3m.github.io/posts/Marathon-CTF/","mainEntityOfPage":{"@type":"WebPage","@id":"https://t1m3m.github.io/posts/Marathon-CTF/"},"image":"https://t1m3m.github.io/assets/img/posts/2021-04-02-Marathon-CTF/cover.jpg","author":{"@type":"Person","name":"Abdelrahman Nasr"},"@context":"https://schema.org"}</script><title>Marathon CTF | T1m3-m4ch1n3</title><link rel="shortcut icon" href="/assets/img/favicons/favicon.ico" type="image/x-icon"><link rel="icon" href="/assets/img/favicons/favicon.ico" type="image/x-icon"><link rel="apple-touch-icon" href="/assets/img/favicons/apple-icon.png"><link rel="apple-touch-icon" href="/assets/img/favicons/apple-icon-precomposed.png"><link rel="apple-touch-icon" sizes="57x57" href="/assets/img/favicons/apple-icon-57x57.png"><link rel="apple-touch-icon" sizes="60x60" href="/assets/img/favicons/apple-icon-60x60.png"><link rel="apple-touch-icon" sizes="72x72" href="/assets/img/favicons/apple-icon-72x72.png"><link rel="apple-touch-icon" sizes="76x76" href="/assets/img/favicons/apple-icon-76x76.png"><link rel="apple-touch-icon" sizes="114x114" href="/assets/img/favicons/apple-icon-114x114.png"><link rel="apple-touch-icon" sizes="120x120" href="/assets/img/favicons/apple-icon-120x120.png"><link rel="apple-touch-icon" sizes="144x144" href="/assets/img/favicons/apple-icon-144x144.png"><link rel="apple-touch-icon" sizes="152x152" href="/assets/img/favicons/apple-icon-152x152.png"><link rel="apple-touch-icon" sizes="180x180" href="/assets/img/favicons/apple-icon-180x180.png"><link rel="icon" type="image/png" sizes="192x192" href="/assets/img/favicons/android-icon-192x192.png"><link rel="icon" type="image/png" sizes="32x32" href="/assets/img/favicons/favicon-32x32.png"><link rel="icon" type="image/png" sizes="96x96" href="/assets/img/favicons/favicon-96x96.png"><link rel="icon" type="image/png" sizes="16x16" href="/assets/img/favicons/favicon-16x16.png"><link rel="manifest" href="/assets/img/favicons/manifest.json"><meta name='msapplication-config' content='/assets/img/favicons/browserconfig.xml'><meta name="msapplication-TileColor" content="#ffffff"><meta name="msapplication-TileImage" content="/assets/img/favicons/ms-icon-144x144.png"><meta name="theme-color" content="#ffffff"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin="anonymous"><link rel="dns-prefetch" href="https://fonts.gstatic.com"><link rel="preconnect" href="https://www.google-analytics.com" crossorigin="use-credentials"><link rel="dns-prefetch" href="https://www.google-analytics.com"><link rel="preconnect" href="https://www.googletagmanager.com" crossorigin="anonymous"><link rel="dns-prefetch" href="https://www.googletagmanager.com"><link rel="preconnect" href="cdn.jsdelivr.net"><link rel="dns-prefetch" href="cdn.jsdelivr.net"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.0.0/dist/css/bootstrap.min.css" integrity="sha256-LA89z+k9fjgMKQ/kq4OO2Mrf8VltYml/VES+Rg0fh20=" crossorigin="anonymous"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@5.11.2/css/all.min.css" integrity="sha256-+N4/V/SbAFiW1MPBCXnfnP9QSN3+Keu+NlB+0ev/YKQ=" crossorigin="anonymous"><link rel="preload" as="style" href="/assets/css/post.css"><link rel="stylesheet" href="/assets/css/post.css"><link rel="preload" as="style" href="/assets/css/lib/bootstrap-toc.min.css"><link rel="stylesheet" href="/assets/css/lib/bootstrap-toc.min.css" /> <script src="https://cdn.jsdelivr.net/npm/jquery@3/dist/jquery.min.js"></script> <script async src="https://cdn.jsdelivr.net/combine/npm/popper.js@1.15.0,npm/bootstrap@4/dist/js/bootstrap.min.js"></script> <script async src="/assets/js/post.min.js"></script> <script defer src="/app.js"></script><body data-spy="scroll" data-target="#toc"><div id="migration-banner" style="background:#6d28d9; color:white; text-align:center; padding:12px; font-weight:600; z-index:999; position: fixed; width:100%; top:0; left:0; box-sizing: border-box;"> <button onclick="document.getElementById('migration-banner').style.display='none'" style="position: absolute; left: 16px; top: 50%; transform: translateY(-50%); background: none; border: none; color: white; font-size: 18px; cursor: pointer; font-weight: bold; line-height: 1; padding: 4px;" aria-label="Close banner"> &times; </button> 🚀 I have migrated to a new website. This blog is now archived and will no longer receive updates. Visit <a href="https://0xtimemachine.com" target="_blank" rel="noopener noreferrer" style="color:white; text-decoration:underline;">0xtimemachine.com</a> to go back to the future!</div><div id="sidebar" class="d-flex flex-column"><div id="nav-wrapper"><div id="profile-wrapper" class="d-flex flex-column"><div id="avatar" class="d-flex justify-content-center"> <a href="/" alt="avatar"> <img src="/assets/img/sample/avatar.png" alt="avatar" onerror="this.style.display='none'"> </a></div><div class="profile-text mt-3"><div class="site-title"> <a href="/">T1m3-m4ch1n3</a></div><div class="site-subtitle font-italic"></div></div></div><ul class="nav flex-column"><li class="nav-item d-flex justify-content-center "> <a href="/" class="nav-link d-flex justify-content-center align-items-center w-100"> <i class="fa-fw fas fa-home ml-xl-3 mr-xl-3 unloaded"></i> <span>HOME</span> </a><li class="nav-item d-flex justify-content-center "> <a href="/tabs/categories/" class="nav-link d-flex justify-content-center align-items-center w-100"> <i class="fa-fw fas fa-stream ml-xl-3 mr-xl-3 unloaded"></i> <span>CATEGORIES</span> </a><li class="nav-item d-flex justify-content-center "> <a href="/tabs/tags/" class="nav-link d-flex justify-content-center align-items-center w-100"> <i class="fa-fw fas fa-tags ml-xl-3 mr-xl-3 unloaded"></i> <span>TAGS</span> </a><li class="nav-item d-flex justify-content-center "> <a href="/tabs/archives/" class="nav-link d-flex justify-content-center align-items-center w-100"> <i class="fa-fw fas fa-archive ml-xl-3 mr-xl-3 unloaded"></i> <span>ARCHIVES</span> </a><li class="nav-item d-flex justify-content-center "> <a href="/tabs/about/" class="nav-link d-flex justify-content-center align-items-center w-100"> <i class="fa-fw fas fa-info ml-xl-3 mr-xl-3 unloaded"></i> <span>ABOUT</span> </a></ul></div><div class="sidebar-bottom d-flex flex-wrap justify-content-around mt-4"> <a href="https://github.com/T1m3M" aria-label="github" target="_blank" rel="noopener"> <i class="fab fa-github-alt"></i> </a> <a href="https://twitter.com/T1m3M" aria-label="twitter" target="_blank" rel="noopener"> <i class="fab fa-twitter"></i> </a> <a href=" javascript:location.href = 'mailto:' + ['1.h4ck.t1m3','gmail.com'].join('@')" aria-label="email" > <i class="fas fa-envelope"></i> </a> <a href="https://linkedin.com/in/abdelrahman-nasr99/" aria-label="linkedin" target="_blank" rel="noopener"> <i class="fab fa-linkedin"></i> </a></div></div><div id="topbar-wrapper" class="row justify-content-center topbar-down"><div id="topbar" class="col-11 d-flex h-100 align-items-center justify-content-between"> <span id="breadcrumb"> <span> <a href="/"> Posts </a> </span> <span>Marathon CTF</span> </span> <i id="sidebar-trigger" class="fas fa-bars fa-fw"></i><div id="topbar-title"> Post</div><i id="search-trigger" class="fas fa-search fa-fw"></i> <span id="search-wrapper" class="align-items-center"> <i class="fas fa-search fa-fw"></i> <input class="form-control" id="search-input" type="search" aria-label="search" placeholder="Search..."> <i class="fa fa-times-circle fa-fw" id="search-cleaner"></i> </span> <span id="search-cancel" >Cancel</span></div></div><div id="main-wrapper"><div id="main"><div class="row"><div id="post-wrapper" class="col-12 col-lg-11 col-xl-8"><div class="post pl-1 pr-1 pl-sm-2 pr-sm-2 pl-md-4 pr-md-4"><h1 data-toc-skip>Marathon CTF</h1><div class="post-meta text-muted d-flex flex-column"><div> Posted <span class="timeago " data-toggle="tooltip" data-placement="bottom" title="Fri, Apr 2, 2021, 10:30 AM +0200" > Apr 2, 2021 <i class="unloaded">2021-04-02T10:30:00+02:00</i> </span> by <span class="author"> Abdelrahman Nasr </span></div><div> Updated <span class="timeago lastmod" data-toggle="tooltip" data-placement="bottom" title="Sat, Apr 3, 2021, 5:30 AM +0200" > Apr 3, 2021 <i class="unloaded">2021-04-03T05:30:21+02:00</i> </span></div></div><div class="post-content"> <img src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7 " data-src="/assets/img/posts/2021-04-02-Marathon-CTF/cover.jpg" class="post-preview-img"><p>Marathon CTF was a great CTF organized by <a href="https://cybertalents.com/">CyberTalents</a> during the whole month (1 Mar. - 31 Mar. 2021) but I participated during only the last 4 days and I got the 28th place (same points ad 25th) as I solved all Reverse challenges but one, and some of Web, Crypto, Forensics challenges and Here’s the writeup for some of these challenges!</p><hr /><h2 id="python-art">Python Art</h2><p><img src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7 " data-src="/assets/img/posts/2021-04-02-Marathon-CTF/info/python-art.png" alt="Python Art Info" /></p><p>Well, This challenge I really liked because It’s more like a reverse challenge or at least for me! :D <img src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7 " data-src="/assets/img/posts/2021-04-02-Marathon-CTF/challenges/python-art/python-art.png" alt="Python Art website" /></p><p>So this website basically draws “whatever” I typed like this: <img src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7 " data-src="/assets/img/posts/2021-04-02-Marathon-CTF/challenges/python-art/test.png" alt="testing input" /></p><p>Since the challenge name is “Python Art” I thought of Django or Flask, I wanted to see the HTML source using inspect element and there was an interesting comment inside the &lt;pre&gt; tag under the drawn text the comment was <code class="language-plaintext highlighter-rouge">&lt;!-- test is not defined --&gt;</code> or something like that so I guessed the comment is a result of eval()! I tired 2+3 as input and the result in the comment was 5 so YUP, that’s eval() function messing with me I KNEW IT!</p><p>Because I’m a reverse guy I overthought it so I tried to get the flag variable but it was not defined, I thought it might be in a text file and tried to read <code class="language-plaintext highlighter-rouge">flag.txt</code> but didn’t work either, then I tried to execute compile() function inside the eval function but none of that worked but that made me read about code objects in Python so I had fun.</p><p>since the URL is <code class="language-plaintext highlighter-rouge">http://18.196.160.18:3333/send</code> I tried the input <code class="language-plaintext highlighter-rouge">send</code> and the comment had this response <code class="language-plaintext highlighter-rouge">&lt;!-- function send at 0xfff..... --&gt;</code> so that’s the address of the function in memory, huh!</p><p>so to get the properties and methods of the function send I tried <code class="language-plaintext highlighter-rouge">dir(send)</code> and the response was</p><div class="language-python highlighter-rouge"><div class="highlight"><code><table class="rouge-table"><tbody><tr><td class="rouge-gutter gl"><pre class="lineno">1
+</pre><td class="rouge-code"><pre><span class="p">[</span><span class="sh">'</span><span class="s">__call__</span><span class="sh">'</span><span class="p">,</span> <span class="sh">'</span><span class="s">__class__</span><span class="sh">'</span><span class="p">,</span> <span class="sh">'</span><span class="s">__closure__</span><span class="sh">'</span><span class="p">,</span> <span class="sh">'</span><span class="s">__code__</span><span class="sh">'</span><span class="p">,</span> <span class="sh">'</span><span class="s">__defaults__</span><span class="sh">'</span><span class="p">,</span> <span class="sh">'</span><span class="s">__delattr__</span><span class="sh">'</span><span class="p">,</span> <span class="sh">'</span><span class="s">__dict__</span><span class="sh">'</span><span class="p">,</span> <span class="sh">'</span><span class="s">__doc__</span><span class="sh">'</span><span class="p">,</span> <span class="sh">'</span><span class="s">__format__</span><span class="sh">'</span><span class="p">,</span> <span class="sh">'</span><span class="s">__get__</span><span class="sh">'</span><span class="p">,</span> <span class="sh">'</span><span class="s">__getattribute__</span><span class="sh">'</span><span class="p">,</span> <span class="sh">'</span><span class="s">__globals__</span><span class="sh">'</span><span class="p">,</span> <span class="sh">'</span><span class="s">__hash__</span><span class="sh">'</span><span class="p">,</span> <span class="sh">'</span><span class="s">__init__</span><span class="sh">'</span><span class="p">,</span> <span class="sh">'</span><span class="s">__module__</span><span class="sh">'</span><span class="p">,</span> <span class="sh">'</span><span class="s">__name__</span><span class="sh">'</span><span class="p">,</span> <span class="sh">'</span><span class="s">__new__</span><span class="sh">'</span><span class="p">,</span> <span class="sh">'</span><span class="s">__reduce__</span><span class="sh">'</span><span class="p">,</span> <span class="sh">'</span><span class="s">__reduce_ex__</span><span class="sh">'</span><span class="p">,</span> <span class="sh">'</span><span class="s">__repr__</span><span class="sh">'</span><span class="p">,</span> <span class="sh">'</span><span class="s">__setattr__</span><span class="sh">'</span><span class="p">,</span> <span class="sh">'</span><span class="s">__sizeof__</span><span class="sh">'</span><span class="p">,</span> <span class="sh">'</span><span class="s">__str__</span><span class="sh">'</span><span class="p">,</span> <span class="sh">'</span><span class="s">__subclasshook__</span><span class="sh">'</span><span class="p">,</span> <span class="sh">'</span><span class="s">func_closure</span><span class="sh">'</span><span class="p">,</span> <span class="sh">'</span><span class="s">func_code</span><span class="sh">'</span><span class="p">,</span> <span class="sh">'</span><span class="s">func_defaults</span><span class="sh">'</span><span class="p">,</span> <span class="sh">'</span><span class="s">func_dict</span><span class="sh">'</span><span class="p">,</span> <span class="sh">'</span><span class="s">func_doc</span><span class="sh">'</span><span class="p">,</span> <span class="sh">'</span><span class="s">func_globals</span><span class="sh">'</span><span class="p">,</span> <span class="sh">'</span><span class="s">func_name</span><span class="sh">'</span><span class="p">]</span>
+</pre></table></code></div></div><p>And by taking a look at func_globals by typing <code class="language-plaintext highlighter-rouge">send.func_globals</code> .. BOOM!:</p><div class="language-plaintext highlighter-rouge"><div class="highlight"><code><table class="rouge-table"><tbody><tr><td class="rouge-gutter gl"><pre class="lineno">1
+2
+3
+4
+5
+6
+7
+8
+9
+10
+11
+12
+13
+14
+</pre><td class="rouge-code"><pre>'DEFAULT_FONT': 'standard',
+'art': &lt;function art at 0x7f2ce3b7b4d0&gt;,
+'Flask': &lt;class 'flask.app.Flask'&gt;,
+'app': &lt;Flask 'app'&gt;,
+'aprint': &lt;function aprint at 0x7f2ce3b7b450&gt;,
+'DECORATION_COUNTER': 195,
+'randart': &lt;function randart at 0x7f2ce3b7b550&gt;,
+...
+lots of gibberish stuff
+...
+'__file__': 'app.py',
+'art_param': &lt;module 'art.art_param' from '/usr/local/lib/python2.7/site-packages/art/art_param.pyc'&gt;
+...
+'decor_dic': &lt;module 'art.decor_dic' from '/usr/local/lib/python2.7/site-packages/art/decor_dic.pyc'&gt;, 'request': &lt;Request 'http://18.196.160.18:3333/send' [POST]&gt;, 'ART_VERSION': '5.1', 'ART_COUNTER': 700
+</pre></table></code></div></div><p>So this is a <code class="language-plaintext highlighter-rouge">Flask</code> web application written in <code class="language-plaintext highlighter-rouge">app.py</code> file and there’s functions like <code class="language-plaintext highlighter-rouge">art</code>, <code class="language-plaintext highlighter-rouge">aprint</code>, <code class="language-plaintext highlighter-rouge">randart</code>, etc.. which belong to the <a href="https://pypi.org/project/art/">art</a> python library! All makes sense now! :D</p><p>Since I have the filename of source code I grabbed it <code class="language-plaintext highlighter-rouge">open('app.py','r').read()</code> and styled it a little:</p><div class="language-python highlighter-rouge"><div class="highlight"><code><table class="rouge-table"><tbody><tr><td class="rouge-gutter gl"><pre class="lineno">1
+2
+3
+4
+5
+6
+7
+8
+9
+10
+11
+12
+13
+14
+15
+16
+17
+18
+19
+20
+21
+22
+23
+24
+25
+26
+27
+</pre><td class="rouge-code"><pre><span class="c1">#!/usr/bin/python
+</span><span class="kn">from</span> <span class="n">flask</span> <span class="kn">import</span> <span class="n">Flask</span>
+<span class="kn">from</span> <span class="n">flask</span> <span class="kn">import</span> <span class="n">render_template</span>
+<span class="kn">from</span> <span class="n">flask</span> <span class="kn">import</span> <span class="n">request</span>
+<span class="kn">from</span> <span class="n">art</span> <span class="kn">import</span> <span class="o">*</span>
+
+<span class="n">app</span> <span class="o">=</span> <span class="nc">Flask</span><span class="p">(</span><span class="n">__name__</span><span class="p">,</span> <span class="n">static_url_path</span><span class="o">=</span><span class="sh">'</span><span class="s">/static</span><span class="sh">'</span><span class="p">)</span>
+
+<span class="nd">@app.route</span><span class="p">(</span><span class="sh">'</span><span class="s">/</span><span class="sh">'</span><span class="p">)</span>
+<span class="k">def</span> <span class="nf">index</span><span class="p">():</span>
+	<span class="k">return</span> <span class="nf">render_template</span><span class="p">(</span><span class="sh">'</span><span class="s">index.html</span><span class="sh">'</span><span class="p">)</span>
+
+
+<span class="nd">@app.route</span><span class="p">(</span><span class="sh">'</span><span class="s">/send</span><span class="sh">'</span><span class="p">,</span> <span class="n">methods</span> <span class="o">=</span> <span class="p">[</span><span class="sh">'</span><span class="s">POST</span><span class="sh">'</span><span class="p">])</span>
+<span class="k">def</span> <span class="nf">send</span><span class="p">():</span>
+	<span class="n">text</span> <span class="o">=</span> <span class="n">request</span><span class="p">.</span><span class="n">form</span><span class="p">.</span><span class="nf">get</span><span class="p">(</span><span class="sh">'</span><span class="s">name</span><span class="sh">'</span><span class="p">)</span>
+	<span class="n">art</span> <span class="o">=</span> <span class="nf">text2art</span><span class="p">(</span><span class="nf">str</span><span class="p">(</span><span class="n">text</span><span class="p">),</span><span class="n">font</span><span class="o">=</span><span class="sh">'</span><span class="s">block</span><span class="sh">'</span><span class="p">,</span><span class="n">chr_ignore</span><span class="o">=</span><span class="bp">True</span><span class="p">)</span>
+
+	<span class="k">try</span><span class="p">:</span>
+		<span class="n">cmd</span> <span class="o">=</span> <span class="nf">eval</span><span class="p">(</span><span class="n">text</span><span class="p">)</span>
+	<span class="k">except</span> <span class="nb">NameError</span> <span class="k">as</span> <span class="n">e</span><span class="p">:</span>
+	    <span class="k">return</span> <span class="nf">render_template</span><span class="p">(</span><span class="sh">'</span><span class="s">index.html</span><span class="sh">'</span><span class="p">,</span> <span class="n">cmd</span><span class="o">=</span><span class="n">e</span> <span class="p">,</span> <span class="n">art</span><span class="o">=</span> <span class="n">art</span><span class="p">)</span>
+	<span class="k">return</span> <span class="nf">render_template</span><span class="p">(</span><span class="sh">'</span><span class="s">index.html</span><span class="sh">'</span><span class="p">,</span> <span class="n">cmd</span><span class="o">=</span><span class="n">cmd</span> <span class="p">,</span> <span class="n">art</span><span class="o">=</span><span class="n">art</span><span class="p">)</span>
+
+
+<span class="k">if</span> <span class="n">__name__</span> <span class="o">==</span> <span class="sh">'</span><span class="s">__main__</span><span class="sh">'</span><span class="p">:</span>
+	<span class="n">app</span><span class="p">.</span><span class="nf">run</span><span class="p">(</span><span class="n">host</span><span class="o">=</span><span class="sh">'</span><span class="s">0.0.0.0</span><span class="sh">'</span><span class="p">)</span>
+</pre></table></code></div></div><p>so as I thought the comment is using eval() function and all looks good, Now it’s time to get the flag!</p><p>I typed <code class="language-plaintext highlighter-rouge">__import__('glob').glob("*")</code> to discover what’s around (which I should’ve done at first BTW xD):</p><div class="language-html highlighter-rouge"><div class="highlight"><code><table class="rouge-table"><tbody><tr><td class="rouge-gutter gl"><pre class="lineno">1
+</pre><td class="rouge-code"><pre><span class="c">&lt;!-- [&amp;#39;app.py&amp;#39;, &amp;#39;flag&amp;#39;, &amp;#39;templates&amp;#39;, &amp;#39;static&amp;#39;] --&gt;</span>
+</pre></table></code></div></div><p>Okay it’s <code class="language-plaintext highlighter-rouge">flag</code> file, not <code class="language-plaintext highlighter-rouge">flag.txt</code>! then by reading that file <code class="language-plaintext highlighter-rouge">open('flag', 'r').read()</code> I’ve got the flag: <img src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7 " data-src="/assets/img/posts/2021-04-02-Marathon-CTF/challenges/python-art/flag.png" alt="flag" /></p><hr /><h2 id="asm-4sm">ASM (4SM)</h2><p><img src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7 " data-src="/assets/img/posts/2021-04-02-Marathon-CTF/info/4sm.png" alt="4SM info" /></p><p>I do love assembly! taking a look at 4SM.asm:</p><div class="language-java highlighter-rouge"><div class="highlight"><code><table class="rouge-table"><tbody><tr><td class="rouge-gutter gl"><pre class="lineno">1
+2
+3
+4
+5
+6
+7
+8
+9
+10
+11
+12
+13
+14
+15
+16
+17
+18
+19
+20
+21
+22
+23
+24
+25
+26
+27
+28
+29
+30
+31
+32
+33
+34
+35
+36
+37
+38
+39
+40
+41
+42
+43
+44
+45
+46
+47
+48
+49
+50
+51
+52
+53
+54
+55
+56
+57
+58
+</pre><td class="rouge-code"><pre><span class="nl">flag_checker:</span>
+        <span class="n">push</span>    <span class="n">rbp</span>
+        <span class="n">mov</span>     <span class="n">rbp</span><span class="o">,</span> <span class="n">rsp</span>
+        <span class="n">mov</span>     <span class="no">DWORD</span> <span class="no">PTR</span> <span class="o">[</span><span class="n">rbp</span><span class="o">-</span><span class="mi">4</span><span class="o">],</span> <span class="n">edi</span>
+        <span class="n">xor</span>     <span class="no">DWORD</span> <span class="no">PTR</span> <span class="o">[</span><span class="n">rbp</span><span class="o">-</span><span class="mi">4</span><span class="o">],</span> <span class="mi">133337</span>
+        <span class="n">sar</span>     <span class="no">DWORD</span> <span class="no">PTR</span> <span class="o">[</span><span class="n">rbp</span><span class="o">-</span><span class="mi">4</span><span class="o">],</span> <span class="mi">3</span>
+        <span class="n">add</span>     <span class="no">DWORD</span> <span class="no">PTR</span> <span class="o">[</span><span class="n">rbp</span><span class="o">-</span><span class="mi">4</span><span class="o">],</span> <span class="mi">1337</span>
+        <span class="n">sub</span>     <span class="no">DWORD</span> <span class="no">PTR</span> <span class="o">[</span><span class="n">rbp</span><span class="o">-</span><span class="mi">4</span><span class="o">],</span> <span class="mi">137</span>
+        <span class="n">mov</span>     <span class="n">edx</span><span class="o">,</span> <span class="no">DWORD</span> <span class="no">PTR</span> <span class="o">[</span><span class="n">rbp</span><span class="o">-</span><span class="mi">4</span><span class="o">]</span>
+        <span class="n">mov</span>     <span class="n">eax</span><span class="o">,</span> <span class="n">edx</span>
+        <span class="n">add</span>     <span class="n">eax</span><span class="o">,</span> <span class="n">eax</span>
+        <span class="n">add</span>     <span class="n">eax</span><span class="o">,</span> <span class="n">edx</span>
+        <span class="n">mov</span>     <span class="no">DWORD</span> <span class="no">PTR</span> <span class="o">[</span><span class="n">rbp</span><span class="o">-</span><span class="mi">4</span><span class="o">],</span> <span class="n">eax</span>
+        <span class="n">cmp</span>     <span class="no">DWORD</span> <span class="no">PTR</span> <span class="o">[</span><span class="n">rbp</span><span class="o">-</span><span class="mi">4</span><span class="o">],</span> <span class="mi">1128648</span>
+        <span class="n">jne</span>     <span class="o">.</span><span class="na">L2</span>
+        <span class="n">mov</span>     <span class="n">eax</span><span class="o">,</span> <span class="mi">1</span>
+        <span class="n">jmp</span>     <span class="o">.</span><span class="na">L3</span>
+<span class="o">.</span><span class="na">L2</span><span class="o">:</span>
+        <span class="n">mov</span>     <span class="n">eax</span><span class="o">,</span> <span class="mi">0</span>
+<span class="o">.</span><span class="na">L3</span><span class="o">:</span>
+        <span class="n">pop</span>     <span class="n">rbp</span>
+        <span class="n">ret</span>
+<span class="o">.</span><span class="na">LC0</span><span class="o">:</span>
+        <span class="o">.</span><span class="na">string</span> <span class="s">"Enter the secret number: "</span>
+<span class="o">.</span><span class="na">LC1</span><span class="o">:</span>
+        <span class="o">.</span><span class="na">string</span> <span class="s">"%d"</span>
+<span class="o">.</span><span class="na">LC2</span><span class="o">:</span>
+        <span class="o">.</span><span class="na">string</span> <span class="s">"Correct number :D"</span>
+<span class="o">.</span><span class="na">LC3</span><span class="o">:</span>
+        <span class="o">.</span><span class="na">string</span> <span class="s">"Wrong number :p"</span>
+<span class="nl">main:</span>
+        <span class="n">push</span>    <span class="n">rbp</span>
+        <span class="n">mov</span>     <span class="n">rbp</span><span class="o">,</span> <span class="n">rsp</span>
+        <span class="n">sub</span>     <span class="n">rsp</span><span class="o">,</span> <span class="mi">16</span>
+        <span class="n">mov</span>     <span class="n">edi</span><span class="o">,</span> <span class="no">OFFSET</span> <span class="nl">FLAT:</span><span class="o">.</span><span class="na">LC0</span>
+        <span class="n">mov</span>     <span class="n">eax</span><span class="o">,</span> <span class="mi">0</span>
+        <span class="n">call</span>    <span class="n">printf</span>
+        <span class="n">mov</span>     <span class="n">eax</span><span class="o">,</span> <span class="no">DWORD</span> <span class="no">PTR</span> <span class="o">[</span><span class="n">rbp</span><span class="o">-</span><span class="mi">4</span><span class="o">]</span>
+        <span class="n">mov</span>     <span class="n">esi</span><span class="o">,</span> <span class="n">eax</span>
+        <span class="n">mov</span>     <span class="n">edi</span><span class="o">,</span> <span class="no">OFFSET</span> <span class="nl">FLAT:</span><span class="o">.</span><span class="na">LC1</span>
+        <span class="n">mov</span>     <span class="n">eax</span><span class="o">,</span> <span class="mi">0</span>
+        <span class="n">call</span>    <span class="n">__isoc99_scanf</span>
+        <span class="n">mov</span>     <span class="n">eax</span><span class="o">,</span> <span class="no">DWORD</span> <span class="no">PTR</span> <span class="o">[</span><span class="n">rbp</span><span class="o">-</span><span class="mi">4</span><span class="o">]</span>
+        <span class="n">mov</span>     <span class="n">edi</span><span class="o">,</span> <span class="n">eax</span>
+        <span class="n">call</span>    <span class="n">flag_checker</span>
+        <span class="n">mov</span>     <span class="no">DWORD</span> <span class="no">PTR</span> <span class="o">[</span><span class="n">rbp</span><span class="o">-</span><span class="mi">8</span><span class="o">],</span> <span class="n">eax</span>
+        <span class="n">cmp</span>     <span class="no">DWORD</span> <span class="no">PTR</span> <span class="o">[</span><span class="n">rbp</span><span class="o">-</span><span class="mi">8</span><span class="o">],</span> <span class="mi">0</span>
+        <span class="n">je</span>      <span class="o">.</span><span class="na">L5</span>
+        <span class="n">mov</span>     <span class="n">edi</span><span class="o">,</span> <span class="no">OFFSET</span> <span class="nl">FLAT:</span><span class="o">.</span><span class="na">LC2</span>
+        <span class="n">call</span>    <span class="n">puts</span>
+        <span class="n">jmp</span>     <span class="o">.</span><span class="na">L6</span>
+<span class="o">.</span><span class="na">L5</span><span class="o">:</span>
+        <span class="n">mov</span>     <span class="n">edi</span><span class="o">,</span> <span class="no">OFFSET</span> <span class="nl">FLAT:</span><span class="o">.</span><span class="na">LC3</span>
+        <span class="n">call</span>    <span class="n">puts</span>
+<span class="o">.</span><span class="na">L6</span><span class="o">:</span>
+        <span class="n">mov</span>     <span class="n">eax</span><span class="o">,</span> <span class="mi">0</span>
+        <span class="n">leave</span>
+        <span class="n">ret</span>
+</pre></table></code></div></div><p>The flow goes as follows:</p><ul><li>starting from main<li>“Enter the secret number: “ message get printed using printf function<li>getting user’s input through scanf function with %d format<li>flag_checker function is called “to check the flag obviously”<li>doing some math: <code class="language-plaintext highlighter-rouge">((((x ^ 133337) &gt;&gt; 3) + 1337) - 137) * 3</code> where x is the user’s input<li>comparing so the result should be equal to 1128648</ul><p><em>NOTE: the <code class="language-plaintext highlighter-rouge">^</code> is XOR and <code class="language-plaintext highlighter-rouge">&gt;&gt;</code> is shift arithmetic right</em></p><p>I had the equation <code class="language-plaintext highlighter-rouge">((((x ^ 133337) &gt;&gt; 3) + 1337) - 137) * 3 = 1128648</code> so by solving it:<br /> <code class="language-plaintext highlighter-rouge">x = ((((1128648/3) + 137) - 1337) &lt;&lt; 3) ^ 133337 = 3133337</code></p><p>The flag: <code class="language-plaintext highlighter-rouge">flag{3133337}</code></p><hr /><h2 id="jett">Jett</h2><p><img src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7 " data-src="/assets/img/posts/2021-04-02-Marathon-CTF/info/jett.png" alt="Jett info" /></p><p>I was given an assembly source like the previous challenge:</p><div class="language-java highlighter-rouge"><div class="highlight"><code><table class="rouge-table"><tbody><tr><td class="rouge-gutter gl"><pre class="lineno">1
+2
+3
+4
+5
+6
+7
+8
+9
+10
+11
+12
+13
+14
+15
+16
+17
+18
+19
+20
+21
+22
+23
+24
+25
+26
+27
+28
+29
+30
+31
+32
+33
+34
+35
+36
+37
+38
+39
+40
+41
+42
+43
+44
+45
+46
+47
+48
+49
+50
+51
+52
+53
+54
+55
+56
+57
+58
+59
+60
+61
+62
+63
+64
+65
+66
+67
+68
+69
+70
+71
+72
+73
+74
+75
+76
+77
+78
+79
+80
+81
+</pre><td class="rouge-code"><pre><span class="o">.</span><span class="na">LC0</span><span class="o">:</span>
+        <span class="o">.</span><span class="na">string</span> <span class="s">"Enter the flag:"</span>
+<span class="o">.</span><span class="na">LC1</span><span class="o">:</span>
+        <span class="o">.</span><span class="na">string</span> <span class="s">"%25s"</span>
+<span class="o">.</span><span class="na">LC2</span><span class="o">:</span>
+        <span class="o">.</span><span class="na">string</span> <span class="s">"Wrong Flag :("</span>
+<span class="o">.</span><span class="na">LC3</span><span class="o">:</span>
+        <span class="o">.</span><span class="na">string</span> <span class="s">"Correct Flag : %s"</span>
+<span class="nl">main:</span>
+        <span class="n">push</span>    <span class="n">rbp</span>
+        <span class="n">mov</span>     <span class="n">rbp</span><span class="o">,</span> <span class="n">rsp</span>
+        <span class="n">sub</span>     <span class="n">rsp</span><span class="o">,</span> <span class="mi">160</span>
+        <span class="n">mov</span>     <span class="no">DWORD</span> <span class="no">PTR</span> <span class="o">[</span><span class="n">rbp</span><span class="o">-</span><span class="mi">160</span><span class="o">],</span> <span class="mi">150</span>
+        <span class="n">mov</span>     <span class="no">DWORD</span> <span class="no">PTR</span> <span class="o">[</span><span class="n">rbp</span><span class="o">-</span><span class="mi">156</span><span class="o">],</span> <span class="mi">204</span>
+        <span class="n">mov</span>     <span class="no">DWORD</span> <span class="no">PTR</span> <span class="o">[</span><span class="n">rbp</span><span class="o">-</span><span class="mi">152</span><span class="o">],</span> <span class="mi">233</span>
+        <span class="n">mov</span>     <span class="no">DWORD</span> <span class="no">PTR</span> <span class="o">[</span><span class="n">rbp</span><span class="o">-</span><span class="mi">148</span><span class="o">],</span> <span class="mi">31</span>
+        <span class="n">mov</span>     <span class="no">DWORD</span> <span class="no">PTR</span> <span class="o">[</span><span class="n">rbp</span><span class="o">-</span><span class="mi">144</span><span class="o">],</span> <span class="mi">211</span>
+        <span class="n">mov</span>     <span class="no">DWORD</span> <span class="no">PTR</span> <span class="o">[</span><span class="n">rbp</span><span class="o">-</span><span class="mi">140</span><span class="o">],</span> <span class="mi">75</span>
+        <span class="n">mov</span>     <span class="no">DWORD</span> <span class="no">PTR</span> <span class="o">[</span><span class="n">rbp</span><span class="o">-</span><span class="mi">136</span><span class="o">],</span> <span class="mi">212</span>
+        <span class="n">mov</span>     <span class="no">DWORD</span> <span class="no">PTR</span> <span class="o">[</span><span class="n">rbp</span><span class="o">-</span><span class="mi">132</span><span class="o">],</span> <span class="mi">74</span>
+        <span class="n">mov</span>     <span class="no">DWORD</span> <span class="no">PTR</span> <span class="o">[</span><span class="n">rbp</span><span class="o">-</span><span class="mi">128</span><span class="o">],</span> <span class="mi">193</span>
+        <span class="n">mov</span>     <span class="no">DWORD</span> <span class="no">PTR</span> <span class="o">[</span><span class="n">rbp</span><span class="o">-</span><span class="mi">124</span><span class="o">],</span> <span class="mi">215</span>
+        <span class="n">mov</span>     <span class="no">DWORD</span> <span class="no">PTR</span> <span class="o">[</span><span class="n">rbp</span><span class="o">-</span><span class="mi">120</span><span class="o">],</span> <span class="mi">85</span>
+        <span class="n">mov</span>     <span class="no">DWORD</span> <span class="no">PTR</span> <span class="o">[</span><span class="n">rbp</span><span class="o">-</span><span class="mi">116</span><span class="o">],</span> <span class="mi">176</span>
+        <span class="n">mov</span>     <span class="no">DWORD</span> <span class="no">PTR</span> <span class="o">[</span><span class="n">rbp</span><span class="o">-</span><span class="mi">112</span><span class="o">],</span> <span class="mi">132</span>
+        <span class="n">mov</span>     <span class="no">DWORD</span> <span class="no">PTR</span> <span class="o">[</span><span class="n">rbp</span><span class="o">-</span><span class="mi">108</span><span class="o">],</span> <span class="mi">215</span>
+        <span class="n">mov</span>     <span class="no">DWORD</span> <span class="no">PTR</span> <span class="o">[</span><span class="n">rbp</span><span class="o">-</span><span class="mi">104</span><span class="o">],</span> <span class="mi">57</span>
+        <span class="n">mov</span>     <span class="no">DWORD</span> <span class="no">PTR</span> <span class="o">[</span><span class="n">rbp</span><span class="o">-</span><span class="mi">100</span><span class="o">],</span> <span class="mi">222</span>
+        <span class="n">mov</span>     <span class="no">DWORD</span> <span class="no">PTR</span> <span class="o">[</span><span class="n">rbp</span><span class="o">-</span><span class="mi">96</span><span class="o">],</span> <span class="mi">38</span>
+        <span class="n">mov</span>     <span class="no">DWORD</span> <span class="no">PTR</span> <span class="o">[</span><span class="n">rbp</span><span class="o">-</span><span class="mi">92</span><span class="o">],</span> <span class="mi">75</span>
+        <span class="n">mov</span>     <span class="no">DWORD</span> <span class="no">PTR</span> <span class="o">[</span><span class="n">rbp</span><span class="o">-</span><span class="mi">88</span><span class="o">],</span> <span class="mi">2</span>
+        <span class="n">mov</span>     <span class="no">DWORD</span> <span class="no">PTR</span> <span class="o">[</span><span class="n">rbp</span><span class="o">-</span><span class="mi">84</span><span class="o">],</span> <span class="mi">139</span>
+        <span class="n">mov</span>     <span class="no">DWORD</span> <span class="no">PTR</span> <span class="o">[</span><span class="n">rbp</span><span class="o">-</span><span class="mi">80</span><span class="o">],</span> <span class="mi">75</span>
+        <span class="n">mov</span>     <span class="no">DWORD</span> <span class="no">PTR</span> <span class="o">[</span><span class="n">rbp</span><span class="o">-</span><span class="mi">76</span><span class="o">],</span> <span class="mi">21</span>
+        <span class="n">mov</span>     <span class="no">DWORD</span> <span class="no">PTR</span> <span class="o">[</span><span class="n">rbp</span><span class="o">-</span><span class="mi">72</span><span class="o">],</span> <span class="mi">215</span>
+        <span class="n">mov</span>     <span class="no">DWORD</span> <span class="no">PTR</span> <span class="o">[</span><span class="n">rbp</span><span class="o">-</span><span class="mi">68</span><span class="o">],</span> <span class="mi">21</span>
+        <span class="n">mov</span>     <span class="no">DWORD</span> <span class="no">PTR</span> <span class="o">[</span><span class="n">rbp</span><span class="o">-</span><span class="mi">64</span><span class="o">],</span> <span class="mi">229</span>
+        <span class="n">mov</span>     <span class="n">edi</span><span class="o">,</span> <span class="no">OFFSET</span> <span class="nl">FLAT:</span><span class="o">.</span><span class="na">LC0</span>
+        <span class="n">call</span>    <span class="n">puts</span>
+        <span class="n">lea</span>     <span class="n">rax</span><span class="o">,</span> <span class="o">[</span><span class="n">rbp</span><span class="o">-</span><span class="mi">48</span><span class="o">]</span>
+        <span class="n">mov</span>     <span class="n">rsi</span><span class="o">,</span> <span class="n">rax</span>
+        <span class="n">mov</span>     <span class="n">edi</span><span class="o">,</span> <span class="no">OFFSET</span> <span class="nl">FLAT:</span><span class="o">.</span><span class="na">LC1</span>
+        <span class="n">mov</span>     <span class="n">eax</span><span class="o">,</span> <span class="mi">0</span>
+        <span class="n">call</span>    <span class="n">__isoc99_scanf</span>
+        <span class="n">mov</span>     <span class="no">DWORD</span> <span class="no">PTR</span> <span class="o">[</span><span class="n">rbp</span><span class="o">-</span><span class="mi">4</span><span class="o">],</span> <span class="mi">0</span>
+        <span class="n">jmp</span>     <span class="o">.</span><span class="na">L2</span>
+<span class="o">.</span><span class="na">L5</span><span class="o">:</span>
+        <span class="n">mov</span>     <span class="n">eax</span><span class="o">,</span> <span class="no">DWORD</span> <span class="no">PTR</span> <span class="o">[</span><span class="n">rbp</span><span class="o">-</span><span class="mi">4</span><span class="o">]</span>
+        <span class="n">cdqe</span>
+        <span class="n">movzx</span>   <span class="n">eax</span><span class="o">,</span> <span class="no">BYTE</span> <span class="no">PTR</span> <span class="o">[</span><span class="n">rbp</span><span class="o">-</span><span class="mi">48</span><span class="o">+</span><span class="n">rax</span><span class="o">]</span>
+        <span class="n">movsx</span>   <span class="n">eax</span><span class="o">,</span> <span class="n">al</span>
+        <span class="n">imul</span>    <span class="n">eax</span><span class="o">,</span> <span class="n">eax</span><span class="o">,</span> <span class="mi">137</span>
+        <span class="n">cdq</span>
+        <span class="n">shr</span>     <span class="n">edx</span><span class="o">,</span> <span class="mi">24</span>
+        <span class="n">add</span>     <span class="n">eax</span><span class="o">,</span> <span class="n">edx</span>
+        <span class="n">movzx</span>   <span class="n">eax</span><span class="o">,</span> <span class="n">al</span>
+        <span class="n">sub</span>     <span class="n">eax</span><span class="o">,</span> <span class="n">edx</span>
+        <span class="n">mov</span>     <span class="no">DWORD</span> <span class="no">PTR</span> <span class="o">[</span><span class="n">rbp</span><span class="o">-</span><span class="mi">8</span><span class="o">],</span> <span class="n">eax</span>
+        <span class="n">mov</span>     <span class="n">eax</span><span class="o">,</span> <span class="no">DWORD</span> <span class="no">PTR</span> <span class="o">[</span><span class="n">rbp</span><span class="o">-</span><span class="mi">4</span><span class="o">]</span>
+        <span class="n">cdqe</span>
+        <span class="n">mov</span>     <span class="n">eax</span><span class="o">,</span> <span class="no">DWORD</span> <span class="no">PTR</span> <span class="o">[</span><span class="n">rbp</span><span class="o">-</span><span class="mi">160</span><span class="o">+</span><span class="n">rax</span><span class="o">*</span><span class="mi">4</span><span class="o">]</span>
+        <span class="n">cmp</span>     <span class="no">DWORD</span> <span class="no">PTR</span> <span class="o">[</span><span class="n">rbp</span><span class="o">-</span><span class="mi">8</span><span class="o">],</span> <span class="n">eax</span>
+        <span class="n">je</span>      <span class="o">.</span><span class="na">L3</span>
+        <span class="n">mov</span>     <span class="n">edi</span><span class="o">,</span> <span class="no">OFFSET</span> <span class="nl">FLAT:</span><span class="o">.</span><span class="na">LC2</span>
+        <span class="n">call</span>    <span class="n">puts</span>
+        <span class="n">mov</span>     <span class="n">eax</span><span class="o">,</span> <span class="mi">0</span>
+        <span class="n">jmp</span>     <span class="o">.</span><span class="na">L6</span>
+<span class="o">.</span><span class="na">L3</span><span class="o">:</span>
+        <span class="n">add</span>     <span class="no">DWORD</span> <span class="no">PTR</span> <span class="o">[</span><span class="n">rbp</span><span class="o">-</span><span class="mi">4</span><span class="o">],</span> <span class="mi">1</span>
+<span class="o">.</span><span class="na">L2</span><span class="o">:</span>
+        <span class="n">cmp</span>     <span class="no">DWORD</span> <span class="no">PTR</span> <span class="o">[</span><span class="n">rbp</span><span class="o">-</span><span class="mi">4</span><span class="o">],</span> <span class="mi">24</span>
+        <span class="n">jle</span>     <span class="o">.</span><span class="na">L5</span>
+        <span class="n">lea</span>     <span class="n">rax</span><span class="o">,</span> <span class="o">[</span><span class="n">rbp</span><span class="o">-</span><span class="mi">48</span><span class="o">]</span>
+        <span class="n">mov</span>     <span class="n">rsi</span><span class="o">,</span> <span class="n">rax</span>
+        <span class="n">mov</span>     <span class="n">edi</span><span class="o">,</span> <span class="no">OFFSET</span> <span class="nl">FLAT:</span><span class="o">.</span><span class="na">LC3</span>
+        <span class="n">mov</span>     <span class="n">eax</span><span class="o">,</span> <span class="mi">0</span>
+        <span class="n">call</span>    <span class="n">printf</span>
+        <span class="n">mov</span>     <span class="n">eax</span><span class="o">,</span> <span class="mi">0</span>
+<span class="o">.</span><span class="na">L6</span><span class="o">:</span>
+        <span class="n">leave</span>
+        <span class="n">ret</span>
+</pre></table></code></div></div><p>The execution flow:</p><ul><li>starting from main<li>allocating the stack and storing some bytes<li>printing “Enter the flag:” message to the screen using puts<li>reading user’s input to the address of [rbp-48] using scanf with %25s format<li>jumping to .L2 label<li>while loop executing while counter [rbp-4] &lt; 25:<ul><li>reading each byte from the user’s input (let’s call it <code class="language-plaintext highlighter-rouge">x</code>)<li>doing the math: <code class="language-plaintext highlighter-rouge">y[i] = (byte)[((x[i] * 137) &gt;&gt; 24) + (x[i] * 137)]</code><li>known_values[i] = y[i] - ((x[i] * 137) » 24)<li>increment counter</ul></ul><p>The full equation is <code class="language-plaintext highlighter-rouge">known_bytes[i] = (byte)[(x[i] * 137) &gt;&gt; 24) + (x[i] * 137)] - ((x[i] * 137) &gt;&gt; 24)</code> and since <code class="language-plaintext highlighter-rouge">(x[i] * 137 &gt;&gt; 24)</code> for printable characters is always <code class="language-plaintext highlighter-rouge">zero</code> it can be reduced to: <code class="language-plaintext highlighter-rouge">known_bytes[i] = (byte)(x[i] * 137) = (x[i] * 137) % 256</code> and I could brute force them and that’s one solution</p><p>The other solution is simply using modular inverse to get the flag:</p><div class="language-python highlighter-rouge"><div class="highlight"><code><table class="rouge-table"><tbody><tr><td class="rouge-gutter gl"><pre class="lineno">1
+2
+3
+4
+5
+6
+7
+8
+9
+10
+11
+12
+13
+14
+15
+16
+</pre><td class="rouge-code"><pre><span class="c1">#!/bin/env python3
+</span>
+<span class="kn">from</span> <span class="n">Crypto.Util.number</span> <span class="kn">import</span> <span class="n">inverse</span>
+
+<span class="n">known_bytes</span> <span class="o">=</span> <span class="p">[</span><span class="mi">150</span><span class="p">,</span> <span class="mi">204</span><span class="p">,</span> <span class="mi">233</span><span class="p">,</span> <span class="mi">31</span><span class="p">,</span> <span class="mi">211</span><span class="p">,</span> <span class="mi">75</span><span class="p">,</span> <span class="mi">212</span><span class="p">,</span> <span class="mi">74</span><span class="p">,</span> <span class="mi">193</span><span class="p">,</span> <span class="mi">215</span><span class="p">,</span> <span class="mi">85</span><span class="p">,</span> <span class="mi">176</span><span class="p">,</span> <span class="mi">132</span><span class="p">,</span> <span class="mi">215</span><span class="p">,</span> <span class="mi">57</span><span class="p">,</span> <span class="mi">222</span><span class="p">,</span> <span class="mi">38</span><span class="p">,</span> <span class="mi">75</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">139</span><span class="p">,</span> <span class="mi">75</span><span class="p">,</span> <span class="mi">21</span><span class="p">,</span> <span class="mi">215</span><span class="p">,</span> <span class="mi">21</span><span class="p">,</span> <span class="mi">229</span><span class="p">]</span>
+
+<span class="n">flag</span> <span class="o">=</span> <span class="sh">""</span>
+
+<span class="k">for</span> <span class="n">a</span> <span class="ow">in</span> <span class="n">known_bytes</span><span class="p">:</span>
+    <span class="n">inv</span> <span class="o">=</span> <span class="nf">inverse</span><span class="p">(</span><span class="mi">137</span><span class="p">,</span> <span class="mi">256</span><span class="p">)</span>
+
+    <span class="n">original</span> <span class="o">=</span> <span class="n">inv</span> <span class="o">*</span> <span class="n">a</span> <span class="o">%</span> <span class="mi">256</span>
+
+    <span class="n">flag</span> <span class="o">+=</span> <span class="nf">chr</span><span class="p">(</span><span class="n">original</span><span class="p">)</span>
+
+<span class="nf">print</span><span class="p">(</span><span class="n">flag</span><span class="p">)</span>
+</pre></table></code></div></div><p>And I got the flag: <code class="language-plaintext highlighter-rouge">flag{34zy_m0d_1nv3rs3-_-}</code></p><hr /><h2 id="hiki">HiKi</h2><p><img src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7 " data-src="/assets/img/posts/2021-04-02-Marathon-CTF/info/hiki.png" alt="HiKi info" /></p><p>I was given an apk file so I decompiled it to jar to see the source code using <code class="language-plaintext highlighter-rouge">dex2jar</code> tool and there were two interesting source files MainActivity.class and EncDec.class:</p><p><img src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7 " data-src="/assets/img/posts/2021-04-02-Marathon-CTF/challenges/hiki/hiki-main.png" alt="Hiki MainActivity.class" /> <img src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7 " data-src="/assets/img/posts/2021-04-02-Marathon-CTF/challenges/hiki/hiki-encdec.png" alt="Hiki EncDec.class" /></p><p>By reading the code it’s obvious that it’s doing AES Decryption to a pre-encrypted value and the key is the pin entered by the user concatenated with <code class="language-plaintext highlighter-rouge">Cyb3rT4l3nt5</code></p><p>Here’s the trick the pin in code should be 6 digits or less and since <code class="language-plaintext highlighter-rouge">Cyb3rT4l3nt5</code> length is 12 and since we’re talking about a small key then It’s 128-bit key which is 16 bytes we know 12 bytes so the pin should be 4 digits! (so the key is on the format <code class="language-plaintext highlighter-rouge">xxxxCyb3rT4l3nt5</code>)</p><p>The pin has 10k possibilities I wrote a python script to brute force it and simulate the decryption process:</p><div class="language-python highlighter-rouge"><div class="highlight"><code><table class="rouge-table"><tbody><tr><td class="rouge-gutter gl"><pre class="lineno">1
+2
+3
+4
+5
+6
+7
+8
+9
+10
+11
+12
+13
+14
+15
+16
+17
+18
+19
+20
+21
+22
+</pre><td class="rouge-code"><pre><span class="c1">#!/bin/env python3
+</span>
+<span class="kn">import</span> <span class="n">base64</span>
+<span class="kn">from</span> <span class="n">Crypto.Cipher</span> <span class="kn">import</span> <span class="n">AES</span>
+
+<span class="n">known_key</span> <span class="o">=</span> <span class="sh">"</span><span class="s">Cyb3rT4l3nt5</span><span class="sh">"</span>
+
+<span class="n">enc</span> <span class="o">=</span> <span class="sh">"</span><span class="s">blJ9s0JObmk7Qi7vfe98RWN3snqSc79GZTC+8IaHuV052R3Q43SH8vXhjQt7E5m3</span><span class="sh">"</span>
+<span class="n">b64_enc</span> <span class="o">=</span> <span class="n">base64</span><span class="p">.</span><span class="nf">b64decode</span><span class="p">(</span><span class="n">enc</span><span class="p">)</span>
+
+<span class="k">for</span> <span class="n">pin</span> <span class="ow">in</span> <span class="nf">range</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">10000</span><span class="p">):</span>
+
+    <span class="k">try</span><span class="p">:</span>
+        <span class="n">key</span> <span class="o">=</span> <span class="nf">str</span><span class="p">(</span><span class="n">pin</span><span class="p">).</span><span class="nf">zfill</span><span class="p">(</span><span class="mi">4</span><span class="p">)</span> <span class="o">+</span> <span class="n">known_key</span>
+
+        <span class="n">cipher</span> <span class="o">=</span> <span class="n">AES</span><span class="p">.</span><span class="nf">new</span><span class="p">(</span><span class="n">key</span><span class="p">.</span><span class="nf">encode</span><span class="p">(</span><span class="sh">'</span><span class="s">utf-8</span><span class="sh">'</span><span class="p">),</span> <span class="n">AES</span><span class="p">.</span><span class="n">MODE_ECB</span><span class="p">)</span>
+        <span class="n">msg</span> <span class="o">=</span> <span class="n">cipher</span><span class="p">.</span><span class="nf">decrypt</span><span class="p">(</span><span class="n">b64_enc</span><span class="p">).</span><span class="nf">decode</span><span class="p">(</span><span class="sh">'</span><span class="s">utf-8</span><span class="sh">'</span><span class="p">)</span>
+
+        <span class="nf">print</span><span class="p">(</span><span class="sh">"</span><span class="s">key = {}, flag = {}</span><span class="sh">"</span><span class="p">.</span><span class="nf">format</span><span class="p">(</span><span class="n">key</span><span class="p">,</span> <span class="n">msg</span><span class="p">))</span>
+
+    <span class="k">except</span><span class="p">:</span>
+        <span class="k">continue</span>
+</pre></table></code></div></div><p><img src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7 " data-src="/assets/img/posts/2021-04-02-Marathon-CTF/challenges/hiki/flag.png" alt="HiKi solver.py" /></p><hr /><h2 id="c1ph3r">C1ph3r</h2><p><img src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7 " data-src="/assets/img/posts/2021-04-02-Marathon-CTF/info/c1ph3r.png" alt="C1ph3r info" /></p><p>Last but not least! This is the most challenge I enjoyed so far in the Marathon CTF and you will figure out why!</p><p>I was given this 32-bit binary and by analyzing it in IDA and taking a look at the strings:</p><p><img src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7 " data-src="/assets/img/posts/2021-04-02-Marathon-CTF/challenges/c1ph3r/strings.png" alt="strings" /></p><p>There are a lot of messages that shows the binary is corrupted and need to be fixed also in the API imports <code class="language-plaintext highlighter-rouge">IsDebuggerPresent</code> function from KERNEL32 Library so I’m expecting ant-debugging techniques!</p><p>I went to <code class="language-plaintext highlighter-rouge">"Enter the flag:\n"</code> reference:</p><p><img src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7 " data-src="/assets/img/posts/2021-04-02-Marathon-CTF/challenges/c1ph3r/fake_flag.png" alt="strings" /> <img src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7 " data-src="/assets/img/posts/2021-04-02-Marathon-CTF/challenges/c1ph3r/xor_44.png" alt="fake flag function" /></p><p>After of pushing data to the stack it calls some functions one of them XORs these bytes with 0x44 <em>(I named it XOR_44)</em> which result in the string <code class="language-plaintext highlighter-rouge">just for your attention, nothing here is real</code> and yeah just another rabbit hole :”D</p><p>Another note from the code overview is that to approach a function it calls a function that jumps to the desired function</p><p>I headed back to the beginning to the main function and started tracing statically the flow which was full of exceptions and debugger traps <code class="language-plaintext highlighter-rouge">int 3</code> instructions to make breakpoints and another important note is <em>Pseudocode</em> is not working so we’re talking assembly here <em><strong>which is cool tbh ;)</strong></em></p><p>My approach here was:</p><ol><li>hitting a breakpoint at the start of try..catch exception<li>modifying EIP to the call instruction (to get out of there ASAP :D)<li>repeating 1 and 2 until reaching finding the treasure (a cool function)</ol><p>Let’s dive in starting from main:</p><p><img src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7 " data-src="/assets/img/posts/2021-04-02-Marathon-CTF/challenges/c1ph3r/main.png" alt="main function" /> <img src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7 " data-src="/assets/img/posts/2021-04-02-Marathon-CTF/challenges/c1ph3r/main2.png" alt="main function again" /></p><p>There were 2 intermediate functions and then I reached this function which seems to be cool the exception start was on the right block but I changed the flow to the highest block above where the magic begins:</p><p><img src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7 " data-src="/assets/img/posts/2021-04-02-Marathon-CTF/challenges/c1ph3r/treasure.png" alt="treasure function" /></p><p>Here’s a closer look to the upper part the first part basically prints “Enter the flag:” and accepts user’s input (32 characters) and I could see clearly 2 loops in there one inside another:</p><p><img src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7 " data-src="/assets/img/posts/2021-04-02-Marathon-CTF/challenges/c1ph3r/magic.png" alt="start of magic function" /></p><p>the first loop iterates while count_1 &lt; 32 (count increases by two) and allocates memory using the standard memset function with size 0x1B28 let’s call that <code class="language-plaintext highlighter-rouge">buff</code> and the second loop iterates while count_2 &lt; 0xD94 (which is half of 0x1B28):</p><p><img src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7 " data-src="/assets/img/posts/2021-04-02-Marathon-CTF/challenges/c1ph3r/loops.png" alt="the two loops" /></p><p>The second loop is doing encryption and after it finishes it’s using memcmp standard function to compare it to a pre-defined memory chunk</p><p><img src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7 " data-src="/assets/img/posts/2021-04-02-Marathon-CTF/challenges/c1ph3r/enc.png" alt="encrypt and compare" /></p><p>Putting pieces together the first loop takes two characters from the user’s input at a time, decrypt it then comparing the result with the pre-stored chunks of memory so I dumped those 16 chunks using 3 lines of IDApython:</p><div class="language-python highlighter-rouge"><div class="highlight"><code><table class="rouge-table"><tbody><tr><td class="rouge-gutter gl"><pre class="lineno">1
+2
+3
+4
+</pre><td class="rouge-code"><pre><span class="n">start</span> <span class="o">=</span> <span class="mh">0x00CACB60</span>
+
+<span class="k">for</span> <span class="n">counter</span> <span class="ow">in</span> <span class="nf">range</span><span class="p">(</span><span class="mi">16</span><span class="p">):</span>
+	<span class="n">idc</span><span class="p">.</span><span class="nf">savefile</span><span class="p">(</span><span class="sh">"</span><span class="s">mem</span><span class="sh">"</span> <span class="o">+</span> <span class="nf">str</span><span class="p">(</span><span class="n">counter</span><span class="p">).</span><span class="nf">zfill</span><span class="p">(</span><span class="mi">2</span><span class="p">)</span> <span class="o">+</span> <span class="sh">"</span><span class="s">.bin</span><span class="sh">"</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="n">start</span> <span class="o">+</span> <span class="p">(</span><span class="n">counter</span> <span class="o">*</span> <span class="mh">0x1B28</span><span class="p">),</span> <span class="mh">0x1B28</span><span class="p">)</span>
+</pre></table></code></div></div><p>Now the decryption process:</p><ul><li>val = two bytes of the user’s input<li>loop from zero to 0xD94:<ul><li>if val % all_bytes[i] != 0 increment counter<li>otherwise buf[i] += 1 and val = val / all_bytes[i]</ul></ul><p>Where all_bytes are stored constants in memory to see if these constants divides the value of 2 bytes</p><p>So again I made a 2 lines IDApython script to get the all_bytes from memory:</p><div class="language-python highlighter-rouge"><div class="highlight"><code><table class="rouge-table"><tbody><tr><td class="rouge-gutter gl"><pre class="lineno">1
+2
+3
+</pre><td class="rouge-code"><pre><span class="n">all_bytes_addr</span> <span class="o">=</span> <span class="mh">0x00CAB038</span>
+
+<span class="n">idc</span><span class="p">.</span><span class="nf">savefile</span><span class="p">(</span><span class="sh">"</span><span class="s">all_bytes.bin</span><span class="sh">"</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="n">all_bytes_addr</span><span class="p">,</span> <span class="mh">0x1B28</span><span class="p">)</span>
+</pre></table></code></div></div><p>Okay enough with the analysis let’s talk code this is the encryption simulation in python for first 2 letters of the flag <code class="language-plaintext highlighter-rouge">"fl" = 0x666c</code> which its result was equal to mem00.bin <em>(the first chunk of memory)</em>:</p><div class="language-python highlighter-rouge"><div class="highlight"><code><table class="rouge-table"><tbody><tr><td class="rouge-gutter gl"><pre class="lineno">1
+2
+3
+4
+5
+6
+7
+8
+9
+10
+11
+12
+13
+14
+15
+16
+17
+18
+19
+</pre><td class="rouge-code"><pre><span class="c1"># encrpytion simulation
+</span><span class="n">buf</span> <span class="o">=</span> <span class="p">[</span> <span class="mi">0</span> <span class="k">for</span> <span class="n">_</span> <span class="ow">in</span> <span class="nf">range</span><span class="p">(</span><span class="mh">0xD94</span><span class="p">)]</span>
+
+<span class="n">val</span> <span class="o">=</span> <span class="mh">0x666C</span>
+<span class="n">count_2</span> <span class="o">=</span> <span class="mi">0</span>
+
+<span class="k">while</span> <span class="n">count_2</span> <span class="o">&lt;</span> <span class="mh">0xD94</span><span class="p">:</span>
+
+    <span class="n">this_byte</span> <span class="o">=</span> <span class="n">all_bytes</span><span class="p">[</span><span class="n">count_2</span><span class="p">]</span>
+
+    <span class="k">if</span> <span class="n">val</span> <span class="o">%</span> <span class="n">this_byte</span> <span class="o">!=</span> <span class="mi">0</span><span class="p">:</span>
+        <span class="n">count_2</span> <span class="o">+=</span> <span class="mi">1</span><span class="p">;</span>
+
+    <span class="k">else</span><span class="p">:</span>
+        <span class="n">buf</span><span class="p">[</span><span class="mi">2</span> <span class="o">*</span> <span class="n">count_2</span><span class="p">]</span> <span class="o">+=</span> <span class="mi">1</span>
+        <span class="n">val</span> <span class="o">=</span> <span class="nf">int</span><span class="p">(</span><span class="n">val</span> <span class="o">/</span> <span class="n">this_byte</span><span class="p">)</span>
+
+<span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="n">buf</span><span class="p">:</span>
+    <span class="nf">print</span><span class="p">(</span><span class="n">i</span><span class="p">,</span> <span class="sh">'</span><span class="s"> </span><span class="sh">'</span><span class="p">,</span> <span class="n">end</span><span class="o">=</span><span class="sh">''</span><span class="p">)</span>
+</pre></table></code></div></div><p><strong>Output: 2 0 1 0 1 0 0 0 0 0 0 0 0 0 1 0 1 … 0</strong> <em>(which is identical to mem00.bin which holds the first 2 bytes’ factorization of the flag)</em></p><p>Let’s sum up, I had the constants and how many times each constant divides the 2 bytes value from the flag so to get those bytes I should calculate the Greatest Common Divisor (GCD) for the 16 values (32 bytes flag) and this way I should have the flag!! so I made a python script to do that for me:</p><div class="language-python highlighter-rouge"><div class="highlight"><code><table class="rouge-table"><tbody><tr><td class="rouge-gutter gl"><pre class="lineno">1
+2
+3
+4
+5
+6
+7
+8
+9
+10
+11
+12
+13
+14
+15
+16
+17
+18
+19
+20
+21
+22
+23
+24
+25
+26
+27
+28
+29
+30
+31
+32
+33
+34
+35
+36
+37
+38
+39
+40
+41
+42
+43
+44
+45
+46
+47
+48
+49
+50
+51
+52
+53
+54
+55
+56
+57
+58
+</pre><td class="rouge-code"><pre><span class="c1">#!/bin/env python3
+</span>
+<span class="kn">import</span> <span class="n">struct</span>
+<span class="kn">from</span> <span class="n">Crypto.Util.number</span> <span class="kn">import</span> <span class="n">long_to_bytes</span>
+
+<span class="n">all_bytes</span> <span class="o">=</span> <span class="p">[]</span>
+
+<span class="c1"># reading all_bytes from the memory dump to array as unsigned short values in little endian
+</span><span class="k">with</span> <span class="nf">open</span><span class="p">(</span><span class="sh">"</span><span class="s">all_bytes.bin</span><span class="sh">"</span><span class="p">,</span> <span class="sh">"</span><span class="s">rb</span><span class="sh">"</span><span class="p">)</span> <span class="k">as</span> <span class="n">f</span><span class="p">:</span>
+
+    <span class="k">while</span> <span class="bp">True</span><span class="p">:</span>
+        <span class="n">buf</span> <span class="o">=</span> <span class="n">f</span><span class="p">.</span><span class="nf">read</span><span class="p">(</span><span class="mi">2</span><span class="p">)</span>
+
+        <span class="k">if</span> <span class="ow">not</span> <span class="n">buf</span><span class="p">:</span>
+            <span class="k">break</span>
+
+        <span class="n">all_bytes</span><span class="p">.</span><span class="nf">append</span><span class="p">(</span><span class="n">struct</span><span class="p">.</span><span class="nf">unpack</span><span class="p">(</span><span class="sh">'</span><span class="s">&lt;H</span><span class="sh">'</span><span class="p">,</span> <span class="n">buf</span><span class="p">)[</span><span class="mi">0</span><span class="p">])</span>
+
+
+
+<span class="n">flag_bytes</span> <span class="o">=</span> <span class="p">[]</span>
+
+<span class="c1"># looping through the 16 memory dumps for the encrypted 2 letters flag
+</span><span class="k">for</span> <span class="n">count_1</span> <span class="ow">in</span> <span class="nf">range</span><span class="p">(</span><span class="mi">16</span><span class="p">):</span>
+
+    <span class="c1"># reading memory dump
+</span>    <span class="k">with</span> <span class="nf">open</span><span class="p">(</span><span class="sh">"</span><span class="s">mem/mem</span><span class="sh">"</span> <span class="o">+</span> <span class="nf">str</span><span class="p">(</span><span class="n">count_1</span><span class="p">).</span><span class="nf">zfill</span><span class="p">(</span><span class="mi">2</span><span class="p">)</span> <span class="o">+</span> <span class="sh">"</span><span class="s">.bin</span><span class="sh">"</span><span class="p">,</span> <span class="sh">"</span><span class="s">rb</span><span class="sh">"</span><span class="p">)</span> <span class="k">as</span> <span class="n">f</span><span class="p">:</span>
+        <span class="n">memdump</span> <span class="o">=</span> <span class="n">f</span><span class="p">.</span><span class="nf">read</span><span class="p">()</span>
+
+    <span class="c1"># reseting counters
+</span>    <span class="n">count_2</span> <span class="o">=</span> <span class="mi">0</span>
+    <span class="n">result</span> <span class="o">=</span> <span class="mi">1</span>
+
+    <span class="c1"># getting the divisors from the memory dump
+</span>    <span class="k">for</span> <span class="n">ptr</span> <span class="ow">in</span> <span class="nf">range</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="nf">len</span><span class="p">(</span><span class="n">memdump</span><span class="p">)):</span>
+
+        <span class="k">if</span> <span class="n">memdump</span><span class="p">[</span><span class="n">ptr</span><span class="p">]</span> <span class="o">&gt;</span> <span class="mi">0</span><span class="p">:</span>
+
+            <span class="c1"># how many times the divisor divides the value
+</span>            <span class="n">times</span> <span class="o">=</span> <span class="n">memdump</span><span class="p">[</span><span class="n">ptr</span><span class="p">]</span>
+
+            <span class="c1">#print("@count_2 = %i -&gt; 0x%x" % (count_2, times))
+</span>
+            <span class="c1"># multiplying the divisors to get the GCD (greatest common divisor)
+</span>            <span class="k">for</span> <span class="n">_</span> <span class="ow">in</span> <span class="nf">range</span><span class="p">(</span><span class="n">times</span><span class="p">):</span>
+                <span class="n">result</span> <span class="o">*=</span> <span class="n">all_bytes</span><span class="p">[</span><span class="n">count_2</span><span class="p">]</span>
+
+        <span class="k">elif</span> <span class="n">ptr</span> <span class="o">%</span> <span class="mi">2</span> <span class="o">==</span> <span class="mi">1</span><span class="p">:</span>
+            <span class="n">count_2</span> <span class="o">+=</span> <span class="mi">1</span>
+
+    <span class="n">flag_bytes</span><span class="p">.</span><span class="nf">append</span><span class="p">(</span><span class="n">result</span><span class="p">)</span>
+
+
+<span class="c1"># decoding the flag
+</span><span class="n">flag</span> <span class="o">=</span> <span class="sh">""</span>
+<span class="n">hex_bytes</span> <span class="o">=</span> <span class="sh">''</span><span class="p">.</span><span class="nf">join</span><span class="p">([</span><span class="nf">hex</span><span class="p">(</span><span class="n">x</span><span class="p">)[</span><span class="mi">2</span><span class="p">:]</span> <span class="k">for</span> <span class="n">x</span> <span class="ow">in</span> <span class="n">flag_bytes</span><span class="p">])</span>
+<span class="n">flag</span> <span class="o">=</span> <span class="nf">long_to_bytes</span><span class="p">(</span><span class="nf">int</span><span class="p">(</span><span class="n">hex_bytes</span><span class="p">,</span> <span class="mi">16</span><span class="p">)).</span><span class="nf">decode</span><span class="p">(</span><span class="sh">'</span><span class="s">utf-8</span><span class="sh">'</span><span class="p">)</span>
+<span class="nf">print</span><span class="p">(</span><span class="n">flag</span><span class="p">)</span>
+</pre></table></code></div></div><p><img src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7 " data-src="/assets/img/posts/2021-04-02-Marathon-CTF/challenges/c1ph3r/flag.png" alt="C1ph3r solver.py" /></p></div><div class="post-tail-wrapper text-muted"><div class="post-meta mb-3"> <i class="far fa-folder-open fa-fw mr-1"></i> <a href='/categories/ctf/'>CTF</a>, <a href='/categories/writeups/'>Writeups</a></div><div class="post-tags"> <i class="fa fa-tags fa-fw mr-1"></i> <a href="/tags/ctf/" class="post-tag no-text-decoration" >ctf</a> <a href="/tags/writeups/" class="post-tag no-text-decoration" >writeups</a> <a href="/tags/reverse/" class="post-tag no-text-decoration" >reverse</a> <a href="/tags/reverse-engineering/" class="post-tag no-text-decoration" >reverse-engineering</a> <a href="/tags/web/" class="post-tag no-text-decoration" >web</a> <a href="/tags/assembly/" class="post-tag no-text-decoration" >assembly</a> <a href="/tags/idapro/" class="post-tag no-text-decoration" >idapro</a> <a href="/tags/idapython/" class="post-tag no-text-decoration" >idapython</a> <a href="/tags/anti-debugging/" class="post-tag no-text-decoration" >anti-debugging</a></div><div class="post-tail-bottom d-flex justify-content-between align-items-center mt-3 pt-5 pb-2"><div class="license-wrapper"> This post is licensed under <a href="https://creativecommons.org/licenses/by/4.0/">CC BY 4.0</a> by the author.</div><div class="share-wrapper"> <span class="share-label text-muted mr-1">Share</span> <span class="share-icons"> <a href="https://twitter.com/intent/tweet?text=Marathon CTF - T1m3-m4ch1n3&url=https://T1m3M.github.io/posts/Marathon-CTF/" data-toggle="tooltip" data-placement="top" title="Twitter" target="_blank" rel="noopener" aria-label="Twitter"> <i class="fa-fw fab fa-twitter"></i> </a> <a href="https://www.facebook.com/sharer/sharer.php?title=Marathon CTF - T1m3-m4ch1n3&u=https://T1m3M.github.io/posts/Marathon-CTF/" data-toggle="tooltip" data-placement="top" title="Facebook" target="_blank" rel="noopener" aria-label="Facebook"> <i class="fa-fw fab fa-facebook-square"></i> </a> <a href="https://telegram.me/share?text=Marathon CTF - T1m3-m4ch1n3&url=https://T1m3M.github.io/posts/Marathon-CTF/" data-toggle="tooltip" data-placement="top" title="Telegram" target="_blank" rel="noopener" aria-label="Telegram"> <i class="fa-fw fab fa-telegram"></i> </a> <a href="https://www.linkedin.com/sharing/share-offsite/?url=https://T1m3M.github.io/posts/Marathon-CTF/" data-toggle="tooltip" data-placement="top" title="Linkedin" target="_blank" rel="noopener" aria-label="Linkedin"> <i class="fa-fw fab fa-linkedin"></i> </a> <i class="fa-fw fas fa-link small" onclick="copyLink()" data-toggle="tooltip" data-placement="top" title="Copy link"></i> </span></div></div></div></div></div><div id="panel-wrapper" class="col-xl-3 pl-2 text-muted topbar-down"><div class="access"><div id="access-lastmod" class="post"> <span>Recent Update</span><ul class="post-content pl-0 pb-1 ml-1 mt-2"><li><a href="/posts/fword-ctf-2021/">FwordCTF 2021</a><li><a href="/posts/cybertalents-scholarship-re-ctf/">CyberTalents Scholarship - Reverse Engineering CTF</a><li><a href="/posts/Marathon-CTF/">Marathon CTF</a><li><a href="/posts/MIPS-cheatsheet/">MIPS cheatsheet</a><li><a href="/posts/RE/">What is Reverse Engineering? | ما هى الهندسة العكسية؟</a></ul></div><div id="access-tags"> <span>Trending Tags</span><div class="d-flex flex-wrap mt-3 mb-1 mr-3"> <a class="post-tag" href="/tags/reverse-engineering/">reverse engineering</a> <a class="post-tag" href="/tags/ctf/">ctf</a> <a class="post-tag" href="/tags/writeups/">writeups</a> <a class="post-tag" href="/tags/assembly/">assembly</a> <a class="post-tag" href="/tags/idapro/">idapro</a> <a class="post-tag" href="/tags/reverse/">reverse</a> <a class="post-tag" href="/tags/crypto/">crypto</a> <a class="post-tag" href="/tags/python/">python</a> <a class="post-tag" href="/tags/idapython/">idapython</a> <a class="post-tag" href="/tags/anti-debugging/">anti debugging</a></div></div></div><div id="toc-wrapper" class="pl-0 pr-4 mb-5"> <span class="pl-3 pt-2 mb-2">Contents</span><nav id="toc" data-toggle="toc"></nav></div></div></div><div class="row"><div class="col-12 col-lg-11 col-xl-8"><div id="post-extend-wrapper" class="pl-1 pr-1 pl-sm-2 pr-sm-2 pl-md-4 pr-md-4"><div id="related-posts" class="mt-5 mb-2 mb-sm-4"><h3 class="pt-2 mt-1 mb-4 ml-1" data-toc-skip>Further Reading</h3><div class="card-deck mb-4"><div class="card"> <a href="/posts/fword-ctf-2021/"><div class="card-body"> <span class="timeago small" > Aug 31, 2021 <i class="unloaded">2021-08-31T07:43:00+02:00</i> </span><h3 class="pt-0 mt-1 mb-3" data-toc-skip>FwordCTF 2021</h3><div class="text-muted small"><p> {% assign img_root = “/assets/img/posts/2021-08-31-fword-ctf-2021” %} This is my writeup for Time Machine reverse challenge from FwordCTF 2021, I enjoyed the CTF so much there were 4 reverse chall...</p></div></div></a></div><div class="card"> <a href="/posts/angstrom-ctf-2021/"><div class="card-body"> <span class="timeago small" > Apr 25, 2021 <i class="unloaded">2021-04-25T00:57:00+02:00</i> </span><h3 class="pt-0 mt-1 mb-3" data-toc-skip>Angstrom CTF 2021</h3><div class="text-muted small"><p> {% assign img_root = “/assets/img/posts/2021-04-25-angstrom-ctf-2021” %} Better late than never! This is my late writeup for some challenges of the great Angstrom CTF 2021. I hope you enjoy it (an...</p></div></div></a></div><div class="card"> <a href="/posts/cybertalents-scholarship-re-ctf/"><div class="card-body"> <span class="timeago small" > Jul 19, 2021 <i class="unloaded">2021-07-19T22:22:00+02:00</i> </span><h3 class="pt-0 mt-1 mb-3" data-toc-skip>CyberTalents Scholarship - Reverse Engineering CTF</h3><div class="text-muted small"><p> {% assign img_root = “/assets/img/posts/2021-07-18-cybertalents-scholarship-re-ctf” %} This was my first CTF to get the 1st place ever and my first first-blood for the hard challenge!! The CTF was...</p></div></div></a></div></div></div><div class="post-navigation d-flex justify-content-between"> <a href="/posts/MIPS-cheatsheet/" class="btn btn-outline-primary"><p>MIPS cheatsheet</p></a> <a href="/posts/angstrom-ctf-2021/" class="btn btn-outline-primary"><p>Angstrom CTF 2021</p></a></div></div></div></div><script type="text/javascript" src="https://cdn.jsdelivr.net/npm/lozad/dist/lozad.min.js"></script> <script type="text/javascript"> const imgs = document.querySelectorAll('#post-wrapper img'); const observer = lozad(imgs); observer.observe(); </script><footer class="d-flex w-100 justify-content-center"><div class="d-flex justify-content-between align-items-center"><div class="footer-left"><p class="mb-0"> © 2026 <a href="https://twitter.com/T1m3M">Abdelrahman Nasr</a>. <span data-toggle="tooltip" data-placement="top" title="Except where otherwise noted, the blog posts on this site are licensed under the Creative Commons Attribution 4.0 International (CC BY 4.0) License by the author.">Some rights reserved.</span></p></div><div class="footer-right"><p class="mb-0"> Powered by <a href="https://jekyllrb.com" target="_blank" rel="noopener">Jekyll</a> with <a href="https://github.com/cotes2020/jekyll-theme-chirpy/" target="_blank" rel="noopener">Chirpy</a> theme.</p></div></div></footer></div><div id="search-result-wrapper" class="d-flex justify-content-center unloaded"><div class="col-12 col-xl-11 post-content"><div id="search-hints"><h4 class="text-muted mb-4">Trending Tags</h4><a class="post-tag" href="/tags/reverse-engineering/">reverse engineering</a> <a class="post-tag" href="/tags/ctf/">ctf</a> <a class="post-tag" href="/tags/writeups/">writeups</a> <a class="post-tag" href="/tags/assembly/">assembly</a> <a class="post-tag" href="/tags/idapro/">idapro</a> <a class="post-tag" href="/tags/reverse/">reverse</a> <a class="post-tag" href="/tags/crypto/">crypto</a> <a class="post-tag" href="/tags/python/">python</a> <a class="post-tag" href="/tags/idapython/">idapython</a> <a class="post-tag" href="/tags/anti-debugging/">anti debugging</a></div><div id="search-results" class="d-flex flex-wrap justify-content-center text-muted mt-3"></div></div></div></div><div id="mask"></div><a id="back-to-top" href="#" aria-label="back-to-top" class="btn btn-lg btn-box-shadow" role="button"> <i class="fas fa-angle-up"></i> </a> <script src="https://cdn.jsdelivr.net/npm/simple-jekyll-search@1.7.3/dest/simple-jekyll-search.min.js"></script> <script> SimpleJekyllSearch({ searchInput: document.getElementById('search-input'), resultsContainer: document.getElementById('search-results'), json: '/assets/js/data/search.json', searchResultTemplate: '<div class="pl-1 pr-1 pl-sm-2 pr-sm-2 pl-lg-4 pr-lg-4 pl-xl-0 pr-xl-0"> <a href="https://T1m3M.github.io{url}">{title}</a><div class="post-meta d-flex flex-column flex-sm-row text-muted mt-1 mb-1"><div class="mr-sm-4"><i class="far fa-folder fa-fw"></i>{categories}</div><div><i class="fa fa-tag fa-fw"></i>{tags}</div></div><p>{snippet}</p></div>', noResultsText: '<p class="mt-5">Oops! No result founds.</p>' }); </script> <script async src="https://www.googletagmanager.com/gtag/js?id=G-1WZELSLYX1"></script> <script> window.dataLayer = window.dataLayer || []; function gtag(){dataLayer.push(arguments);} gtag('js', new Date()); gtag('config', 'G-1WZELSLYX1'); </script>
